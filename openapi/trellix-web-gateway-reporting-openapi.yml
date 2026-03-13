@@ -1,0 +1,869 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Reporting API
+  description: >-
+    API for accessing web traffic logs, security events, threat analytics,
+    and generating custom reports from Trellix Web Gateway (formerly McAfee
+    Web Gateway) data. Provides access to historical traffic data, blocked
+    requests, malware detections, and URL categorization statistics.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+externalDocs:
+  description: Trellix Web Gateway Reporting API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-reporting-api
+servers:
+  - url: https://{mwg-server}:{port}/reporter/api
+    description: Trellix Web Gateway Reporting Service
+    variables:
+      mwg-server:
+        default: mwg.example.com
+        description: Hostname or IP address of the Web Gateway appliance
+      port:
+        default: '4712'
+        description: Management port for the reporting API
+tags:
+  - name: Traffic Logs
+    description: Web traffic log access and search
+  - name: Security Events
+    description: Security event and threat detection data
+  - name: Reports
+    description: Report generation and retrieval
+  - name: Statistics
+    description: Aggregated traffic and security statistics
+  - name: Dashboards
+    description: Dashboard data for visualization
+security:
+  - cookieAuth: []
+paths:
+  /logs/traffic:
+    get:
+      operationId: getTrafficLogs
+      summary: Retrieve web traffic logs
+      description: >-
+        Query web traffic access logs with optional filtering by time range,
+        source IP, destination URL, action, and other criteria.
+      tags:
+        - Traffic Logs
+      parameters:
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+        - name: sourceIp
+          in: query
+          description: Filter by source IP address
+          schema:
+            type: string
+        - name: destinationUrl
+          in: query
+          description: Filter by destination URL pattern
+          schema:
+            type: string
+        - name: action
+          in: query
+          description: Filter by action taken
+          schema:
+            type: string
+            enum:
+              - allowed
+              - blocked
+              - redirected
+        - name: user
+          in: query
+          description: Filter by authenticated user name
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Traffic log entries returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                    description: Total number of matching entries
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TrafficLogEntry'
+        '401':
+          description: Unauthorized
+  /logs/traffic/{logId}:
+    get:
+      operationId: getTrafficLogEntry
+      summary: Get a specific traffic log entry
+      description: >-
+        Retrieve detailed information about a specific traffic log entry.
+      tags:
+        - Traffic Logs
+      parameters:
+        - $ref: '#/components/parameters/logId'
+      responses:
+        '200':
+          description: Traffic log entry details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrafficLogEntry'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Log entry not found
+  /events/security:
+    get:
+      operationId: getSecurityEvents
+      summary: Retrieve security events
+      description: >-
+        Query security events including malware detections, policy
+        violations, blocked threats, and suspicious activity alerts.
+      tags:
+        - Security Events
+      parameters:
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+        - name: severity
+          in: query
+          description: Filter by event severity
+          schema:
+            type: string
+            enum:
+              - low
+              - medium
+              - high
+              - critical
+        - name: eventType
+          in: query
+          description: Filter by event type
+          schema:
+            type: string
+            enum:
+              - malware
+              - phishing
+              - policy_violation
+              - data_leak
+              - certificate_error
+              - authentication_failure
+        - name: sourceIp
+          in: query
+          description: Filter by source IP address
+          schema:
+            type: string
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Security events returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCount:
+                    type: integer
+                    description: Total number of matching events
+                  events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SecurityEvent'
+        '401':
+          description: Unauthorized
+  /events/security/{eventId}:
+    get:
+      operationId: getSecurityEvent
+      summary: Get a specific security event
+      description: >-
+        Retrieve detailed information about a specific security event,
+        including full threat analysis data.
+      tags:
+        - Security Events
+      parameters:
+        - $ref: '#/components/parameters/eventId'
+      responses:
+        '200':
+          description: Security event details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityEvent'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event not found
+  /reports:
+    get:
+      operationId: listReports
+      summary: List available reports
+      description: >-
+        Retrieve a list of available report definitions and previously
+        generated reports.
+      tags:
+        - Reports
+      responses:
+        '200':
+          description: List of reports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: generateReport
+      summary: Generate a new report
+      description: >-
+        Generate a new report based on specified parameters, time range,
+        and report type.
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '202':
+          description: Report generation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          description: Invalid report parameters
+        '401':
+          description: Unauthorized
+  /reports/{reportId}:
+    get:
+      operationId: getReport
+      summary: Get a report
+      description: >-
+        Retrieve the status and results of a specific report.
+      tags:
+        - Reports
+      parameters:
+        - $ref: '#/components/parameters/reportId'
+      responses:
+        '200':
+          description: Report details and results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+    delete:
+      operationId: deleteReport
+      summary: Delete a report
+      description: >-
+        Delete a previously generated report and its associated data.
+      tags:
+        - Reports
+      parameters:
+        - $ref: '#/components/parameters/reportId'
+      responses:
+        '200':
+          description: Report deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+  /reports/{reportId}/download:
+    get:
+      operationId: downloadReport
+      summary: Download a report
+      description: >-
+        Download a generated report in the specified format (PDF, CSV, or XML).
+      tags:
+        - Reports
+      parameters:
+        - $ref: '#/components/parameters/reportId'
+        - name: format
+          in: query
+          description: Output format for the report
+          schema:
+            type: string
+            enum:
+              - pdf
+              - csv
+              - xml
+            default: pdf
+      responses:
+        '200':
+          description: Report file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            text/csv:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+  /statistics/traffic:
+    get:
+      operationId: getTrafficStatistics
+      summary: Get traffic statistics
+      description: >-
+        Retrieve aggregated traffic statistics including request counts,
+        bandwidth usage, and top destinations over a specified time period.
+      tags:
+        - Statistics
+      parameters:
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+        - name: granularity
+          in: query
+          description: Time granularity for aggregation
+          schema:
+            type: string
+            enum:
+              - hourly
+              - daily
+              - weekly
+              - monthly
+            default: daily
+      responses:
+        '200':
+          description: Traffic statistics returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrafficStatistics'
+        '401':
+          description: Unauthorized
+  /statistics/threats:
+    get:
+      operationId: getThreatStatistics
+      summary: Get threat statistics
+      description: >-
+        Retrieve aggregated threat detection statistics including malware
+        detections, blocked URLs, and category violations over a specified
+        time period.
+      tags:
+        - Statistics
+      parameters:
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+        - name: granularity
+          in: query
+          description: Time granularity for aggregation
+          schema:
+            type: string
+            enum:
+              - hourly
+              - daily
+              - weekly
+              - monthly
+            default: daily
+      responses:
+        '200':
+          description: Threat statistics returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatStatistics'
+        '401':
+          description: Unauthorized
+  /statistics/top/urls:
+    get:
+      operationId: getTopUrls
+      summary: Get top accessed URLs
+      description: >-
+        Retrieve the most frequently accessed URLs during the specified
+        time period.
+      tags:
+        - Statistics
+      parameters:
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Top URLs returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TopUrlEntry'
+        '401':
+          description: Unauthorized
+  /statistics/top/categories:
+    get:
+      operationId: getTopCategories
+      summary: Get top URL categories
+      description: >-
+        Retrieve the most accessed URL categories during the specified
+        time period.
+      tags:
+        - Statistics
+      parameters:
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Top categories returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TopCategoryEntry'
+        '401':
+          description: Unauthorized
+  /dashboards/overview:
+    get:
+      operationId: getDashboardOverview
+      summary: Get dashboard overview data
+      description: >-
+        Retrieve aggregated data for the main reporting dashboard, including
+        traffic volume, threat counts, and top statistics.
+      tags:
+        - Dashboards
+      parameters:
+        - name: period
+          in: query
+          description: Time period for the dashboard data
+          schema:
+            type: string
+            enum:
+              - last_hour
+              - last_24h
+              - last_7d
+              - last_30d
+            default: last_24h
+      responses:
+        '200':
+          description: Dashboard overview data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOverview'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: >-
+        Session cookie obtained via the Konfigurator REST /login endpoint.
+  parameters:
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    endTime:
+      name: endTime
+      in: query
+      description: End time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+    logId:
+      name: logId
+      in: path
+      required: true
+      description: Unique identifier of the log entry
+      schema:
+        type: string
+    eventId:
+      name: eventId
+      in: path
+      required: true
+      description: Unique identifier of the security event
+      schema:
+        type: string
+    reportId:
+      name: reportId
+      in: path
+      required: true
+      description: Unique identifier of the report
+      schema:
+        type: string
+  schemas:
+    TrafficLogEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique log entry identifier
+        timestamp:
+          type: string
+          format: date-time
+          description: Time the request was processed
+        sourceIp:
+          type: string
+          description: Client source IP address
+        user:
+          type: string
+          description: Authenticated user name
+        method:
+          type: string
+          description: HTTP method
+        url:
+          type: string
+          description: Requested URL
+        statusCode:
+          type: integer
+          description: HTTP response status code
+        action:
+          type: string
+          enum:
+            - allowed
+            - blocked
+            - redirected
+          description: Action taken by the gateway
+        category:
+          type: string
+          description: URL category classification
+        bytesIn:
+          type: integer
+          description: Bytes received from the client
+        bytesOut:
+          type: integer
+          description: Bytes sent to the client
+        duration:
+          type: integer
+          description: Request processing duration in milliseconds
+        ruleName:
+          type: string
+          description: Name of the policy rule that matched
+        mediaType:
+          type: string
+          description: Content media type
+        userAgent:
+          type: string
+          description: Client user agent string
+    SecurityEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique event identifier
+        timestamp:
+          type: string
+          format: date-time
+          description: Time the event occurred
+        severity:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+          description: Event severity level
+        eventType:
+          type: string
+          enum:
+            - malware
+            - phishing
+            - policy_violation
+            - data_leak
+            - certificate_error
+            - authentication_failure
+          description: Type of security event
+        sourceIp:
+          type: string
+          description: Source IP address
+        user:
+          type: string
+          description: Associated user name
+        url:
+          type: string
+          description: URL involved in the event
+        threatName:
+          type: string
+          description: Name of the detected threat
+        action:
+          type: string
+          enum:
+            - blocked
+            - quarantined
+            - logged
+            - cleaned
+          description: Action taken
+        ruleName:
+          type: string
+          description: Policy rule that triggered the event
+        details:
+          type: string
+          description: Additional event details
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique report identifier
+        name:
+          type: string
+          description: Report name
+        type:
+          type: string
+          enum:
+            - traffic_summary
+            - security_summary
+            - user_activity
+            - url_categories
+            - threat_analysis
+            - bandwidth_usage
+            - policy_hits
+          description: Report type
+        status:
+          type: string
+          enum:
+            - pending
+            - generating
+            - completed
+            - failed
+          description: Report generation status
+        createdAt:
+          type: string
+          format: date-time
+          description: When the report was requested
+        completedAt:
+          type: string
+          format: date-time
+          description: When the report generation completed
+        startTime:
+          type: string
+          format: date-time
+          description: Report data start time
+        endTime:
+          type: string
+          format: date-time
+          description: Report data end time
+    ReportRequest:
+      type: object
+      required:
+        - name
+        - type
+        - startTime
+        - endTime
+      properties:
+        name:
+          type: string
+          description: Name for the report
+        type:
+          type: string
+          enum:
+            - traffic_summary
+            - security_summary
+            - user_activity
+            - url_categories
+            - threat_analysis
+            - bandwidth_usage
+            - policy_hits
+          description: Type of report to generate
+        startTime:
+          type: string
+          format: date-time
+          description: Start of the reporting period
+        endTime:
+          type: string
+          format: date-time
+          description: End of the reporting period
+        filters:
+          type: object
+          properties:
+            sourceIps:
+              type: array
+              items:
+                type: string
+              description: Filter by source IP addresses
+            users:
+              type: array
+              items:
+                type: string
+              description: Filter by user names
+            categories:
+              type: array
+              items:
+                type: string
+              description: Filter by URL categories
+    TrafficStatistics:
+      type: object
+      properties:
+        totalRequests:
+          type: integer
+          description: Total number of web requests
+        allowedRequests:
+          type: integer
+          description: Number of allowed requests
+        blockedRequests:
+          type: integer
+          description: Number of blocked requests
+        totalBytesIn:
+          type: integer
+          description: Total inbound bytes
+        totalBytesOut:
+          type: integer
+          description: Total outbound bytes
+        uniqueUsers:
+          type: integer
+          description: Number of unique users
+        uniqueDestinations:
+          type: integer
+          description: Number of unique destinations accessed
+        timeSeries:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              requests:
+                type: integer
+              bytesIn:
+                type: integer
+              bytesOut:
+                type: integer
+    ThreatStatistics:
+      type: object
+      properties:
+        totalThreats:
+          type: integer
+          description: Total threats detected
+        malwareDetections:
+          type: integer
+          description: Number of malware detections
+        phishingDetections:
+          type: integer
+          description: Number of phishing site detections
+        policyViolations:
+          type: integer
+          description: Number of policy violations
+        dataLeakEvents:
+          type: integer
+          description: Number of data leak prevention events
+        timeSeries:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              threats:
+                type: integer
+              malware:
+                type: integer
+              phishing:
+                type: integer
+    TopUrlEntry:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL
+        requestCount:
+          type: integer
+          description: Number of requests to this URL
+        totalBytes:
+          type: integer
+          description: Total bytes transferred
+    TopCategoryEntry:
+      type: object
+      properties:
+        category:
+          type: string
+          description: URL category name
+        requestCount:
+          type: integer
+          description: Number of requests in this category
+        blockedCount:
+          type: integer
+          description: Number of blocked requests
+        percentage:
+          type: number
+          format: float
+          description: Percentage of total traffic
+    DashboardOverview:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Time period for the data
+        totalRequests:
+          type: integer
+          description: Total web requests in the period
+        blockedRequests:
+          type: integer
+          description: Total blocked requests
+        threatsDetected:
+          type: integer
+          description: Total threats detected
+        activeUsers:
+          type: integer
+          description: Number of active users
+        topCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopCategoryEntry'
+        topThreats:
+          type: array
+          items:
+            type: object
+            properties:
+              threatName:
+                type: string
+              detectionCount:
+                type: integer
+        trafficTrend:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              requests:
+                type: integer
+              blocked:
+                type: integer

@@ -1,0 +1,1145 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy API
+  description: >-
+    API for creating, updating, and managing security policies, rule sets,
+    and configurations for web filtering and threat prevention on Trellix
+    Web Gateway (formerly McAfee Web Gateway). Provides programmatic access
+    to policy rules, URL filter settings, anti-malware settings, and SSL
+    scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api
+servers:
+  - url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+    description: Trellix Web Gateway Policy Endpoint
+    variables:
+      mwg-server:
+        default: mwg.example.com
+        description: Hostname or IP address of the Web Gateway appliance
+      port:
+        default: '4712'
+        description: Management port for the REST API
+tags:
+  - name: Rule Sets
+    description: Manage policy rule sets
+  - name: Rules
+    description: Manage individual policy rules within rule sets
+  - name: URL Filtering
+    description: URL categorization and filtering settings
+  - name: Anti-Malware
+    description: Anti-malware scanning configuration
+  - name: SSL Scanning
+    description: SSL/TLS inspection configuration
+  - name: Data Loss Prevention
+    description: DLP policy configuration
+  - name: Authentication
+    description: Authentication policy settings
+security:
+  - cookieAuth: []
+paths:
+  /rulesets:
+    get:
+      operationId: listRuleSets
+      summary: List all rule sets
+      description: >-
+        Retrieve the list of all configured rule sets, including their
+        status, order, and basic configuration.
+      tags:
+        - Rule Sets
+      parameters:
+        - name: type
+          in: query
+          description: Filter by rule set type
+          schema:
+            type: string
+            enum:
+              - request
+              - response
+              - error
+        - name: enabled
+          in: query
+          description: Filter by enabled status
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of rule sets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ruleSets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RuleSet'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createRuleSet
+      summary: Create a new rule set
+      description: >-
+        Create a new rule set with the specified configuration. The rule
+        set must be committed before it becomes active.
+      tags:
+        - Rule Sets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleSetCreate'
+      responses:
+        '201':
+          description: Rule set created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSet'
+        '400':
+          description: Invalid rule set definition
+        '401':
+          description: Unauthorized
+  /rulesets/{ruleSetId}:
+    get:
+      operationId: getRuleSet
+      summary: Get a rule set
+      description: >-
+        Retrieve the full configuration of a specific rule set, including
+        all contained rules and their conditions.
+      tags:
+        - Rule Sets
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSet'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+    put:
+      operationId: updateRuleSet
+      summary: Update a rule set
+      description: >-
+        Update the configuration of an existing rule set. Changes must be
+        committed to take effect.
+      tags:
+        - Rule Sets
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleSetUpdate'
+      responses:
+        '200':
+          description: Rule set updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSet'
+        '400':
+          description: Invalid rule set configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+    delete:
+      operationId: deleteRuleSet
+      summary: Delete a rule set
+      description: >-
+        Delete a rule set and all its contained rules. Changes must be
+        committed to take effect.
+      tags:
+        - Rule Sets
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/enable:
+    post:
+      operationId: enableRuleSet
+      summary: Enable a rule set
+      description: >-
+        Enable a disabled rule set. Changes must be committed to take effect.
+      tags:
+        - Rule Sets
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set enabled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/disable:
+    post:
+      operationId: disableRuleSet
+      summary: Disable a rule set
+      description: >-
+        Disable an active rule set without deleting it. Changes must be
+        committed to take effect.
+      tags:
+        - Rule Sets
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set disabled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/rules:
+    get:
+      operationId: listRules
+      summary: List rules in a rule set
+      description: >-
+        Retrieve all rules within a specific rule set, including their
+        conditions, actions, and order.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: List of rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+    post:
+      operationId: createRule
+      summary: Create a new rule
+      description: >-
+        Add a new rule to a rule set with the specified conditions and
+        actions. Changes must be committed to take effect.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCreate'
+      responses:
+        '201':
+          description: Rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Invalid rule definition
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/rules/{ruleId}:
+    get:
+      operationId: getRule
+      summary: Get a specific rule
+      description: >-
+        Retrieve the full configuration of a specific rule within a rule set.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Rule details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule or rule set not found
+    put:
+      operationId: updateRule
+      summary: Update a rule
+      description: >-
+        Update the configuration of an existing rule. Changes must be
+        committed to take effect.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+        - $ref: '#/components/parameters/ruleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleUpdate'
+      responses:
+        '200':
+          description: Rule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Invalid rule configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule or rule set not found
+    delete:
+      operationId: deleteRule
+      summary: Delete a rule
+      description: >-
+        Delete a specific rule from a rule set. Changes must be committed
+        to take effect.
+      tags:
+        - Rules
+      parameters:
+        - $ref: '#/components/parameters/ruleSetId'
+        - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Rule deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule or rule set not found
+  /urlfilter/categories:
+    get:
+      operationId: listUrlCategories
+      summary: List URL categories
+      description: >-
+        Retrieve the list of available URL categories used for web
+        filtering and policy decisions.
+      tags:
+        - URL Filtering
+      responses:
+        '200':
+          description: List of URL categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UrlCategory'
+        '401':
+          description: Unauthorized
+  /urlfilter/lookup:
+    get:
+      operationId: lookupUrl
+      summary: Look up URL categorization
+      description: >-
+        Look up the category and reputation of a specific URL against
+        the Trellix Global Threat Intelligence database.
+      tags:
+        - URL Filtering
+      parameters:
+        - name: url
+          in: query
+          required: true
+          description: URL to look up
+          schema:
+            type: string
+      responses:
+        '200':
+          description: URL categorization result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlLookupResult'
+        '401':
+          description: Unauthorized
+  /urlfilter/settings:
+    get:
+      operationId: getUrlFilterSettings
+      summary: Get URL filter settings
+      description: >-
+        Retrieve the current URL filtering configuration including
+        blocked categories, allowed exceptions, and safe search settings.
+      tags:
+        - URL Filtering
+      responses:
+        '200':
+          description: URL filter settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlFilterSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateUrlFilterSettings
+      summary: Update URL filter settings
+      description: >-
+        Update the URL filtering configuration. Changes must be committed
+        to take effect.
+      tags:
+        - URL Filtering
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlFilterSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+  /antimalware/engines:
+    get:
+      operationId: listAntiMalwareEngines
+      summary: List anti-malware engines
+      description: >-
+        Retrieve the list of configured anti-malware scanning engines and
+        their current status.
+      tags:
+        - Anti-Malware
+      responses:
+        '200':
+          description: List of anti-malware engines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  engines:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AntiMalwareEngine'
+        '401':
+          description: Unauthorized
+  /antimalware/settings:
+    get:
+      operationId: getAntiMalwareSettings
+      summary: Get anti-malware settings
+      description: >-
+        Retrieve the current anti-malware scanning configuration including
+        enabled engines, scan behavior, and file type handling.
+      tags:
+        - Anti-Malware
+      responses:
+        '200':
+          description: Anti-malware settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AntiMalwareSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateAntiMalwareSettings
+      summary: Update anti-malware settings
+      description: >-
+        Update the anti-malware scanning configuration. Changes must be
+        committed to take effect.
+      tags:
+        - Anti-Malware
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AntiMalwareSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+  /ssl/settings:
+    get:
+      operationId: getSslSettings
+      summary: Get SSL scanning settings
+      description: >-
+        Retrieve the current SSL/TLS inspection configuration including
+        certificate handling, bypass lists, and protocol settings.
+      tags:
+        - SSL Scanning
+      responses:
+        '200':
+          description: SSL scanning settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SslSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateSslSettings
+      summary: Update SSL scanning settings
+      description: >-
+        Update the SSL/TLS inspection configuration. Changes must be
+        committed to take effect.
+      tags:
+        - SSL Scanning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SslSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+  /ssl/certificates:
+    get:
+      operationId: listSslCertificates
+      summary: List SSL certificates
+      description: >-
+        Retrieve the list of SSL/TLS certificates used by the gateway
+        for SSL inspection.
+      tags:
+        - SSL Scanning
+      responses:
+        '200':
+          description: List of certificates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SslCertificate'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: uploadSslCertificate
+      summary: Upload an SSL certificate
+      description: >-
+        Upload a new SSL/TLS certificate for use in SSL inspection.
+      tags:
+        - SSL Scanning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SslCertificateUpload'
+      responses:
+        '201':
+          description: Certificate uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SslCertificate'
+        '400':
+          description: Invalid certificate
+        '401':
+          description: Unauthorized
+  /dlp/settings:
+    get:
+      operationId: getDlpSettings
+      summary: Get DLP settings
+      description: >-
+        Retrieve the current Data Loss Prevention configuration including
+        enabled classifiers, actions, and sensitivity levels.
+      tags:
+        - Data Loss Prevention
+      responses:
+        '200':
+          description: DLP settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DlpSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateDlpSettings
+      summary: Update DLP settings
+      description: >-
+        Update the Data Loss Prevention configuration. Changes must be
+        committed to take effect.
+      tags:
+        - Data Loss Prevention
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DlpSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+  /dlp/classifiers:
+    get:
+      operationId: listDlpClassifiers
+      summary: List DLP classifiers
+      description: >-
+        Retrieve the list of available data classifiers for content
+        inspection and data loss prevention.
+      tags:
+        - Data Loss Prevention
+      responses:
+        '200':
+          description: List of DLP classifiers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  classifiers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DlpClassifier'
+        '401':
+          description: Unauthorized
+  /authentication/settings:
+    get:
+      operationId: getAuthenticationSettings
+      summary: Get authentication settings
+      description: >-
+        Retrieve the current user authentication configuration including
+        authentication methods, directory services, and bypass rules.
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Authentication settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateAuthenticationSettings
+      summary: Update authentication settings
+      description: >-
+        Update the user authentication configuration. Changes must be
+        committed to take effect.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: >-
+        Session cookie obtained via the Konfigurator REST /login endpoint.
+  parameters:
+    ruleSetId:
+      name: ruleSetId
+      in: path
+      required: true
+      description: Unique identifier of the rule set
+      schema:
+        type: string
+    ruleId:
+      name: ruleId
+      in: path
+      required: true
+      description: Unique identifier of the rule
+      schema:
+        type: string
+  schemas:
+    RuleSet:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        description:
+          type: string
+          description: Rule set description
+        type:
+          type: string
+          enum:
+            - request
+            - response
+            - error
+          description: Processing phase for the rule set
+        enabled:
+          type: boolean
+          description: Whether the rule set is active
+        order:
+          type: integer
+          description: Processing order of the rule set
+        ruleCount:
+          type: integer
+          description: Number of rules in the set
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: Rules contained in this rule set
+    RuleSetCreate:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Rule set name
+        description:
+          type: string
+          description: Rule set description
+        type:
+          type: string
+          enum:
+            - request
+            - response
+            - error
+          description: Processing phase
+        enabled:
+          type: boolean
+          default: true
+          description: Whether the rule set is enabled
+    RuleSetUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule set name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule set
+        order:
+          type: integer
+          description: Updated processing order
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique rule identifier
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          description: Whether the rule is active
+        order:
+          type: integer
+          description: Processing order within the rule set
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    RuleCreate:
+      type: object
+      required:
+        - name
+        - condition
+        - action
+      properties:
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          default: true
+          description: Whether the rule is enabled
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    RuleUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule
+        order:
+          type: integer
+          description: Updated processing order
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: >-
+            Property to evaluate (e.g., URL.Host, URL.Categories,
+            Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+            - equals
+            - not_equals
+            - contains
+            - not_contains
+            - matches
+            - in_list
+            - not_in_list
+            - greater_than
+            - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
+    RuleAction:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - allow
+            - block
+            - redirect
+            - authenticate
+            - log
+            - continue
+            - stop_rule_set
+            - stop_cycle
+          description: Action to take when the rule matches
+        blockTemplate:
+          type: string
+          description: Block page template to display
+        redirectUrl:
+          type: string
+          description: URL to redirect to
+    UrlCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Category identifier
+        name:
+          type: string
+          description: Category name
+        description:
+          type: string
+          description: Category description
+        parentCategory:
+          type: string
+          description: Parent category name for subcategories
+    UrlLookupResult:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Looked up URL
+        categories:
+          type: array
+          items:
+            type: string
+          description: Assigned URL categories
+        reputation:
+          type: string
+          enum:
+            - trusted
+            - neutral
+            - suspicious
+            - high_risk
+            - malicious
+          description: URL reputation score
+        riskLevel:
+          type: integer
+          minimum: 0
+          maximum: 127
+          description: Numeric risk level (0-127)
+    UrlFilterSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether URL filtering is enabled
+        blockedCategories:
+          type: array
+          items:
+            type: string
+          description: List of blocked URL category IDs
+        allowedExceptions:
+          type: array
+          items:
+            type: string
+          description: URLs or patterns excepted from filtering
+        safeSearchEnabled:
+          type: boolean
+          description: Whether safe search enforcement is enabled
+        blockUncategorized:
+          type: boolean
+          description: Whether to block uncategorized URLs
+    AntiMalwareEngine:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Engine name
+        version:
+          type: string
+          description: Engine version
+        signatureDate:
+          type: string
+          format: date-time
+          description: Last signature update timestamp
+        enabled:
+          type: boolean
+          description: Whether the engine is enabled
+        status:
+          type: string
+          enum:
+            - active
+            - updating
+            - error
+          description: Current engine status
+    AntiMalwareSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether anti-malware scanning is enabled
+        engines:
+          type: array
+          items:
+            type: string
+          description: List of enabled engine names
+        scanDirection:
+          type: string
+          enum:
+            - both
+            - request_only
+            - response_only
+          description: Direction of traffic to scan
+        maxScanSize:
+          type: integer
+          description: Maximum file size to scan in bytes
+        blockOnError:
+          type: boolean
+          description: Whether to block if scanning fails
+        gatewayAntiMalwareEnabled:
+          type: boolean
+          description: Whether Gateway Anti-Malware (GAM) engine is enabled
+    SslSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether SSL inspection is enabled
+        verifyServerCertificates:
+          type: boolean
+          description: Whether to verify upstream server certificates
+        bypassDomains:
+          type: array
+          items:
+            type: string
+          description: Domains to bypass SSL inspection
+        bypassCategories:
+          type: array
+          items:
+            type: string
+          description: URL categories to bypass SSL inspection
+        minimumProtocolVersion:
+          type: string
+          enum:
+            - TLSv1.0
+            - TLSv1.1
+            - TLSv1.2
+            - TLSv1.3
+          description: Minimum TLS protocol version to accept
+    SslCertificate:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Certificate identifier
+        subject:
+          type: string
+          description: Certificate subject
+        issuer:
+          type: string
+          description: Certificate issuer
+        validFrom:
+          type: string
+          format: date-time
+          description: Certificate validity start date
+        validTo:
+          type: string
+          format: date-time
+          description: Certificate expiration date
+        serialNumber:
+          type: string
+          description: Certificate serial number
+        fingerprint:
+          type: string
+          description: Certificate SHA-256 fingerprint
+    SslCertificateUpload:
+      type: object
+      required:
+        - certificate
+      properties:
+        certificate:
+          type: string
+          description: PEM-encoded certificate data
+        privateKey:
+          type: string
+          description: PEM-encoded private key (for CA certificates)
+        passphrase:
+          type: string
+          description: Private key passphrase if encrypted
+    DlpSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether DLP is enabled
+        action:
+          type: string
+          enum:
+            - block
+            - log
+            - quarantine
+          description: Default action when sensitive data is detected
+        enabledClassifiers:
+          type: array
+          items:
+            type: string
+          description: List of enabled classifier IDs
+        scanUploads:
+          type: boolean
+          description: Whether to scan file uploads
+        scanFormData:
+          type: boolean
+          description: Whether to scan form data submissions
+    DlpClassifier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Classifier identifier
+        name:
+          type: string
+          description: Classifier name
+        description:
+          type: string
+          description: What the classifier detects
+        type:
+          type: string
+          enum:
+            - builtin
+            - custom
+            - regex
+          description: Classifier type
+        enabled:
+          type: boolean
+          description: Whether the classifier is active
+    AuthenticationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether user authentication is enabled
+        method:
+          type: string
+          enum:
+            - ntlm
+            - kerberos
+            - ldap
+            - radius
+            - basic
+            - cookie
+          description: Primary authentication method
+        fallbackMethod:
+          type: string
+          enum:
+            - ntlm
+            - kerberos
+            - ldap
+            - radius
+            - basic
+            - cookie
+            - none
+          description: Fallback authentication method
+        directoryServer:
+          type: string
+          description: LDAP/AD directory server address
+        directoryBaseDn:
+          type: string
+          description: Base DN for directory searches
+        bypassIps:
+          type: array
+          items:
+            type: string
+          description: IP addresses exempt from authentication
+        sessionTimeout:
+          type: integer
+          description: Authentication session timeout in seconds

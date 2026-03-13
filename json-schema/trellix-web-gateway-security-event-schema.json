@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.trellix.com/schemas/web-gateway/security-event.json",
+  "title": "Trellix Web Gateway Security Event",
+  "description": "Represents a security event detected by the Trellix Web Gateway, including malware detections, phishing attempts, policy violations, and data loss prevention triggers.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the security event"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the security event occurred"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Severity level of the security event"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "malware",
+        "phishing",
+        "policy_violation",
+        "data_leak",
+        "certificate_error",
+        "authentication_failure"
+      ],
+      "description": "Type of security event detected"
+    },
+    "sourceIp": {
+      "type": "string",
+      "description": "IP address of the client that triggered the event"
+    },
+    "user": {
+      "type": "string",
+      "description": "Authenticated user name associated with the event"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL involved in the security event"
+    },
+    "threatName": {
+      "type": "string",
+      "description": "Name of the detected threat or malware"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["blocked", "quarantined", "logged", "cleaned"],
+      "description": "Action taken by the gateway in response to the event"
+    },
+    "ruleName": {
+      "type": "string",
+      "description": "Name of the policy rule that triggered the event"
+    },
+    "details": {
+      "type": "string",
+      "description": "Additional descriptive details about the event"
+    }
+  },
+  "required": ["id", "timestamp", "severity", "eventType", "action"]
+}

@@ -1,0 +1,166 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "trellix": "https://docs.trellix.com/schemas/web-gateway/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Appliance": {
+      "@id": "trellix:Appliance",
+      "@context": {
+        "name": "schema:name",
+        "hostname": "trellix:hostname",
+        "version": "schema:softwareVersion",
+        "role": "trellix:applianceRole",
+        "status": "trellix:operationalStatus",
+        "lastSync": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "RuleSet": {
+      "@id": "trellix:RuleSet",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "type": "trellix:ruleSetType",
+        "enabled": {
+          "@id": "trellix:enabled",
+          "@type": "xsd:boolean"
+        },
+        "order": {
+          "@id": "trellix:processingOrder",
+          "@type": "xsd:integer"
+        },
+        "ruleCount": {
+          "@id": "trellix:ruleCount",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Rule": {
+      "@id": "trellix:Rule",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "enabled": {
+          "@id": "trellix:enabled",
+          "@type": "xsd:boolean"
+        },
+        "condition": "trellix:ruleCondition",
+        "action": "trellix:ruleAction"
+      }
+    },
+
+    "SecurityEvent": {
+      "@id": "trellix:SecurityEvent",
+      "@context": {
+        "timestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "severity": "trellix:severity",
+        "eventType": "trellix:eventType",
+        "sourceIp": "trellix:sourceIp",
+        "user": "schema:name",
+        "url": "schema:url",
+        "threatName": "trellix:threatName",
+        "action": "trellix:actionTaken",
+        "ruleName": "trellix:ruleName"
+      }
+    },
+
+    "TrafficLogEntry": {
+      "@id": "trellix:TrafficLogEntry",
+      "@context": {
+        "timestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "sourceIp": "trellix:sourceIp",
+        "user": "schema:name",
+        "method": "trellix:httpMethod",
+        "url": "schema:url",
+        "statusCode": {
+          "@id": "trellix:httpStatusCode",
+          "@type": "xsd:integer"
+        },
+        "action": "trellix:actionTaken",
+        "category": "trellix:urlCategory",
+        "bytesIn": {
+          "@id": "trellix:bytesIn",
+          "@type": "xsd:integer"
+        },
+        "bytesOut": {
+          "@id": "trellix:bytesOut",
+          "@type": "xsd:integer"
+        },
+        "duration": {
+          "@id": "trellix:durationMs",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "UrlCategory": {
+      "@id": "trellix:UrlCategory",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "parentCategory": "trellix:parentCategory"
+      }
+    },
+
+    "CustomList": {
+      "@id": "trellix:CustomList",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "type": "trellix:listType",
+        "entryCount": {
+          "@id": "trellix:entryCount",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Report": {
+      "@id": "trellix:Report",
+      "@context": {
+        "name": "schema:name",
+        "type": "trellix:reportType",
+        "status": "trellix:reportStatus",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "completedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "SslCertificate": {
+      "@id": "trellix:SslCertificate",
+      "@context": {
+        "subject": "trellix:certificateSubject",
+        "issuer": "trellix:certificateIssuer",
+        "validFrom": {
+          "@id": "trellix:validFrom",
+          "@type": "xsd:dateTime"
+        },
+        "validTo": {
+          "@id": "trellix:validTo",
+          "@type": "xsd:dateTime"
+        },
+        "serialNumber": "trellix:serialNumber",
+        "fingerprint": "trellix:fingerprint"
+      }
+    }
+  }
+}

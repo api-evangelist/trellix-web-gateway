@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.trellix.com/schemas/web-gateway/rule-set.json",
+  "title": "Trellix Web Gateway Rule Set",
+  "description": "Represents a policy rule set configured on the Trellix Web Gateway, containing ordered rules with conditions and actions for web traffic processing.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the rule set"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the rule set"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the rule set purpose"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["request", "response", "error"],
+      "description": "Processing phase in which this rule set is evaluated"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the rule set is currently active"
+    },
+    "order": {
+      "type": "integer",
+      "description": "Processing order relative to other rule sets"
+    },
+    "ruleCount": {
+      "type": "integer",
+      "description": "Number of rules contained in this rule set"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Rule"
+      },
+      "description": "Ordered list of rules within this rule set"
+    }
+  },
+  "required": ["id", "name", "type", "enabled"],
+  "$defs": {
+    "Rule": {
+      "type": "object",
+      "description": "An individual policy rule with a condition and action",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the rule"
+        },
+        "name": {
+          "type": "string",
+          "description": "Rule name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Rule description"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the rule is active"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Processing order within the rule set"
+        },
+        "condition": {
+          "$ref": "#/$defs/RuleCondition"
+        },
+        "action": {
+          "$ref": "#/$defs/RuleAction"
+        }
+      },
+      "required": ["id", "name", "enabled", "condition", "action"]
+    },
+    "RuleCondition": {
+      "type": "object",
+      "description": "Condition that determines when a rule matches",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "equals",
+            "not_equals",
+            "contains",
+            "not_contains",
+            "matches",
+            "in_list",
+            "not_in_list",
+            "greater_than",
+            "less_than"
+          ],
+          "description": "Comparison operator"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value to compare against"
+        },
+        "listRef": {
+          "type": "string",
+          "description": "Reference to a custom list for list-based operations"
+        }
+      },
+      "required": ["property", "operator"]
+    },
+    "RuleAction": {
+      "type": "object",
+      "description": "Action to execute when a rule condition matches",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "allow",
+            "block",
+            "redirect",
+            "authenticate",
+            "log",
+            "continue",
+            "stop_rule_set",
+            "stop_cycle"
+          ],
+          "description": "Action type"
+        },
+        "blockTemplate": {
+          "type": "string",
+          "description": "Block page template to display when action is block"
+        },
+        "redirectUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to redirect to when action is redirect"
+        }
+      },
+      "required": ["type"]
+    }
+  }
+}

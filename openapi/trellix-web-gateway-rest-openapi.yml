@@ -1,0 +1,713 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway REST API
+  description: >-
+    RESTful API for managing and configuring Trellix Web Gateway (formerly
+    McAfee Web Gateway) appliances. The Konfigurator REST interface provides
+    programmatic access to system administration, configuration management,
+    file handling, authentication, and appliance lifecycle operations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+externalDocs:
+  description: Trellix Web Gateway REST API Guide
+  url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
+servers:
+  - url: https://{mwg-server}:{port}/Konfigurator/REST
+    description: Trellix Web Gateway Appliance
+    variables:
+      mwg-server:
+        default: mwg.example.com
+        description: Hostname or IP address of the Web Gateway appliance
+      port:
+        default: '4712'
+        description: Management port for the REST API
+tags:
+  - name: Authentication
+    description: Session-based authentication for API access
+  - name: System
+    description: System information and appliance management
+  - name: Configuration
+    description: Configuration management and commit operations
+  - name: Files
+    description: File upload and download operations
+  - name: Lists
+    description: Manage custom lists used in policy rules
+  - name: Troubleshooting
+    description: Log access and diagnostic operations
+security:
+  - cookieAuth: []
+paths:
+  /login:
+    post:
+      operationId: login
+      summary: Authenticate and create a session
+      description: >-
+        Authenticate with the Web Gateway appliance using administrator
+        credentials. Returns a session cookie used for subsequent API calls.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: Administrator username
+                password:
+                  type: string
+                  description: Administrator password
+              required:
+                - userName
+                - password
+      responses:
+        '200':
+          description: Authentication successful
+          headers:
+            Set-Cookie:
+              description: Session cookie for subsequent requests
+              schema:
+                type: string
+        '401':
+          description: Authentication failed - invalid credentials
+      security: []
+  /logout:
+    post:
+      operationId: logout
+      summary: End the current session
+      description: >-
+        Terminate the current authenticated session and invalidate the
+        session cookie.
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Session terminated successfully
+  /system:
+    get:
+      operationId: getSystemInfo
+      summary: Get system information
+      description: >-
+        Retrieve system information about the Web Gateway appliance,
+        including version, hostname, and operational status.
+      tags:
+        - System
+      responses:
+        '200':
+          description: System information returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemInfo'
+        '401':
+          description: Unauthorized
+  /system/appliances:
+    get:
+      operationId: listAppliances
+      summary: List managed appliances
+      description: >-
+        Retrieve the list of all Web Gateway appliances in the management
+        cluster.
+      tags:
+        - System
+      responses:
+        '200':
+          description: List of managed appliances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appliances:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Appliance'
+        '401':
+          description: Unauthorized
+  /system/appliances/{applianceId}:
+    get:
+      operationId: getAppliance
+      summary: Get appliance details
+      description: >-
+        Retrieve details of a specific managed appliance by its identifier.
+      tags:
+        - System
+      parameters:
+        - $ref: '#/components/parameters/applianceId'
+      responses:
+        '200':
+          description: Appliance details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appliance'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Appliance not found
+  /configuration:
+    get:
+      operationId: getConfiguration
+      summary: Get current configuration
+      description: >-
+        Retrieve the current running configuration of the Web Gateway
+        appliance in XML format.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Current configuration returned
+          content:
+            application/xml:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+  /configuration/commit:
+    post:
+      operationId: commitConfiguration
+      summary: Commit configuration changes
+      description: >-
+        Commit pending configuration changes to the Web Gateway appliance.
+        Changes become active after a successful commit.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Configuration committed successfully
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict - another commit is in progress
+  /configuration/rollback:
+    post:
+      operationId: rollbackConfiguration
+      summary: Rollback configuration changes
+      description: >-
+        Discard all uncommitted configuration changes and revert to the
+        last committed state.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Configuration rolled back successfully
+        '401':
+          description: Unauthorized
+  /configuration/backup:
+    post:
+      operationId: createBackup
+      summary: Create a configuration backup
+      description: >-
+        Create a backup of the current configuration that can be restored later.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Backup created successfully
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+  /configuration/restore:
+    post:
+      operationId: restoreBackup
+      summary: Restore a configuration backup
+      description: >-
+        Restore a previously created configuration backup to the appliance.
+      tags:
+        - Configuration
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Backup restored successfully
+        '400':
+          description: Invalid backup file
+        '401':
+          description: Unauthorized
+  /files:
+    get:
+      operationId: listFiles
+      summary: List available files
+      description: >-
+        List files available on the Web Gateway appliance, including rule
+        set exports and configuration files.
+      tags:
+        - Files
+      responses:
+        '200':
+          description: List of available files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FileInfo'
+        '401':
+          description: Unauthorized
+  /files/{fileName}:
+    get:
+      operationId: downloadFile
+      summary: Download a file
+      description: >-
+        Download a specific file from the Web Gateway appliance.
+      tags:
+        - Files
+      parameters:
+        - $ref: '#/components/parameters/fileName'
+      responses:
+        '200':
+          description: File content returned
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
+    put:
+      operationId: uploadFile
+      summary: Upload a file
+      description: >-
+        Upload a file to the Web Gateway appliance, such as a rule set
+        import or certificate file.
+      tags:
+        - Files
+      parameters:
+        - $ref: '#/components/parameters/fileName'
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File uploaded successfully
+        '400':
+          description: Invalid file
+        '401':
+          description: Unauthorized
+    delete:
+      operationId: deleteFile
+      summary: Delete a file
+      description: >-
+        Delete a specific file from the Web Gateway appliance.
+      tags:
+        - Files
+      parameters:
+        - $ref: '#/components/parameters/fileName'
+      responses:
+        '200':
+          description: File deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
+  /lists:
+    get:
+      operationId: listCustomLists
+      summary: List custom lists
+      description: >-
+        Retrieve all custom lists configured on the appliance, including
+        URL whitelists, blacklists, and IP address lists.
+      tags:
+        - Lists
+      responses:
+        '200':
+          description: Custom lists returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lists:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomList'
+        '401':
+          description: Unauthorized
+  /lists/{listId}:
+    get:
+      operationId: getCustomList
+      summary: Get a custom list
+      description: >-
+        Retrieve the contents and metadata of a specific custom list.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      responses:
+        '200':
+          description: Custom list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+    put:
+      operationId: updateCustomList
+      summary: Update a custom list
+      description: >-
+        Replace the contents of a specific custom list with new entries.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomListUpdate'
+      responses:
+        '200':
+          description: Custom list updated
+        '400':
+          description: Invalid list data
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+  /lists/{listId}/entries:
+    post:
+      operationId: addListEntry
+      summary: Add an entry to a custom list
+      description: >-
+        Add a new entry to an existing custom list.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEntry'
+      responses:
+        '201':
+          description: Entry added successfully
+        '400':
+          description: Invalid entry
+        '401':
+          description: Unauthorized
+        '404':
+          description: List not found
+  /lists/{listId}/entries/{entryId}:
+    delete:
+      operationId: deleteListEntry
+      summary: Delete an entry from a custom list
+      description: >-
+        Remove a specific entry from a custom list.
+      tags:
+        - Lists
+      parameters:
+        - $ref: '#/components/parameters/listId'
+        - $ref: '#/components/parameters/entryId'
+      responses:
+        '200':
+          description: Entry deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Entry or list not found
+  /troubleshooting/logs:
+    get:
+      operationId: getLogs
+      summary: Retrieve system logs
+      description: >-
+        Access system and audit logs from the Web Gateway appliance for
+        troubleshooting and monitoring purposes.
+      tags:
+        - Troubleshooting
+      parameters:
+        - name: type
+          in: query
+          description: Type of log to retrieve
+          schema:
+            type: string
+            enum:
+              - system
+              - audit
+              - access
+              - debug
+        - name: from
+          in: query
+          description: Start timestamp for log retrieval
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          description: End timestamp for log retrieval
+          schema:
+            type: string
+            format: date-time
+        - name: limit
+          in: query
+          description: Maximum number of log entries to return
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Log entries returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LogEntry'
+        '401':
+          description: Unauthorized
+  /troubleshooting/feedback:
+    get:
+      operationId: getFeedbackFiles
+      summary: List feedback files
+      description: >-
+        Retrieve the list of available feedback and diagnostic files
+        generated by the appliance.
+      tags:
+        - Troubleshooting
+      responses:
+        '200':
+          description: Feedback files listed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FileInfo'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: >-
+        Session cookie obtained via the /login endpoint. Passed
+        automatically in subsequent requests.
+  parameters:
+    applianceId:
+      name: applianceId
+      in: path
+      required: true
+      description: Unique identifier of the managed appliance
+      schema:
+        type: string
+    fileName:
+      name: fileName
+      in: path
+      required: true
+      description: Name of the file
+      schema:
+        type: string
+    listId:
+      name: listId
+      in: path
+      required: true
+      description: Unique identifier of the custom list
+      schema:
+        type: string
+    entryId:
+      name: entryId
+      in: path
+      required: true
+      description: Unique identifier of the list entry
+      schema:
+        type: string
+  schemas:
+    SystemInfo:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Web Gateway software version
+        hostname:
+          type: string
+          description: Appliance hostname
+        serialNumber:
+          type: string
+          description: Appliance serial number
+        status:
+          type: string
+          enum:
+            - running
+            - maintenance
+            - error
+          description: Current operational status
+        uptime:
+          type: integer
+          description: System uptime in seconds
+        cpuUsage:
+          type: number
+          format: float
+          description: Current CPU usage percentage
+        memoryUsage:
+          type: number
+          format: float
+          description: Current memory usage percentage
+        lastConfigChange:
+          type: string
+          format: date-time
+          description: Timestamp of the last configuration change
+    Appliance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the appliance
+        name:
+          type: string
+          description: Display name of the appliance
+        hostname:
+          type: string
+          description: Hostname or IP address
+        version:
+          type: string
+          description: Software version running on the appliance
+        role:
+          type: string
+          enum:
+            - primary
+            - secondary
+            - standalone
+          description: Role of the appliance in the cluster
+        status:
+          type: string
+          enum:
+            - online
+            - offline
+            - syncing
+            - error
+          description: Current status of the appliance
+        lastSync:
+          type: string
+          format: date-time
+          description: Last synchronization timestamp
+    FileInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: File name
+        size:
+          type: integer
+          description: File size in bytes
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+        type:
+          type: string
+          description: File type or MIME type
+    CustomList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the list
+        name:
+          type: string
+          description: Display name of the list
+        type:
+          type: string
+          enum:
+            - url
+            - ip
+            - string
+            - regex
+            - mediaType
+            - category
+          description: Type of entries in the list
+        description:
+          type: string
+          description: Description of the list purpose
+        entryCount:
+          type: integer
+          description: Number of entries in the list
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListEntry'
+          description: List entries
+    CustomListUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated list name
+        description:
+          type: string
+          description: Updated list description
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListEntry'
+          description: Complete replacement entries for the list
+    ListEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the entry
+        value:
+          type: string
+          description: Entry value (URL, IP, string, etc.)
+        description:
+          type: string
+          description: Optional description of the entry
+    LogEntry:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Log entry timestamp
+        level:
+          type: string
+          enum:
+            - DEBUG
+            - INFO
+            - WARNING
+            - ERROR
+            - CRITICAL
+          description: Log severity level
+        source:
+          type: string
+          description: Component that generated the log entry
+        message:
+          type: string
+          description: Log message content

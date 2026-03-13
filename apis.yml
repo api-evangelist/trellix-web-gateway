@@ -3,7 +3,7 @@ description: Trellix Web Gateway (formerly McAfee Web Gateway) provides advanced
 image: https://www.trellix.com/assets/images/trellix-logo.png
 url: https://www.trellix.com/products/web-gateway/
 created: '2024'
-modified: '2024'
+modified: '2026-03-04'
 specificationVersion: '0.18'
 apis:
 - name: Trellix Web Gateway REST API
@@ -26,6 +26,8 @@ apis:
     url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
   - type: Postman Collection
     url: https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
+  - type: OpenAPI
+    url: openapi/trellix-web-gateway-rest-openapi.yml
   contact:
   - type: Support
     url: https://www.trellix.com/support/
@@ -46,6 +48,8 @@ apis:
     url: https://docs.trellix.com/bundle/web-gateway-reporting-api
   - type: API Reference
     url: https://docs.trellix.com/api/web-gateway/reporting/
+  - type: OpenAPI
+    url: openapi/trellix-web-gateway-reporting-openapi.yml
 - name: Trellix Web Gateway Policy API
   description: API for creating, updating, and managing security policies, rules,  and configurations for web filtering and threat prevention.
   image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
@@ -61,6 +65,8 @@ apis:
     url: https://docs.trellix.com/bundle/web-gateway-policy-api
   - type: Examples
     url: https://github.com/trellix-enterprise/mwg-api-examples
+  - type: OpenAPI
+    url: openapi/trellix-web-gateway-policy-openapi.yml
 common:
 - type: Getting Started
   url: https://docs.trellix.com/bundle/web-gateway-getting-started
@@ -78,10 +84,15 @@ common:
   url: https://www.trellix.com/login/
 - type: SDK
   url: https://github.com/trellix-enterprise/mwg-sdk
+- type: JSON-LD
+  url: json-ld/trellix-web-gateway-context.jsonld
+- type: JSONSchema
+  url: json-schema/trellix-web-gateway-security-event-schema.json
+- type: JSONSchema
+  url: json-schema/trellix-web-gateway-rule-set-schema.json
 maintainers:
-- name: Trellix
-  email: developer@trellix.com
-  url: https://www.trellix.com/
+- FN: Kin Lane
+  email: kin@apievangelist.com
 tags:
 - Cybersecurity
 - Web Gateway

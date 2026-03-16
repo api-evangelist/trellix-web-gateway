@@ -3,7 +3,7 @@ description: Trellix Web Gateway (formerly McAfee Web Gateway) provides advanced
 image: https://www.trellix.com/assets/images/trellix-logo.png
 url: https://www.trellix.com/products/web-gateway/
 created: '2024'
-modified: '2026-03-04'
+modified: '2026-03-16'
 specificationVersion: '0.18'
 apis:
 - name: Trellix Web Gateway REST API

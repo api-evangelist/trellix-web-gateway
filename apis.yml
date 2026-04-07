@@ -1,104 +1,117 @@
 name: Trellix Web Gateway
-description: Trellix Web Gateway (formerly McAfee Web Gateway) provides advanced threat  protection and secure web access for enterprises. It offers URL filtering,  malware detection, data loss prevention, and cloud security capabilities  through a comprehensive web security platform.
+description: >-
+  Trellix Web Gateway (formerly McAfee Web Gateway) provides advanced threat protection
+  and secure web access for enterprises. It offers URL filtering, malware detection,
+  data loss prevention, and cloud security capabilities through a comprehensive web
+  security platform.
 image: https://www.trellix.com/assets/images/trellix-logo.png
 url: https://www.trellix.com/products/web-gateway/
 created: '2024'
 modified: '2026-03-16'
 specificationVersion: '0.18'
 apis:
-- name: Trellix Web Gateway REST API
-  description: RESTful API for managing and configuring Trellix Web Gateway appliances,  including policy management, reporting, threat intelligence, and system  administration tasks.
-  image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
-  humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
-  baseURL: https://<mwg-server>:<port>/Konfigurator/REST
-  tags:
-  - Web Security
+  - name: Trellix Web Gateway REST API
+    description: >-
+      RESTful API for managing and configuring Trellix Web Gateway appliances, including
+      policy management, reporting, threat intelligence, and system administration
+      tasks.
+    image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
+    humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
+    baseURL: https://<mwg-server>:<port>/Konfigurator/REST
+    tags:
+      - Web Security
+      - Threat Protection
+      - URL Filtering
+      - Gateway
+      - Enterprise Security
+    properties:
+      - type: Documentation
+        url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
+      - type: OpenAPI
+        url: https://docs.trellix.com/api/web-gateway/openapi.json
+      - type: Authentication
+        url: 
+          https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
+      - type: Postman Collection
+        url: 
+          https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
+      - type: OpenAPI
+        url: openapi/trellix-web-gateway-rest-openapi.yml
+    contact:
+      - type: Support
+        url: https://www.trellix.com/support/
+      - type: Email
+        email: support@trellix.com
+  - name: Trellix Web Gateway Reporting API
+    description: >-
+      API for accessing web traffic logs, security events, threat analytics, and generating
+      custom reports from Web Gateway data.
+    image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
+    humanURL: https://docs.trellix.com/bundle/web-gateway-reporting-guide
+    baseURL: https://<mwg-server>:<port>/reporter/api
+    tags:
+      - Reporting
+      - Analytics
+      - Logs
+      - Security Events
+    properties:
+      - type: Documentation
+        url: https://docs.trellix.com/bundle/web-gateway-reporting-api
+      - type: API Reference
+        url: https://docs.trellix.com/api/web-gateway/reporting/
+      - type: OpenAPI
+        url: openapi/trellix-web-gateway-reporting-openapi.yml
+  - name: Trellix Web Gateway Policy API
+    description: >-
+      API for creating, updating, and managing security policies, rules, and configurations
+      for web filtering and threat prevention.
+    image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
+    humanURL: https://docs.trellix.com/bundle/web-gateway-policy-guide
+    baseURL: https://<mwg-server>:<port>/Konfigurator/REST/policy
+    tags:
+      - Policy Management
+      - Rules
+      - Configuration
+      - Security Policies
+    properties:
+      - type: Documentation
+        url: https://docs.trellix.com/bundle/web-gateway-policy-api
+      - type: Examples
+        url: https://github.com/trellix-enterprise/mwg-api-examples
+      - type: OpenAPI
+        url: openapi/trellix-web-gateway-policy-openapi.yml
+common:
+  - type: Getting Started
+    url: https://docs.trellix.com/bundle/web-gateway-getting-started
+  - type: Developer Portal
+    url: https://developer.trellix.com/
+  - type: Change Log
+    url: https://docs.trellix.com/bundle/web-gateway-release-notes
+  - type: Status
+    url: https://status.trellix.com/
+  - type: Terms of Service
+    url: https://www.trellix.com/legal/terms-of-use/
+  - type: Privacy Policy
+    url: https://www.trellix.com/privacy/
+  - type: Portal
+    url: https://www.trellix.com/login/
+  - type: SDK
+    url: https://github.com/trellix-enterprise/mwg-sdk
+  - type: JSON-LD
+    url: json-ld/trellix-web-gateway-context.jsonld
+  - type: JSONSchema
+    url: json-schema/trellix-web-gateway-security-event-schema.json
+  - type: JSONSchema
+    url: json-schema/trellix-web-gateway-rule-set-schema.json
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+tags:
+  - Cybersecurity
+  - Web Gateway
   - Threat Protection
   - URL Filtering
-  - Gateway
+  - Malware Protection
+  - Data Loss Prevention
   - Enterprise Security
-  properties:
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
-  - type: OpenAPI
-    url: https://docs.trellix.com/api/web-gateway/openapi.json
-  - type: Authentication
-    url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
-  - type: Postman Collection
-    url: https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
-  - type: OpenAPI
-    url: openapi/trellix-web-gateway-rest-openapi.yml
-  contact:
-  - type: Support
-    url: https://www.trellix.com/support/
-  - type: Email
-    email: support@trellix.com
-- name: Trellix Web Gateway Reporting API
-  description: API for accessing web traffic logs, security events, threat analytics,  and generating custom reports from Web Gateway data.
-  image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
-  humanURL: https://docs.trellix.com/bundle/web-gateway-reporting-guide
-  baseURL: https://<mwg-server>:<port>/reporter/api
-  tags:
-  - Reporting
-  - Analytics
-  - Logs
-  - Security Events
-  properties:
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-reporting-api
-  - type: API Reference
-    url: https://docs.trellix.com/api/web-gateway/reporting/
-  - type: OpenAPI
-    url: openapi/trellix-web-gateway-reporting-openapi.yml
-- name: Trellix Web Gateway Policy API
-  description: API for creating, updating, and managing security policies, rules,  and configurations for web filtering and threat prevention.
-  image: https://www.trellix.com/assets/images/products/web-gateway-icon.png
-  humanURL: https://docs.trellix.com/bundle/web-gateway-policy-guide
-  baseURL: https://<mwg-server>:<port>/Konfigurator/REST/policy
-  tags:
-  - Policy Management
-  - Rules
-  - Configuration
-  - Security Policies
-  properties:
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-policy-api
-  - type: Examples
-    url: https://github.com/trellix-enterprise/mwg-api-examples
-  - type: OpenAPI
-    url: openapi/trellix-web-gateway-policy-openapi.yml
-common:
-- type: Getting Started
-  url: https://docs.trellix.com/bundle/web-gateway-getting-started
-- type: Developer Portal
-  url: https://developer.trellix.com/
-- type: Change Log
-  url: https://docs.trellix.com/bundle/web-gateway-release-notes
-- type: Status
-  url: https://status.trellix.com/
-- type: Terms of Service
-  url: https://www.trellix.com/legal/terms-of-use/
-- type: Privacy Policy
-  url: https://www.trellix.com/privacy/
-- type: Portal
-  url: https://www.trellix.com/login/
-- type: SDK
-  url: https://github.com/trellix-enterprise/mwg-sdk
-- type: JSON-LD
-  url: json-ld/trellix-web-gateway-context.jsonld
-- type: JSONSchema
-  url: json-schema/trellix-web-gateway-security-event-schema.json
-- type: JSONSchema
-  url: json-schema/trellix-web-gateway-rule-set-schema.json
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-tags:
-- Cybersecurity
-- Web Gateway
-- Threat Protection
-- URL Filtering
-- Malware Protection
-- Data Loss Prevention
-- Enterprise Security
-- Network Security
+  - Network Security

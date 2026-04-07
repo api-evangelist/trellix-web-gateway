@@ -47,7 +47,7 @@ paths:
   /rulesets:
     get:
       operationId: listRuleSets
-      summary: List all rule sets
+      summary: Trellix Web Gateway List all rule sets
       description: >-
         Retrieve the list of all configured rule sets, including their
         status, order, and basic configuration.
@@ -84,7 +84,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createRuleSet
-      summary: Create a new rule set
+      summary: Trellix Web Gateway Create a new rule set
       description: >-
         Create a new rule set with the specified configuration. The rule
         set must be committed before it becomes active.
@@ -110,7 +110,7 @@ paths:
   /rulesets/{ruleSetId}:
     get:
       operationId: getRuleSet
-      summary: Get a rule set
+      summary: Trellix Web Gateway Get a rule set
       description: >-
         Retrieve the full configuration of a specific rule set, including
         all contained rules and their conditions.
@@ -131,7 +131,7 @@ paths:
           description: Rule set not found
     put:
       operationId: updateRuleSet
-      summary: Update a rule set
+      summary: Trellix Web Gateway Update a rule set
       description: >-
         Update the configuration of an existing rule set. Changes must be
         committed to take effect.
@@ -160,7 +160,7 @@ paths:
           description: Rule set not found
     delete:
       operationId: deleteRuleSet
-      summary: Delete a rule set
+      summary: Trellix Web Gateway Delete a rule set
       description: >-
         Delete a rule set and all its contained rules. Changes must be
         committed to take effect.
@@ -178,7 +178,7 @@ paths:
   /rulesets/{ruleSetId}/enable:
     post:
       operationId: enableRuleSet
-      summary: Enable a rule set
+      summary: Trellix Web Gateway Enable a rule set
       description: >-
         Enable a disabled rule set. Changes must be committed to take effect.
       tags:
@@ -195,7 +195,7 @@ paths:
   /rulesets/{ruleSetId}/disable:
     post:
       operationId: disableRuleSet
-      summary: Disable a rule set
+      summary: Trellix Web Gateway Disable a rule set
       description: >-
         Disable an active rule set without deleting it. Changes must be
         committed to take effect.
@@ -213,7 +213,7 @@ paths:
   /rulesets/{ruleSetId}/rules:
     get:
       operationId: listRules
-      summary: List rules in a rule set
+      summary: Trellix Web Gateway List rules in a rule set
       description: >-
         Retrieve all rules within a specific rule set, including their
         conditions, actions, and order.
@@ -239,7 +239,7 @@ paths:
           description: Rule set not found
     post:
       operationId: createRule
-      summary: Create a new rule
+      summary: Trellix Web Gateway Create a new rule
       description: >-
         Add a new rule to a rule set with the specified conditions and
         actions. Changes must be committed to take effect.
@@ -269,7 +269,7 @@ paths:
   /rulesets/{ruleSetId}/rules/{ruleId}:
     get:
       operationId: getRule
-      summary: Get a specific rule
+      summary: Trellix Web Gateway Get a specific rule
       description: >-
         Retrieve the full configuration of a specific rule within a rule set.
       tags:
@@ -290,7 +290,7 @@ paths:
           description: Rule or rule set not found
     put:
       operationId: updateRule
-      summary: Update a rule
+      summary: Trellix Web Gateway Update a rule
       description: >-
         Update the configuration of an existing rule. Changes must be
         committed to take effect.
@@ -320,7 +320,7 @@ paths:
           description: Rule or rule set not found
     delete:
       operationId: deleteRule
-      summary: Delete a rule
+      summary: Trellix Web Gateway Delete a rule
       description: >-
         Delete a specific rule from a rule set. Changes must be committed
         to take effect.
@@ -339,7 +339,7 @@ paths:
   /urlfilter/categories:
     get:
       operationId: listUrlCategories
-      summary: List URL categories
+      summary: Trellix Web Gateway List URL categories
       description: >-
         Retrieve the list of available URL categories used for web
         filtering and policy decisions.
@@ -362,7 +362,7 @@ paths:
   /urlfilter/lookup:
     get:
       operationId: lookupUrl
-      summary: Look up URL categorization
+      summary: Trellix Web Gateway Look up URL categorization
       description: >-
         Look up the category and reputation of a specific URL against
         the Trellix Global Threat Intelligence database.
@@ -387,7 +387,7 @@ paths:
   /urlfilter/settings:
     get:
       operationId: getUrlFilterSettings
-      summary: Get URL filter settings
+      summary: Trellix Web Gateway Get URL filter settings
       description: >-
         Retrieve the current URL filtering configuration including
         blocked categories, allowed exceptions, and safe search settings.
@@ -404,7 +404,7 @@ paths:
           description: Unauthorized
     put:
       operationId: updateUrlFilterSettings
-      summary: Update URL filter settings
+      summary: Trellix Web Gateway Update URL filter settings
       description: >-
         Update the URL filtering configuration. Changes must be committed
         to take effect.
@@ -426,7 +426,7 @@ paths:
   /antimalware/engines:
     get:
       operationId: listAntiMalwareEngines
-      summary: List anti-malware engines
+      summary: Trellix Web Gateway List anti-malware engines
       description: >-
         Retrieve the list of configured anti-malware scanning engines and
         their current status.
@@ -449,7 +449,7 @@ paths:
   /antimalware/settings:
     get:
       operationId: getAntiMalwareSettings
-      summary: Get anti-malware settings
+      summary: Trellix Web Gateway Get anti-malware settings
       description: >-
         Retrieve the current anti-malware scanning configuration including
         enabled engines, scan behavior, and file type handling.
@@ -466,7 +466,7 @@ paths:
           description: Unauthorized
     put:
       operationId: updateAntiMalwareSettings
-      summary: Update anti-malware settings
+      summary: Trellix Web Gateway Update anti-malware settings
       description: >-
         Update the anti-malware scanning configuration. Changes must be
         committed to take effect.
@@ -488,7 +488,7 @@ paths:
   /ssl/settings:
     get:
       operationId: getSslSettings
-      summary: Get SSL scanning settings
+      summary: Trellix Web Gateway Get SSL scanning settings
       description: >-
         Retrieve the current SSL/TLS inspection configuration including
         certificate handling, bypass lists, and protocol settings.
@@ -505,7 +505,7 @@ paths:
           description: Unauthorized
     put:
       operationId: updateSslSettings
-      summary: Update SSL scanning settings
+      summary: Trellix Web Gateway Update SSL scanning settings
       description: >-
         Update the SSL/TLS inspection configuration. Changes must be
         committed to take effect.
@@ -527,7 +527,7 @@ paths:
   /ssl/certificates:
     get:
       operationId: listSslCertificates
-      summary: List SSL certificates
+      summary: Trellix Web Gateway List SSL certificates
       description: >-
         Retrieve the list of SSL/TLS certificates used by the gateway
         for SSL inspection.
@@ -549,7 +549,7 @@ paths:
           description: Unauthorized
     post:
       operationId: uploadSslCertificate
-      summary: Upload an SSL certificate
+      summary: Trellix Web Gateway Upload an SSL certificate
       description: >-
         Upload a new SSL/TLS certificate for use in SSL inspection.
       tags:
@@ -574,7 +574,7 @@ paths:
   /dlp/settings:
     get:
       operationId: getDlpSettings
-      summary: Get DLP settings
+      summary: Trellix Web Gateway Get DLP settings
       description: >-
         Retrieve the current Data Loss Prevention configuration including
         enabled classifiers, actions, and sensitivity levels.
@@ -591,7 +591,7 @@ paths:
           description: Unauthorized
     put:
       operationId: updateDlpSettings
-      summary: Update DLP settings
+      summary: Trellix Web Gateway Update DLP settings
       description: >-
         Update the Data Loss Prevention configuration. Changes must be
         committed to take effect.
@@ -613,7 +613,7 @@ paths:
   /dlp/classifiers:
     get:
       operationId: listDlpClassifiers
-      summary: List DLP classifiers
+      summary: Trellix Web Gateway List DLP classifiers
       description: >-
         Retrieve the list of available data classifiers for content
         inspection and data loss prevention.
@@ -636,7 +636,7 @@ paths:
   /authentication/settings:
     get:
       operationId: getAuthenticationSettings
-      summary: Get authentication settings
+      summary: Trellix Web Gateway Get authentication settings
       description: >-
         Retrieve the current user authentication configuration including
         authentication methods, directory services, and bypass rules.
@@ -653,7 +653,7 @@ paths:
           description: Unauthorized
     put:
       operationId: updateAuthenticationSettings
-      summary: Update authentication settings
+      summary: Trellix Web Gateway Update authentication settings
       description: >-
         Update the user authentication configuration. Changes must be
         committed to take effect.

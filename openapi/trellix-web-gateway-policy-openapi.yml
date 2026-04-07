@@ -27,20 +27,20 @@ servers:
         default: '4712'
         description: Management port for the REST API
 tags:
+  - name: Anti-Malware
+    description: Anti-malware scanning configuration
+  - name: Authentication
+    description: Authentication policy settings
+  - name: Data Loss Prevention
+    description: DLP policy configuration
   - name: Rule Sets
     description: Manage policy rule sets
   - name: Rules
     description: Manage individual policy rules within rule sets
-  - name: URL Filtering
-    description: URL categorization and filtering settings
-  - name: Anti-Malware
-    description: Anti-malware scanning configuration
   - name: SSL Scanning
     description: SSL/TLS inspection configuration
-  - name: Data Loss Prevention
-    description: DLP policy configuration
-  - name: Authentication
-    description: Authentication policy settings
+  - name: URL Filtering
+    description: URL categorization and filtering settings
 security:
   - cookieAuth: []
 paths:

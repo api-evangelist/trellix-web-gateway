@@ -19,22 +19,20 @@ apis:
     humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
     baseURL: https://<mwg-server>:<port>/Konfigurator/REST
     tags:
-      - Web Security
+      - Enterprise Security
+      - Gateway
       - Threat Protection
       - URL Filtering
-      - Gateway
-      - Enterprise Security
+      - Web Security
     properties:
       - type: Documentation
         url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
       - type: OpenAPI
         url: https://docs.trellix.com/api/web-gateway/openapi.json
       - type: Authentication
-        url: 
-          https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
+        url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
       - type: Postman Collection
-        url: 
-          https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
+        url: https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
       - type: OpenAPI
         url: openapi/trellix-web-gateway-rest-openapi.yml
     contact:
@@ -50,9 +48,9 @@ apis:
     humanURL: https://docs.trellix.com/bundle/web-gateway-reporting-guide
     baseURL: https://<mwg-server>:<port>/reporter/api
     tags:
-      - Reporting
       - Analytics
       - Logs
+      - Reporting
       - Security Events
     properties:
       - type: Documentation
@@ -69,9 +67,9 @@ apis:
     humanURL: https://docs.trellix.com/bundle/web-gateway-policy-guide
     baseURL: https://<mwg-server>:<port>/Konfigurator/REST/policy
     tags:
+      - Configuration
       - Policy Management
       - Rules
-      - Configuration
       - Security Policies
     properties:
       - type: Documentation
@@ -108,10 +106,10 @@ maintainers:
     email: kin@apievangelist.com
 tags:
   - Cybersecurity
-  - Web Gateway
-  - Threat Protection
-  - URL Filtering
-  - Malware Protection
   - Data Loss Prevention
   - Enterprise Security
+  - Malware Protection
   - Network Security
+  - Threat Protection
+  - URL Filtering
+  - Web Gateway

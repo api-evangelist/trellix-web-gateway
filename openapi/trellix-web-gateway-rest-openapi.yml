@@ -28,14 +28,14 @@ servers:
 tags:
   - name: Authentication
     description: Session-based authentication for API access
-  - name: System
-    description: System information and appliance management
   - name: Configuration
     description: Configuration management and commit operations
   - name: Files
     description: File upload and download operations
   - name: Lists
     description: Manage custom lists used in policy rules
+  - name: System
+    description: System information and appliance management
   - name: Troubleshooting
     description: Log access and diagnostic operations
 security:

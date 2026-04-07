@@ -26,16 +26,16 @@ servers:
         default: '4712'
         description: Management port for the reporting API
 tags:
-  - name: Traffic Logs
-    description: Web traffic log access and search
-  - name: Security Events
-    description: Security event and threat detection data
-  - name: Reports
-    description: Report generation and retrieval
-  - name: Statistics
-    description: Aggregated traffic and security statistics
   - name: Dashboards
     description: Dashboard data for visualization
+  - name: Reports
+    description: Report generation and retrieval
+  - name: Security Events
+    description: Security event and threat detection data
+  - name: Statistics
+    description: Aggregated traffic and security statistics
+  - name: Traffic Logs
+    description: Web traffic log access and search
 security:
   - cookieAuth: []
 paths:

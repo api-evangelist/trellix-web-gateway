@@ -1,0 +1,30 @@
+{
+  "total": 2,
+  "events": [
+    {
+      "id": "evt_0001AB",
+      "timestamp": "2026-05-03T14:22:15Z",
+      "type": "malware",
+      "severity": "high",
+      "sourceIp": "10.1.2.100",
+      "destinationUrl": "http://malicious-site.example.com/payload.exe",
+      "category": "Malware",
+      "action": "blocked",
+      "malwareName": "Trojan.GenericKD.48923",
+      "userId": "jdoe@company.com",
+      "applianceId": "mwg-primary-01"
+    },
+    {
+      "id": "evt_0002CD",
+      "timestamp": "2026-05-03T14:18:42Z",
+      "type": "policy-violation",
+      "severity": "medium",
+      "sourceIp": "10.1.3.55",
+      "destinationUrl": "https://social-media.example.com",
+      "category": "Social Networking",
+      "action": "blocked",
+      "userId": "bsmith@company.com",
+      "applianceId": "mwg-primary-01"
+    }
+  ]
+}

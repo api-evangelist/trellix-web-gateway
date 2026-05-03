@@ -42,7 +42,7 @@ paths:
   /logs/traffic:
     get:
       operationId: getTrafficLogs
-      summary: Trellix Web Gateway Retrieve web traffic logs
+      summary: Retrieve web traffic logs
       description: >-
         Query web traffic access logs with optional filtering by time range,
         source IP, destination URL, action, and other criteria.
@@ -97,7 +97,7 @@ paths:
   /logs/traffic/{logId}:
     get:
       operationId: getTrafficLogEntry
-      summary: Trellix Web Gateway Get a specific traffic log entry
+      summary: Get a specific traffic log entry
       description: >-
         Retrieve detailed information about a specific traffic log entry.
       tags:
@@ -118,7 +118,7 @@ paths:
   /events/security:
     get:
       operationId: getSecurityEvents
-      summary: Trellix Web Gateway Retrieve security events
+      summary: Retrieve security events
       description: >-
         Query security events including malware detections, policy
         violations, blocked threats, and suspicious activity alerts.
@@ -176,7 +176,7 @@ paths:
   /events/security/{eventId}:
     get:
       operationId: getSecurityEvent
-      summary: Trellix Web Gateway Get a specific security event
+      summary: Get a specific security event
       description: >-
         Retrieve detailed information about a specific security event,
         including full threat analysis data.
@@ -198,7 +198,7 @@ paths:
   /reports:
     get:
       operationId: listReports
-      summary: Trellix Web Gateway List available reports
+      summary: List available reports
       description: >-
         Retrieve a list of available report definitions and previously
         generated reports.
@@ -220,7 +220,7 @@ paths:
           description: Unauthorized
     post:
       operationId: generateReport
-      summary: Trellix Web Gateway Generate a new report
+      summary: Generate a new report
       description: >-
         Generate a new report based on specified parameters, time range,
         and report type.
@@ -246,7 +246,7 @@ paths:
   /reports/{reportId}:
     get:
       operationId: getReport
-      summary: Trellix Web Gateway Get a report
+      summary: Get a report
       description: >-
         Retrieve the status and results of a specific report.
       tags:
@@ -266,7 +266,7 @@ paths:
           description: Report not found
     delete:
       operationId: deleteReport
-      summary: Trellix Web Gateway Delete a report
+      summary: Delete a report
       description: >-
         Delete a previously generated report and its associated data.
       tags:
@@ -283,7 +283,7 @@ paths:
   /reports/{reportId}/download:
     get:
       operationId: downloadReport
-      summary: Trellix Web Gateway Download a report
+      summary: Download a report
       description: >-
         Download a generated report in the specified format (PDF, CSV, or XML).
       tags:
@@ -321,7 +321,7 @@ paths:
   /statistics/traffic:
     get:
       operationId: getTrafficStatistics
-      summary: Trellix Web Gateway Get traffic statistics
+      summary: Get traffic statistics
       description: >-
         Retrieve aggregated traffic statistics including request counts,
         bandwidth usage, and top destinations over a specified time period.
@@ -353,7 +353,7 @@ paths:
   /statistics/threats:
     get:
       operationId: getThreatStatistics
-      summary: Trellix Web Gateway Get threat statistics
+      summary: Get threat statistics
       description: >-
         Retrieve aggregated threat detection statistics including malware
         detections, blocked URLs, and category violations over a specified
@@ -386,7 +386,7 @@ paths:
   /statistics/top/urls:
     get:
       operationId: getTopUrls
-      summary: Trellix Web Gateway Get top accessed URLs
+      summary: Get top accessed URLs
       description: >-
         Retrieve the most frequently accessed URLs during the specified
         time period.
@@ -413,7 +413,7 @@ paths:
   /statistics/top/categories:
     get:
       operationId: getTopCategories
-      summary: Trellix Web Gateway Get top URL categories
+      summary: Get top URL categories
       description: >-
         Retrieve the most accessed URL categories during the specified
         time period.
@@ -440,7 +440,7 @@ paths:
   /dashboards/overview:
     get:
       operationId: getDashboardOverview
-      summary: Trellix Web Gateway Get dashboard overview data
+      summary: Get dashboard overview data
       description: >-
         Retrieve aggregated data for the main reporting dashboard, including
         traffic volume, threat counts, and top statistics.

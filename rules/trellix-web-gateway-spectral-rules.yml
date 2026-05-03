@@ -1,0 +1,113 @@
+rules:
+  twg-operation-id-camel-case:
+    description: Operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  twg-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 /()+&-]*$"
+
+  twg-security-defined:
+    description: All non-login operations must define security requirements
+    message: "Operation should define security requirements"
+    severity: error
+    given: "$.paths[?(!@path.match('/login$'))][get,post,put,patch,delete]"
+    then:
+      field: security
+      function: defined
+
+  twg-response-200-get:
+    description: All GET operations must define a 200 response
+    message: "GET operation must define a 200 response"
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: defined
+
+  twg-response-401-defined:
+    description: Authenticated operations should define a 401 response
+    message: "Authenticated operation should define 401 Unauthorized"
+    severity: warn
+    given: "$.paths[*][get,post,put,delete]"
+    then:
+      field: responses.401
+      function: defined
+
+  twg-tag-defined:
+    description: All operations must have at least one tag
+    message: "Operation must include at least one tag"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: defined
+
+  twg-server-variables:
+    description: Server URLs with variables must define those variables
+    message: "Server URL variable must have a default value"
+    severity: warn
+    given: "$.servers[*].variables[*]"
+    then:
+      field: default
+      function: defined
+
+  twg-cookie-auth:
+    description: Web Gateway uses session cookie authentication via JSESSIONID
+    message: "Security scheme must be cookieAuth using JSESSIONID cookie"
+    severity: info
+    given: "$.components.securitySchemes.cookieAuth"
+    then:
+      function: defined
+
+  twg-path-kebab-case:
+    description: API paths should use lowercase letters and hyphens
+    message: "Path segment should be lowercase"
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z][a-z0-9-]*(/[a-z][a-z0-9-]*|/\\{[a-zA-Z][a-zA-Z0-9]*\\})*)+$"
+
+  twg-delete-response:
+    description: DELETE operations should return 200 or 204
+    message: "DELETE should define a 200 or 204 success response"
+    severity: warn
+    given: "$.paths[*].delete"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            responses:
+              type: object
+
+  twg-post-request-body:
+    description: POST operations that create resources should define a request body
+    message: "POST operation should define a requestBody"
+    severity: warn
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: defined
+
+  twg-xml-content-type:
+    description: Configuration endpoints use XML content type
+    message: "Configuration endpoints should support application/xml"
+    severity: info
+    given: "$.paths['/configuration'].get.responses.200.content"
+    then:
+      function: defined

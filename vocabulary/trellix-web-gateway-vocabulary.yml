@@ -1,0 +1,153 @@
+vocabulary:
+  name: Trellix Web Gateway Vocabulary
+  description: >-
+    Domain vocabulary for Trellix Web Gateway (formerly McAfee Web Gateway),
+    covering web security, URL filtering, malware protection, SSL inspection,
+    and policy management concepts.
+  version: 1.0.0
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Enterprise Security
+    - Network Security
+    - Web Security
+
+terms:
+  - term: Web Gateway
+    definition: >-
+      A security appliance or service that controls web access by inspecting
+      HTTP/HTTPS traffic, enforcing policies, and blocking malicious content.
+    related:
+      - URL Filtering
+      - Anti-Malware
+      - SSL Inspection
+
+  - term: URL Filtering
+    definition: >-
+      The process of categorizing and controlling access to websites based on
+      URL categories such as Malware, Social Networking, Gambling, or Adult Content.
+    related:
+      - URL Category
+      - Web Gateway
+
+  - term: URL Category
+    definition: >-
+      A classification assigned to a URL based on its content, purpose, or
+      risk level, used to enforce web browsing policies.
+    related:
+      - URL Filtering
+
+  - term: Anti-Malware
+    definition: >-
+      The capability to scan web content and downloads for malicious software,
+      viruses, trojans, and other threats before they reach end users.
+    related:
+      - Web Gateway
+      - Malware Detection
+
+  - term: Malware Detection
+    definition: >-
+      The identification of malicious software in web content using signature
+      scanning, heuristics, and behavioral analysis.
+    related:
+      - Anti-Malware
+
+  - term: SSL Inspection
+    definition: >-
+      Also known as SSL/TLS Interception or Deep Packet Inspection — the
+      process of decrypting, scanning, and re-encrypting HTTPS traffic to
+      detect threats hidden in encrypted communications.
+    related:
+      - Web Gateway
+      - Deep Packet Inspection
+
+  - term: Deep Packet Inspection
+    definition: >-
+      Examination of packet content beyond the header to identify protocols,
+      applications, threats, and policy violations in network traffic.
+    related:
+      - SSL Inspection
+
+  - term: Rule Set
+    definition: >-
+      A named collection of policy rules that are evaluated in order for
+      each web request to determine the action to take.
+    related:
+      - Policy Rule
+      - Web Gateway
+
+  - term: Policy Rule
+    definition: >-
+      A conditional statement in a rule set that specifies when a condition
+      is met, what action should be taken (block, allow, redirect, scan).
+    related:
+      - Rule Set
+
+  - term: DLP
+    definition: >-
+      Data Loss Prevention — technology that detects and prevents the
+      unauthorized transmission of sensitive data such as PII, credit card
+      numbers, or intellectual property through web channels.
+    related:
+      - Data Exfiltration
+      - Web Gateway
+
+  - term: Data Exfiltration
+    definition: >-
+      The unauthorized transfer of data from an organization through web
+      or other communication channels.
+    related:
+      - DLP
+
+  - term: Custom List
+    definition: >-
+      A user-defined collection of URLs, IP addresses, strings, or regular
+      expressions used in policy rules for allow/block decisions.
+    related:
+      - URL Filtering
+      - Policy Rule
+
+  - term: Appliance
+    definition: >-
+      A dedicated physical or virtual device running the Trellix Web Gateway
+      software, deployed inline or as a proxy in the network.
+    related:
+      - Web Gateway
+      - Konfigurator
+
+  - term: Konfigurator
+    definition: >-
+      The management interface and REST API endpoint for configuring Trellix
+      Web Gateway appliances, accessible at the /Konfigurator/REST path.
+    related:
+      - Appliance
+
+  - term: Cluster
+    definition: >-
+      A group of Web Gateway appliances deployed together for high availability
+      and load distribution, managed through a primary node.
+    related:
+      - Appliance
+
+  - term: Traffic Log
+    definition: >-
+      A record of web requests made through the Web Gateway, including URL,
+      user, timestamp, action taken, and bytes transferred.
+    related:
+      - Web Gateway
+      - Audit
+
+  - term: Security Event
+    definition: >-
+      A logged occurrence of a security-relevant action on the Web Gateway,
+      such as malware detection, policy violation, or authentication failure.
+    related:
+      - Traffic Log
+      - Malware Detection
+
+  - term: Session Cookie
+    definition: >-
+      The JSESSIONID cookie issued by the Web Gateway management interface
+      after successful authentication, used for subsequent API requests.
+    related:
+      - Authentication

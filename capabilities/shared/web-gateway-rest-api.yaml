@@ -1,0 +1,355 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Trellix Web Gateway REST API"
+  description: >-
+    RESTful API for managing and configuring Trellix Web Gateway appliances,
+    including system administration, configuration management, file handling,
+    and custom list management.
+  tags:
+    - Enterprise Security
+    - Gateway
+    - Network Security
+    - Web Security
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TWG_SESSION_COOKIE: TWG_SESSION_COOKIE
+
+capability:
+  consumes:
+    - type: http
+      namespace: twg-rest
+      baseUri: https://mwg.example.com:4712/Konfigurator/REST
+      description: "Trellix Web Gateway appliance management REST API"
+      authentication:
+        type: apikey
+        key: Cookie
+        value: "JSESSIONID={{TWG_SESSION_COOKIE}}"
+        placement: header
+      resources:
+        - name: system
+          path: /system
+          description: "System information and appliance status"
+          operations:
+            - name: get-system-info
+              method: GET
+              description: "Get system information"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: appliances
+          path: /system/appliances
+          description: "Managed appliances in the cluster"
+          operations:
+            - name: list-appliances
+              method: GET
+              description: "List managed appliances"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: appliance-detail
+          path: /system/appliances/{applianceId}
+          description: "Single appliance details"
+          operations:
+            - name: get-appliance
+              method: GET
+              description: "Get appliance details"
+              inputParameters:
+                - name: applianceId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Appliance identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: configuration
+          path: /configuration
+          description: "Appliance configuration"
+          operations:
+            - name: get-configuration
+              method: GET
+              description: "Get current configuration"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: configuration-commit
+          path: /configuration/commit
+          description: "Commit configuration changes"
+          operations:
+            - name: commit-configuration
+              method: POST
+              description: "Commit configuration changes"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: configuration-rollback
+          path: /configuration/rollback
+          description: "Rollback configuration changes"
+          operations:
+            - name: rollback-configuration
+              method: POST
+              description: "Rollback configuration changes"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: lists
+          path: /lists
+          description: "Custom URL and IP lists"
+          operations:
+            - name: list-custom-lists
+              method: GET
+              description: "List custom lists"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: list-detail
+          path: /lists/{listId}
+          description: "Single custom list"
+          operations:
+            - name: get-custom-list
+              method: GET
+              description: "Get a custom list"
+              inputParameters:
+                - name: listId
+                  in: path
+                  type: string
+                  required: true
+                  description: "List identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-custom-list
+              method: PUT
+              description: "Update a custom list"
+              inputParameters:
+                - name: listId
+                  in: path
+                  type: string
+                  required: true
+                  description: "List identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  entries: "{{tools.entries}}"
+
+        - name: logs
+          path: /troubleshooting/logs
+          description: "System and audit logs"
+          operations:
+            - name: get-logs
+              method: GET
+              description: "Retrieve system logs"
+              inputParameters:
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: "Log type (system, audit, access, debug)"
+                - name: from
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start timestamp"
+                - name: to
+                  in: query
+                  type: string
+                  required: false
+                  description: "End timestamp"
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Max log entries"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: twg-rest-api
+      resources:
+        - path: /v1/system
+          name: system
+          description: "Appliance system info"
+          operations:
+            - method: GET
+              name: get-system-info
+              description: "Get system information"
+              call: "twg-rest.get-system-info"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/appliances
+          name: appliances
+          description: "Managed appliances"
+          operations:
+            - method: GET
+              name: list-appliances
+              description: "List appliances"
+              call: "twg-rest.list-appliances"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/configuration
+          name: configuration
+          description: "Appliance configuration"
+          operations:
+            - method: GET
+              name: get-configuration
+              description: "Get configuration"
+              call: "twg-rest.get-configuration"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/lists
+          name: custom-lists
+          description: "Custom lists"
+          operations:
+            - method: GET
+              name: list-custom-lists
+              description: "List custom lists"
+              call: "twg-rest.list-custom-lists"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/logs
+          name: logs
+          description: "System logs"
+          operations:
+            - method: GET
+              name: get-logs
+              description: "Get logs"
+              call: "twg-rest.get-logs"
+              with:
+                type: "rest.type"
+                from: "rest.from"
+                to: "rest.to"
+                limit: "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: twg-rest-mcp
+      transport: http
+      tools:
+        - name: get-system-info
+          description: "Get Web Gateway appliance system information and status"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "twg-rest.get-system-info"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-appliances
+          description: "List all managed Web Gateway appliances in the cluster"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "twg-rest.list-appliances"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-appliance
+          description: "Get details for a specific Web Gateway appliance"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "twg-rest.get-appliance"
+          with:
+            applianceId: "tools.applianceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-custom-lists
+          description: "List custom URL, IP, and string lists used in Web Gateway policies"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "twg-rest.list-custom-lists"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-custom-list
+          description: "Get entries and metadata for a specific custom list"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "twg-rest.get-custom-list"
+          with:
+            listId: "tools.listId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-logs
+          description: "Retrieve system, audit, or access logs from the Web Gateway"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "twg-rest.get-logs"
+          with:
+            type: "tools.type"
+            from: "tools.from"
+            to: "tools.to"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: commit-configuration
+          description: "Commit pending configuration changes to activate them on the appliance"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "twg-rest.commit-configuration"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rollback-configuration
+          description: "Rollback uncommitted configuration changes to the last committed state"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "twg-rest.rollback-configuration"
+          outputParameters:
+            - type: object
+              mapping: "$."

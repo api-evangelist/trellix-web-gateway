@@ -44,7 +44,7 @@ paths:
   /login:
     post:
       operationId: login
-      summary: Trellix Web Gateway Authenticate and create a session
+      summary: Authenticate and create a session
       description: >-
         Authenticate with the Web Gateway appliance using administrator
         credentials. Returns a session cookie used for subsequent API calls.
@@ -80,7 +80,7 @@ paths:
   /logout:
     post:
       operationId: logout
-      summary: Trellix Web Gateway End the current session
+      summary: End the current session
       description: >-
         Terminate the current authenticated session and invalidate the
         session cookie.
@@ -92,7 +92,7 @@ paths:
   /system:
     get:
       operationId: getSystemInfo
-      summary: Trellix Web Gateway Get system information
+      summary: Get system information
       description: >-
         Retrieve system information about the Web Gateway appliance,
         including version, hostname, and operational status.
@@ -110,7 +110,7 @@ paths:
   /system/appliances:
     get:
       operationId: listAppliances
-      summary: Trellix Web Gateway List managed appliances
+      summary: List managed appliances
       description: >-
         Retrieve the list of all Web Gateway appliances in the management
         cluster.
@@ -133,7 +133,7 @@ paths:
   /system/appliances/{applianceId}:
     get:
       operationId: getAppliance
-      summary: Trellix Web Gateway Get appliance details
+      summary: Get appliance details
       description: >-
         Retrieve details of a specific managed appliance by its identifier.
       tags:
@@ -154,7 +154,7 @@ paths:
   /configuration:
     get:
       operationId: getConfiguration
-      summary: Trellix Web Gateway Get current configuration
+      summary: Get current configuration
       description: >-
         Retrieve the current running configuration of the Web Gateway
         appliance in XML format.
@@ -172,7 +172,7 @@ paths:
   /configuration/commit:
     post:
       operationId: commitConfiguration
-      summary: Trellix Web Gateway Commit configuration changes
+      summary: Commit configuration changes
       description: >-
         Commit pending configuration changes to the Web Gateway appliance.
         Changes become active after a successful commit.
@@ -188,7 +188,7 @@ paths:
   /configuration/rollback:
     post:
       operationId: rollbackConfiguration
-      summary: Trellix Web Gateway Rollback configuration changes
+      summary: Rollback configuration changes
       description: >-
         Discard all uncommitted configuration changes and revert to the
         last committed state.
@@ -202,7 +202,7 @@ paths:
   /configuration/backup:
     post:
       operationId: createBackup
-      summary: Trellix Web Gateway Create a configuration backup
+      summary: Create a configuration backup
       description: >-
         Create a backup of the current configuration that can be restored later.
       tags:
@@ -220,7 +220,7 @@ paths:
   /configuration/restore:
     post:
       operationId: restoreBackup
-      summary: Trellix Web Gateway Restore a configuration backup
+      summary: Restore a configuration backup
       description: >-
         Restore a previously created configuration backup to the appliance.
       tags:
@@ -242,7 +242,7 @@ paths:
   /files:
     get:
       operationId: listFiles
-      summary: Trellix Web Gateway List available files
+      summary: List available files
       description: >-
         List files available on the Web Gateway appliance, including rule
         set exports and configuration files.
@@ -265,7 +265,7 @@ paths:
   /files/{fileName}:
     get:
       operationId: downloadFile
-      summary: Trellix Web Gateway Download a file
+      summary: Download a file
       description: >-
         Download a specific file from the Web Gateway appliance.
       tags:
@@ -286,7 +286,7 @@ paths:
           description: File not found
     put:
       operationId: uploadFile
-      summary: Trellix Web Gateway Upload a file
+      summary: Upload a file
       description: >-
         Upload a file to the Web Gateway appliance, such as a rule set
         import or certificate file.
@@ -310,7 +310,7 @@ paths:
           description: Unauthorized
     delete:
       operationId: deleteFile
-      summary: Trellix Web Gateway Delete a file
+      summary: Delete a file
       description: >-
         Delete a specific file from the Web Gateway appliance.
       tags:
@@ -327,7 +327,7 @@ paths:
   /lists:
     get:
       operationId: listCustomLists
-      summary: Trellix Web Gateway List custom lists
+      summary: List custom lists
       description: >-
         Retrieve all custom lists configured on the appliance, including
         URL whitelists, blacklists, and IP address lists.
@@ -350,7 +350,7 @@ paths:
   /lists/{listId}:
     get:
       operationId: getCustomList
-      summary: Trellix Web Gateway Get a custom list
+      summary: Get a custom list
       description: >-
         Retrieve the contents and metadata of a specific custom list.
       tags:
@@ -370,7 +370,7 @@ paths:
           description: List not found
     put:
       operationId: updateCustomList
-      summary: Trellix Web Gateway Update a custom list
+      summary: Update a custom list
       description: >-
         Replace the contents of a specific custom list with new entries.
       tags:
@@ -395,7 +395,7 @@ paths:
   /lists/{listId}/entries:
     post:
       operationId: addListEntry
-      summary: Trellix Web Gateway Add an entry to a custom list
+      summary: Add an entry to a custom list
       description: >-
         Add a new entry to an existing custom list.
       tags:
@@ -420,7 +420,7 @@ paths:
   /lists/{listId}/entries/{entryId}:
     delete:
       operationId: deleteListEntry
-      summary: Trellix Web Gateway Delete an entry from a custom list
+      summary: Delete an entry from a custom list
       description: >-
         Remove a specific entry from a custom list.
       tags:
@@ -438,7 +438,7 @@ paths:
   /troubleshooting/logs:
     get:
       operationId: getLogs
-      summary: Trellix Web Gateway Retrieve system logs
+      summary: Retrieve system logs
       description: >-
         Access system and audit logs from the Web Gateway appliance for
         troubleshooting and monitoring purposes.
@@ -490,7 +490,7 @@ paths:
   /troubleshooting/feedback:
     get:
       operationId: getFeedbackFiles
-      summary: Trellix Web Gateway List feedback files
+      summary: List feedback files
       description: >-
         Retrieve the list of available feedback and diagnostic files
         generated by the appliance.

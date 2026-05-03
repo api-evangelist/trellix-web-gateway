@@ -1,0 +1,18 @@
+{
+  "title": "Trellix Web Gateway Security Event Structure",
+  "description": "JSON Structure for a Trellix Web Gateway security event",
+  "type": "object",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique event identifier" },
+    { "name": "timestamp", "type": "date-time", "required": true, "description": "Event timestamp" },
+    { "name": "type", "type": "string", "required": true, "description": "Event type (malware, policy-violation, etc.)" },
+    { "name": "severity", "type": "enum[critical,high,medium,low,info]", "required": true, "description": "Event severity" },
+    { "name": "sourceIp", "type": "string", "required": false, "description": "Source IP address" },
+    { "name": "destinationUrl", "type": "string", "required": false, "description": "Requested URL" },
+    { "name": "category", "type": "string", "required": false, "description": "URL category" },
+    { "name": "action", "type": "enum[blocked,allowed,cleaned,redirected]", "required": false, "description": "Action taken" },
+    { "name": "malwareName", "type": "string", "required": false, "description": "Malware name if applicable" },
+    { "name": "userId", "type": "string", "required": false, "description": "Authenticated user ID" },
+    { "name": "applianceId", "type": "string", "required": false, "description": "Appliance that detected the event" }
+  ]
+}

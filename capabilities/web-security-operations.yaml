@@ -1,237 +1,575 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Trellix Web Gateway Security Operations"
-  description: >-
-    Unified capability for security operations teams to monitor, investigate,
-    and respond to web security threats using Trellix Web Gateway. Combines
-    traffic log analysis, security event investigation, threat statistics,
-    and appliance health monitoring for SOC analysts and network security engineers.
+  label: Trellix Web Gateway Security Operations
+  description: Unified capability for security operations teams to monitor, investigate, and respond to web security threats
+    using Trellix Web Gateway. Combines traffic log analysis, security event investigation, threat statistics, and appliance
+    health monitoring for SOC analysts and network security engineers.
   tags:
-    - Enterprise Security
-    - Network Security
-    - Security Operations
-    - Threat Detection
-    - Web Security
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Enterprise Security
+  - Network Security
+  - Security Operations
+  - Threat Detection
+  - Web Security
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      TWG_SESSION_COOKIE: TWG_SESSION_COOKIE
-
+- namespace: env
+  keys:
+    TWG_SESSION_COOKIE: TWG_SESSION_COOKIE
 capability:
   consumes:
-    - import: twg-rest
-      location: ./shared/web-gateway-rest-api.yaml
-    - import: twg-reporting
-      location: ./shared/web-gateway-reporting-api.yaml
-
+  - type: http
+    namespace: twg-rest
+    baseUri: https://mwg.example.com:4712/Konfigurator/REST
+    description: Trellix Web Gateway appliance management REST API
+    authentication:
+      type: apikey
+      key: Cookie
+      value: JSESSIONID={{TWG_SESSION_COOKIE}}
+      placement: header
+    resources:
+    - name: system
+      path: /system
+      description: System information and appliance status
+      operations:
+      - name: get-system-info
+        method: GET
+        description: Get system information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: appliances
+      path: /system/appliances
+      description: Managed appliances in the cluster
+      operations:
+      - name: list-appliances
+        method: GET
+        description: List managed appliances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: appliance-detail
+      path: /system/appliances/{applianceId}
+      description: Single appliance details
+      operations:
+      - name: get-appliance
+        method: GET
+        description: Get appliance details
+        inputParameters:
+        - name: applianceId
+          in: path
+          type: string
+          required: true
+          description: Appliance identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration
+      path: /configuration
+      description: Appliance configuration
+      operations:
+      - name: get-configuration
+        method: GET
+        description: Get current configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration-commit
+      path: /configuration/commit
+      description: Commit configuration changes
+      operations:
+      - name: commit-configuration
+        method: POST
+        description: Commit configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration-rollback
+      path: /configuration/rollback
+      description: Rollback configuration changes
+      operations:
+      - name: rollback-configuration
+        method: POST
+        description: Rollback configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lists
+      path: /lists
+      description: Custom URL and IP lists
+      operations:
+      - name: list-custom-lists
+        method: GET
+        description: List custom lists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-detail
+      path: /lists/{listId}
+      description: Single custom list
+      operations:
+      - name: get-custom-list
+        method: GET
+        description: Get a custom list
+        inputParameters:
+        - name: listId
+          in: path
+          type: string
+          required: true
+          description: List identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-custom-list
+        method: PUT
+        description: Update a custom list
+        inputParameters:
+        - name: listId
+          in: path
+          type: string
+          required: true
+          description: List identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            entries: '{{tools.entries}}'
+    - name: logs
+      path: /troubleshooting/logs
+      description: System and audit logs
+      operations:
+      - name: get-logs
+        method: GET
+        description: Retrieve system logs
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          required: false
+          description: Log type (system, audit, access, debug)
+        - name: from
+          in: query
+          type: string
+          required: false
+          description: Start timestamp
+        - name: to
+          in: query
+          type: string
+          required: false
+          description: End timestamp
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Max log entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: twg-reporting
+    baseUri: https://mwg.example.com:4712/reporter/api
+    description: Trellix Web Gateway reporting and analytics API
+    authentication:
+      type: apikey
+      key: Cookie
+      value: JSESSIONID={{TWG_SESSION_COOKIE}}
+      placement: header
+    resources:
+    - name: traffic-logs
+      path: /v1/traffic/logs
+      description: Web traffic logs
+      operations:
+      - name: get-traffic-logs
+        method: GET
+        description: Retrieve web traffic logs
+        inputParameters:
+        - name: from
+          in: query
+          type: string
+          required: false
+          description: Start timestamp
+        - name: to
+          in: query
+          type: string
+          required: false
+          description: End timestamp
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Max results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: security-events
+      path: /v1/events/security
+      description: Security events
+      operations:
+      - name: get-security-events
+        method: GET
+        description: Retrieve security events
+        inputParameters:
+        - name: from
+          in: query
+          type: string
+          required: false
+          description: Start timestamp
+        - name: to
+          in: query
+          type: string
+          required: false
+          description: End timestamp
+        - name: severity
+          in: query
+          type: string
+          required: false
+          description: Event severity filter
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Max results
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reports
+      path: /v1/reports
+      description: Generated reports
+      operations:
+      - name: list-reports
+        method: GET
+        description: List available reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: generate-report
+        method: POST
+        description: Generate a new report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            type: '{{tools.type}}'
+            from: '{{tools.from}}'
+            to: '{{tools.to}}'
+    - name: traffic-statistics
+      path: /v1/statistics/traffic
+      description: Traffic statistics
+      operations:
+      - name: get-traffic-statistics
+        method: GET
+        description: Get traffic statistics
+        inputParameters:
+        - name: period
+          in: query
+          type: string
+          required: false
+          description: Statistics period
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: threat-statistics
+      path: /v1/statistics/threats
+      description: Threat statistics
+      operations:
+      - name: get-threat-statistics
+        method: GET
+        description: Get threat statistics
+        inputParameters:
+        - name: period
+          in: query
+          type: string
+          required: false
+          description: Statistics period
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: top-urls
+      path: /v1/top/urls
+      description: Top accessed URLs
+      operations:
+      - name: get-top-urls
+        method: GET
+        description: Get top accessed URLs
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Number of top URLs
+        - name: period
+          in: query
+          type: string
+          required: false
+          description: Time period
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: top-categories
+      path: /v1/top/categories
+      description: Top URL categories
+      operations:
+      - name: get-top-categories
+        method: GET
+        description: Get top URL categories
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Number of categories
+        - name: period
+          in: query
+          type: string
+          required: false
+          description: Time period
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: twg-security-ops-api
-      description: "Unified REST API for Web Gateway security operations and monitoring."
-      resources:
-        - path: /v1/security-events
-          name: security-events
-          description: "Security events and threat detections"
-          operations:
-            - method: GET
-              name: get-security-events
-              description: "Retrieve security events for investigation"
-              call: "twg-reporting.get-security-events"
-              with:
-                from: "rest.from"
-                to: "rest.to"
-                severity: "rest.severity"
-                limit: "rest.limit"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/traffic-logs
-          name: traffic-logs
-          description: "Web traffic logs for forensic analysis"
-          operations:
-            - method: GET
-              name: get-traffic-logs
-              description: "Retrieve traffic logs"
-              call: "twg-reporting.get-traffic-logs"
-              with:
-                from: "rest.from"
-                to: "rest.to"
-                limit: "rest.limit"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/statistics/threats
-          name: threat-statistics
-          description: "Threat statistics for security reporting"
-          operations:
-            - method: GET
-              name: get-threat-statistics
-              description: "Get threat statistics"
-              call: "twg-reporting.get-threat-statistics"
-              with:
-                period: "rest.period"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/statistics/traffic
-          name: traffic-statistics
-          description: "Traffic statistics for capacity and monitoring"
-          operations:
-            - method: GET
-              name: get-traffic-statistics
-              description: "Get traffic statistics"
-              call: "twg-reporting.get-traffic-statistics"
-              with:
-                period: "rest.period"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/top-urls
-          name: top-urls
-          description: "Top accessed URLs"
-          operations:
-            - method: GET
-              name: get-top-urls
-              description: "Get top URLs"
-              call: "twg-reporting.get-top-urls"
-              with:
-                limit: "rest.limit"
-                period: "rest.period"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/appliances
-          name: appliances
-          description: "Web Gateway appliance health"
-          operations:
-            - method: GET
-              name: list-appliances
-              description: "List appliances and health status"
-              call: "twg-rest.list-appliances"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/logs
-          name: system-logs
-          description: "System and audit logs"
-          operations:
-            - method: GET
-              name: get-logs
-              description: "Get system logs"
-              call: "twg-rest.get-logs"
-              with:
-                type: "rest.type"
-                from: "rest.from"
-                to: "rest.to"
-                limit: "rest.limit"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: twg-security-ops-mcp
-      transport: http
-      description: "MCP server for AI-assisted Web Gateway security operations and threat investigation."
-      tools:
-        - name: get-security-events
-          description: "Retrieve security events from Web Gateway including malware detections and policy violations. Use for incident investigation and threat hunting."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-reporting.get-security-events"
-          with:
-            from: "tools.from"
-            to: "tools.to"
-            severity: "tools.severity"
-            limit: "tools.limit"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-traffic-logs
-          description: "Retrieve web traffic logs for forensic analysis, compliance auditing, and user behavior investigation."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-reporting.get-traffic-logs"
-          with:
-            from: "tools.from"
-            to: "tools.to"
-            limit: "tools.limit"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-threat-statistics
-          description: "Get threat statistics to understand attack patterns, malware trends, and security posture over time."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-reporting.get-threat-statistics"
-          with:
-            period: "tools.period"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-traffic-statistics
-          description: "Get web traffic statistics for capacity planning and anomaly detection."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-reporting.get-traffic-statistics"
-          with:
-            period: "tools.period"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-top-urls
-          description: "Get top accessed URLs to identify potential policy violations or unusual browsing patterns."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-reporting.get-top-urls"
-          with:
-            limit: "tools.limit"
-            period: "tools.period"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-top-categories
-          description: "Get top URL categories to understand web browsing patterns and policy effectiveness."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-reporting.get-top-categories"
-          with:
-            limit: "tools.limit"
-            period: "tools.period"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-system-logs
-          description: "Retrieve Web Gateway system and audit logs for compliance and change tracking."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-rest.get-logs"
-          with:
-            type: "tools.type"
-            from: "tools.from"
-            to: "tools.to"
-            limit: "tools.limit"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-appliances
-          description: "List Web Gateway appliances and check their operational health status."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-rest.list-appliances"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: twg-security-ops-api
+    description: Unified REST API for Web Gateway security operations and monitoring.
+    resources:
+    - path: /v1/security-events
+      name: security-events
+      description: Security events and threat detections
+      operations:
+      - method: GET
+        name: get-security-events
+        description: Retrieve security events for investigation
+        call: twg-reporting.get-security-events
+        with:
+          from: rest.from
+          to: rest.to
+          severity: rest.severity
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/traffic-logs
+      name: traffic-logs
+      description: Web traffic logs for forensic analysis
+      operations:
+      - method: GET
+        name: get-traffic-logs
+        description: Retrieve traffic logs
+        call: twg-reporting.get-traffic-logs
+        with:
+          from: rest.from
+          to: rest.to
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/statistics/threats
+      name: threat-statistics
+      description: Threat statistics for security reporting
+      operations:
+      - method: GET
+        name: get-threat-statistics
+        description: Get threat statistics
+        call: twg-reporting.get-threat-statistics
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/statistics/traffic
+      name: traffic-statistics
+      description: Traffic statistics for capacity and monitoring
+      operations:
+      - method: GET
+        name: get-traffic-statistics
+        description: Get traffic statistics
+        call: twg-reporting.get-traffic-statistics
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/top-urls
+      name: top-urls
+      description: Top accessed URLs
+      operations:
+      - method: GET
+        name: get-top-urls
+        description: Get top URLs
+        call: twg-reporting.get-top-urls
+        with:
+          limit: rest.limit
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/appliances
+      name: appliances
+      description: Web Gateway appliance health
+      operations:
+      - method: GET
+        name: list-appliances
+        description: List appliances and health status
+        call: twg-rest.list-appliances
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/logs
+      name: system-logs
+      description: System and audit logs
+      operations:
+      - method: GET
+        name: get-logs
+        description: Get system logs
+        call: twg-rest.get-logs
+        with:
+          type: rest.type
+          from: rest.from
+          to: rest.to
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: twg-security-ops-mcp
+    transport: http
+    description: MCP server for AI-assisted Web Gateway security operations and threat investigation.
+    tools:
+    - name: get-security-events
+      description: Retrieve security events from Web Gateway including malware detections and policy violations. Use for incident
+        investigation and threat hunting.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-reporting.get-security-events
+      with:
+        from: tools.from
+        to: tools.to
+        severity: tools.severity
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-traffic-logs
+      description: Retrieve web traffic logs for forensic analysis, compliance auditing, and user behavior investigation.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-reporting.get-traffic-logs
+      with:
+        from: tools.from
+        to: tools.to
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-threat-statistics
+      description: Get threat statistics to understand attack patterns, malware trends, and security posture over time.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-reporting.get-threat-statistics
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-traffic-statistics
+      description: Get web traffic statistics for capacity planning and anomaly detection.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-reporting.get-traffic-statistics
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-top-urls
+      description: Get top accessed URLs to identify potential policy violations or unusual browsing patterns.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-reporting.get-top-urls
+      with:
+        limit: tools.limit
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-top-categories
+      description: Get top URL categories to understand web browsing patterns and policy effectiveness.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-reporting.get-top-categories
+      with:
+        limit: tools.limit
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-system-logs
+      description: Retrieve Web Gateway system and audit logs for compliance and change tracking.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-rest.get-logs
+      with:
+        type: tools.type
+        from: tools.from
+        to: tools.to
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-appliances
+      description: List Web Gateway appliances and check their operational health status.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-rest.list-appliances
+      outputParameters:
+      - type: object
+        mapping: $.

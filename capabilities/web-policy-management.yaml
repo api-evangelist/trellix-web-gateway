@@ -1,248 +1,605 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Trellix Web Gateway Policy Management"
-  description: >-
-    Unified capability for network security admins to configure and manage
-    web security policies on Trellix Web Gateway. Combines policy rule sets,
-    URL filtering, anti-malware settings, SSL inspection, DLP configuration,
-    and appliance management for network security engineers and IT administrators.
+  label: Trellix Web Gateway Policy Management
+  description: Unified capability for network security admins to configure and manage web security policies on Trellix Web
+    Gateway. Combines policy rule sets, URL filtering, anti-malware settings, SSL inspection, DLP configuration, and appliance
+    management for network security engineers and IT administrators.
   tags:
-    - Configuration Management
-    - DLP
-    - Enterprise Security
-    - Network Security
-    - Policy Management
-    - URL Filtering
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Configuration Management
+  - DLP
+  - Enterprise Security
+  - Network Security
+  - Policy Management
+  - URL Filtering
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      TWG_SESSION_COOKIE: TWG_SESSION_COOKIE
-
+- namespace: env
+  keys:
+    TWG_SESSION_COOKIE: TWG_SESSION_COOKIE
 capability:
   consumes:
-    - import: twg-rest
-      location: ./shared/web-gateway-rest-api.yaml
-    - import: twg-policy
-      location: ./shared/web-gateway-policy-api.yaml
-
+  - type: http
+    namespace: twg-rest
+    baseUri: https://mwg.example.com:4712/Konfigurator/REST
+    description: Trellix Web Gateway appliance management REST API
+    authentication:
+      type: apikey
+      key: Cookie
+      value: JSESSIONID={{TWG_SESSION_COOKIE}}
+      placement: header
+    resources:
+    - name: system
+      path: /system
+      description: System information and appliance status
+      operations:
+      - name: get-system-info
+        method: GET
+        description: Get system information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: appliances
+      path: /system/appliances
+      description: Managed appliances in the cluster
+      operations:
+      - name: list-appliances
+        method: GET
+        description: List managed appliances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: appliance-detail
+      path: /system/appliances/{applianceId}
+      description: Single appliance details
+      operations:
+      - name: get-appliance
+        method: GET
+        description: Get appliance details
+        inputParameters:
+        - name: applianceId
+          in: path
+          type: string
+          required: true
+          description: Appliance identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration
+      path: /configuration
+      description: Appliance configuration
+      operations:
+      - name: get-configuration
+        method: GET
+        description: Get current configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration-commit
+      path: /configuration/commit
+      description: Commit configuration changes
+      operations:
+      - name: commit-configuration
+        method: POST
+        description: Commit configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration-rollback
+      path: /configuration/rollback
+      description: Rollback configuration changes
+      operations:
+      - name: rollback-configuration
+        method: POST
+        description: Rollback configuration changes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lists
+      path: /lists
+      description: Custom URL and IP lists
+      operations:
+      - name: list-custom-lists
+        method: GET
+        description: List custom lists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: list-detail
+      path: /lists/{listId}
+      description: Single custom list
+      operations:
+      - name: get-custom-list
+        method: GET
+        description: Get a custom list
+        inputParameters:
+        - name: listId
+          in: path
+          type: string
+          required: true
+          description: List identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-custom-list
+        method: PUT
+        description: Update a custom list
+        inputParameters:
+        - name: listId
+          in: path
+          type: string
+          required: true
+          description: List identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            entries: '{{tools.entries}}'
+    - name: logs
+      path: /troubleshooting/logs
+      description: System and audit logs
+      operations:
+      - name: get-logs
+        method: GET
+        description: Retrieve system logs
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          required: false
+          description: Log type (system, audit, access, debug)
+        - name: from
+          in: query
+          type: string
+          required: false
+          description: Start timestamp
+        - name: to
+          in: query
+          type: string
+          required: false
+          description: End timestamp
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Max log entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: twg-policy
+    baseUri: https://mwg.example.com:4712/Konfigurator/REST/policy
+    description: Trellix Web Gateway Policy management API
+    authentication:
+      type: apikey
+      key: Cookie
+      value: JSESSIONID={{TWG_SESSION_COOKIE}}
+      placement: header
+    resources:
+    - name: rule-sets
+      path: /rulesets
+      description: Web Gateway policy rule sets
+      operations:
+      - name: list-rule-sets
+        method: GET
+        description: List all rule sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-rule-set
+        method: POST
+        description: Create a new rule set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+    - name: rule-set-detail
+      path: /rulesets/{ruleSetId}
+      description: Single rule set
+      operations:
+      - name: get-rule-set
+        method: GET
+        description: Get a rule set
+        inputParameters:
+        - name: ruleSetId
+          in: path
+          type: string
+          required: true
+          description: Rule set identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-rule-set
+        method: PUT
+        description: Update a rule set
+        inputParameters:
+        - name: ruleSetId
+          in: path
+          type: string
+          required: true
+          description: Rule set identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+      - name: delete-rule-set
+        method: DELETE
+        description: Delete a rule set
+        inputParameters:
+        - name: ruleSetId
+          in: path
+          type: string
+          required: true
+          description: Rule set identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: url-filtering
+      path: /urlfilter/settings
+      description: URL filtering configuration
+      operations:
+      - name: get-url-filter-settings
+        method: GET
+        description: Get URL filter settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-url-filter-settings
+        method: PUT
+        description: Update URL filter settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            blockCategories: '{{tools.blockCategories}}'
+    - name: url-lookup
+      path: /urlfilter/lookup
+      description: URL categorization lookup
+      operations:
+      - name: lookup-url
+        method: GET
+        description: Look up URL categorization
+        inputParameters:
+        - name: url
+          in: query
+          type: string
+          required: true
+          description: URL to categorize
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: anti-malware
+      path: /antimalware/settings
+      description: Anti-malware settings
+      operations:
+      - name: get-anti-malware-settings
+        method: GET
+        description: Get anti-malware settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-anti-malware-settings
+        method: PUT
+        description: Update anti-malware settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            enableGatewayAntiMalware: '{{tools.enableGatewayAntiMalware}}'
+    - name: ssl-settings
+      path: /ssl/settings
+      description: SSL/TLS inspection settings
+      operations:
+      - name: get-ssl-settings
+        method: GET
+        description: Get SSL scanning settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-ssl-settings
+        method: PUT
+        description: Update SSL scanning settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            enableSslScanning: '{{tools.enableSslScanning}}'
+    - name: dlp-settings
+      path: /dlp/settings
+      description: Data Loss Prevention settings
+      operations:
+      - name: get-dlp-settings
+        method: GET
+        description: Get DLP settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-dlp-settings
+        method: PUT
+        description: Update DLP settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            enableDlp: '{{tools.enableDlp}}'
   exposes:
-    - type: rest
-      port: 8081
-      namespace: twg-policy-mgmt-api
-      description: "Unified REST API for Web Gateway policy configuration and management."
-      resources:
-        - path: /v1/rule-sets
-          name: rule-sets
-          description: "Policy rule sets"
-          operations:
-            - method: GET
-              name: list-rule-sets
-              description: "List all rule sets"
-              call: "twg-policy.list-rule-sets"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-rule-set
-              description: "Create a new rule set"
-              call: "twg-policy.create-rule-set"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/url-filter/settings
-          name: url-filter-settings
-          description: "URL filtering configuration"
-          operations:
-            - method: GET
-              name: get-url-filter-settings
-              description: "Get URL filter settings"
-              call: "twg-policy.get-url-filter-settings"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/url-filter/lookup
-          name: url-lookup
-          description: "URL categorization lookup"
-          operations:
-            - method: GET
-              name: lookup-url
-              description: "Look up URL categorization"
-              call: "twg-policy.lookup-url"
-              with:
-                url: "rest.url"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/anti-malware/settings
-          name: anti-malware-settings
-          description: "Anti-malware settings"
-          operations:
-            - method: GET
-              name: get-anti-malware-settings
-              description: "Get anti-malware settings"
-              call: "twg-policy.get-anti-malware-settings"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/ssl/settings
-          name: ssl-settings
-          description: "SSL/TLS inspection settings"
-          operations:
-            - method: GET
-              name: get-ssl-settings
-              description: "Get SSL scanning settings"
-              call: "twg-policy.get-ssl-settings"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/dlp/settings
-          name: dlp-settings
-          description: "DLP policy settings"
-          operations:
-            - method: GET
-              name: get-dlp-settings
-              description: "Get DLP settings"
-              call: "twg-policy.get-dlp-settings"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/lists
-          name: custom-lists
-          description: "Custom URL, IP, and string lists"
-          operations:
-            - method: GET
-              name: list-custom-lists
-              description: "List custom lists"
-              call: "twg-rest.list-custom-lists"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/configuration
-          name: configuration
-          description: "Appliance configuration management"
-          operations:
-            - method: GET
-              name: get-configuration
-              description: "Get current configuration"
-              call: "twg-rest.get-configuration"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9091
-      namespace: twg-policy-mgmt-mcp
-      transport: http
-      description: "MCP server for AI-assisted Web Gateway policy configuration and optimization."
-      tools:
-        - name: list-rule-sets
-          description: "List all policy rule sets on the Web Gateway for review and audit."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-policy.list-rule-sets"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-rule-set
-          description: "Create a new policy rule set on the Web Gateway."
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "twg-policy.create-rule-set"
-          with:
-            name: "tools.name"
-            description: "tools.description"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-url-filter-settings
-          description: "Get URL filtering configuration including blocked and allowed categories."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "twg-policy.get-url-filter-settings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: lookup-url
-          description: "Look up how a specific URL is categorized by the Web Gateway to troubleshoot filtering decisions."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "twg-policy.lookup-url"
-          with:
-            url: "tools.url"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-anti-malware-settings
-          description: "Get anti-malware scanning configuration to verify threat protection settings."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "twg-policy.get-anti-malware-settings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-ssl-settings
-          description: "Get SSL/TLS inspection configuration to verify encrypted traffic scanning."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "twg-policy.get-ssl-settings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-dlp-settings
-          description: "Get Data Loss Prevention settings to verify data exfiltration protection."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "twg-policy.get-dlp-settings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-custom-lists
-          description: "List custom URL, IP, and string lists used in security policies."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "twg-rest.list-custom-lists"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-configuration
-          description: "Get the current appliance configuration for backup or review."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "twg-rest.get-configuration"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: commit-configuration
-          description: "Commit pending configuration changes to activate them on the Web Gateway."
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "twg-rest.commit-configuration"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: rollback-configuration
-          description: "Rollback uncommitted configuration changes to the last committed state."
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "twg-rest.rollback-configuration"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8081
+    namespace: twg-policy-mgmt-api
+    description: Unified REST API for Web Gateway policy configuration and management.
+    resources:
+    - path: /v1/rule-sets
+      name: rule-sets
+      description: Policy rule sets
+      operations:
+      - method: GET
+        name: list-rule-sets
+        description: List all rule sets
+        call: twg-policy.list-rule-sets
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-rule-set
+        description: Create a new rule set
+        call: twg-policy.create-rule-set
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/url-filter/settings
+      name: url-filter-settings
+      description: URL filtering configuration
+      operations:
+      - method: GET
+        name: get-url-filter-settings
+        description: Get URL filter settings
+        call: twg-policy.get-url-filter-settings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/url-filter/lookup
+      name: url-lookup
+      description: URL categorization lookup
+      operations:
+      - method: GET
+        name: lookup-url
+        description: Look up URL categorization
+        call: twg-policy.lookup-url
+        with:
+          url: rest.url
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/anti-malware/settings
+      name: anti-malware-settings
+      description: Anti-malware settings
+      operations:
+      - method: GET
+        name: get-anti-malware-settings
+        description: Get anti-malware settings
+        call: twg-policy.get-anti-malware-settings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ssl/settings
+      name: ssl-settings
+      description: SSL/TLS inspection settings
+      operations:
+      - method: GET
+        name: get-ssl-settings
+        description: Get SSL scanning settings
+        call: twg-policy.get-ssl-settings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/dlp/settings
+      name: dlp-settings
+      description: DLP policy settings
+      operations:
+      - method: GET
+        name: get-dlp-settings
+        description: Get DLP settings
+        call: twg-policy.get-dlp-settings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lists
+      name: custom-lists
+      description: Custom URL, IP, and string lists
+      operations:
+      - method: GET
+        name: list-custom-lists
+        description: List custom lists
+        call: twg-rest.list-custom-lists
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configuration
+      name: configuration
+      description: Appliance configuration management
+      operations:
+      - method: GET
+        name: get-configuration
+        description: Get current configuration
+        call: twg-rest.get-configuration
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9091
+    namespace: twg-policy-mgmt-mcp
+    transport: http
+    description: MCP server for AI-assisted Web Gateway policy configuration and optimization.
+    tools:
+    - name: list-rule-sets
+      description: List all policy rule sets on the Web Gateway for review and audit.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-policy.list-rule-sets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-rule-set
+      description: Create a new policy rule set on the Web Gateway.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: twg-policy.create-rule-set
+      with:
+        name: tools.name
+        description: tools.description
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-url-filter-settings
+      description: Get URL filtering configuration including blocked and allowed categories.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: twg-policy.get-url-filter-settings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lookup-url
+      description: Look up how a specific URL is categorized by the Web Gateway to troubleshoot filtering decisions.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: twg-policy.lookup-url
+      with:
+        url: tools.url
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-anti-malware-settings
+      description: Get anti-malware scanning configuration to verify threat protection settings.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: twg-policy.get-anti-malware-settings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ssl-settings
+      description: Get SSL/TLS inspection configuration to verify encrypted traffic scanning.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: twg-policy.get-ssl-settings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dlp-settings
+      description: Get Data Loss Prevention settings to verify data exfiltration protection.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: twg-policy.get-dlp-settings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-custom-lists
+      description: List custom URL, IP, and string lists used in security policies.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: twg-rest.list-custom-lists
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-configuration
+      description: Get the current appliance configuration for backup or review.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: twg-rest.get-configuration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: commit-configuration
+      description: Commit pending configuration changes to activate them on the Web Gateway.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: twg-rest.commit-configuration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rollback-configuration
+      description: Rollback uncommitted configuration changes to the last committed state.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: twg-rest.rollback-configuration
+      outputParameters:
+      - type: object
+        mapping: $.

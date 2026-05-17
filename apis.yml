@@ -94,23 +94,23 @@ apis:
       - type: OpenAPI
         url: openapi/trellix-web-gateway-policy-openapi.yml
 common:
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.trellix.com/bundle/web-gateway-getting-started
   - type: Developer Portal
     url: https://developer.trellix.com/
-  - type: Change Log
+  - type: ChangeLog
     url: https://docs.trellix.com/bundle/web-gateway-release-notes
-  - type: Status
+  - type: StatusPage
     url: https://status.trellix.com/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.trellix.com/legal/terms-of-use/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.trellix.com/privacy/
   - type: Portal
     url: https://www.trellix.com/login/
   - type: SDK
     url: https://github.com/trellix-enterprise/mwg-sdk
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/trellix-web-gateway-context.jsonld
   - type: JSONSchema
     url: json-schema/trellix-web-gateway-security-event-schema.json

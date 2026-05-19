@@ -1,0 +1,205 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trellix Web Gateway Reporting API — Reports
+  description: 'Trellix Web Gateway Reporting API — Reports. 5 operations. Lead operation: List available reports. Self-contained
+    Naftiko capability covering one Trellix Web Gateway business surface.'
+  tags:
+  - Trellix Web Gateway
+  - Reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLIX_WEB_GATEWAY_API_KEY: TRELLIX_WEB_GATEWAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reporting-reports
+    baseUri: https://{mwg-server}:{port}/reporter/api
+    description: Trellix Web Gateway Reporting API — Reports business capability. Self-contained, no shared references.
+    resources:
+    - name: reports
+      path: /reports
+      operations:
+      - name: listreports
+        method: GET
+        description: List available reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: generatereport
+        method: POST
+        description: Generate a new report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: reports-reportId
+      path: /reports/{reportId}
+      operations:
+      - name: getreport
+        method: GET
+        description: Get a report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletereport
+        method: DELETE
+        description: Delete a report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reports-reportId-download
+      path: /reports/{reportId}/download
+      operations:
+      - name: downloadreport
+        method: GET
+        description: Download a report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: format
+          in: query
+          type: string
+          description: Output format for the report
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.TRELLIX_WEB_GATEWAY_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: reporting-reports-rest
+    port: 8080
+    description: REST adapter for Trellix Web Gateway Reporting API — Reports. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/reports
+      name: reports
+      description: REST surface for reports.
+      operations:
+      - method: GET
+        name: listreports
+        description: List available reports
+        call: reporting-reports.listreports
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: generatereport
+        description: Generate a new report
+        call: reporting-reports.generatereport
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reports/{reportid}
+      name: reports-reportid
+      description: REST surface for reports-reportId.
+      operations:
+      - method: GET
+        name: getreport
+        description: Get a report
+        call: reporting-reports.getreport
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletereport
+        description: Delete a report
+        call: reporting-reports.deletereport
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reports/{reportid}/download
+      name: reports-reportid-download
+      description: REST surface for reports-reportId-download.
+      operations:
+      - method: GET
+        name: downloadreport
+        description: Download a report
+        call: reporting-reports.downloadreport
+        with:
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reporting-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trellix Web Gateway Reporting API — Reports. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-available-reports
+      description: List available reports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-reports.listreports
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-new-report
+      description: Generate a new report
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: reporting-reports.generatereport
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-report
+      description: Get a report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-reports.getreport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-report
+      description: Delete a report
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: reporting-reports.deletereport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: download-report
+      description: Download a report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-reports.downloadreport
+      with:
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trellix Web Gateway Reporting API — Security Events
+  description: 'Trellix Web Gateway Reporting API — Security Events. 2 operations. Lead operation: Retrieve security events.
+    Self-contained Naftiko capability covering one Trellix Web Gateway business surface.'
+  tags:
+  - Trellix Web Gateway
+  - Security Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLIX_WEB_GATEWAY_API_KEY: TRELLIX_WEB_GATEWAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reporting-security-events
+    baseUri: https://{mwg-server}:{port}/reporter/api
+    description: Trellix Web Gateway Reporting API — Security Events business capability. Self-contained, no shared references.
+    resources:
+    - name: events-security
+      path: /events/security
+      operations:
+      - name: getsecurityevents
+        method: GET
+        description: Retrieve security events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: severity
+          in: query
+          type: string
+          description: Filter by event severity
+        - name: eventType
+          in: query
+          type: string
+          description: Filter by event type
+        - name: sourceIp
+          in: query
+          type: string
+          description: Filter by source IP address
+    - name: events-security-eventId
+      path: /events/security/{eventId}
+      operations:
+      - name: getsecurityevent
+        method: GET
+        description: Get a specific security event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.TRELLIX_WEB_GATEWAY_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: reporting-security-events-rest
+    port: 8080
+    description: REST adapter for Trellix Web Gateway Reporting API — Security Events. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/events/security
+      name: events-security
+      description: REST surface for events-security.
+      operations:
+      - method: GET
+        name: getsecurityevents
+        description: Retrieve security events
+        call: reporting-security-events.getsecurityevents
+        with:
+          severity: rest.severity
+          eventType: rest.eventType
+          sourceIp: rest.sourceIp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events/security/{eventid}
+      name: events-security-eventid
+      description: REST surface for events-security-eventId.
+      operations:
+      - method: GET
+        name: getsecurityevent
+        description: Get a specific security event
+        call: reporting-security-events.getsecurityevent
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reporting-security-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trellix Web Gateway Reporting API — Security Events. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: retrieve-security-events
+      description: Retrieve security events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-security-events.getsecurityevents
+      with:
+        severity: tools.severity
+        eventType: tools.eventType
+        sourceIp: tools.sourceIp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-security-event
+      description: Get a specific security event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-security-events.getsecurityevent
+      outputParameters:
+      - type: object
+        mapping: $.

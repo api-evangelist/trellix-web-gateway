@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trellix Web Gateway REST API — Troubleshooting
+  description: 'Trellix Web Gateway REST API — Troubleshooting. 2 operations. Lead operation: List feedback files. Self-contained
+    Naftiko capability covering one Trellix Web Gateway business surface.'
+  tags:
+  - Trellix Web Gateway
+  - Troubleshooting
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLIX_WEB_GATEWAY_API_KEY: TRELLIX_WEB_GATEWAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-troubleshooting
+    baseUri: https://{mwg-server}:{port}/Konfigurator/REST
+    description: Trellix Web Gateway REST API — Troubleshooting business capability. Self-contained, no shared references.
+    resources:
+    - name: troubleshooting-feedback
+      path: /troubleshooting/feedback
+      operations:
+      - name: getfeedbackfiles
+        method: GET
+        description: List feedback files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: troubleshooting-logs
+      path: /troubleshooting/logs
+      operations:
+      - name: getlogs
+        method: GET
+        description: Retrieve system logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Type of log to retrieve
+        - name: from
+          in: query
+          type: string
+          description: Start timestamp for log retrieval
+        - name: to
+          in: query
+          type: string
+          description: End timestamp for log retrieval
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of log entries to return
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.TRELLIX_WEB_GATEWAY_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: rest-troubleshooting-rest
+    port: 8080
+    description: REST adapter for Trellix Web Gateway REST API — Troubleshooting. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/troubleshooting/feedback
+      name: troubleshooting-feedback
+      description: REST surface for troubleshooting-feedback.
+      operations:
+      - method: GET
+        name: getfeedbackfiles
+        description: List feedback files
+        call: rest-troubleshooting.getfeedbackfiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/troubleshooting/logs
+      name: troubleshooting-logs
+      description: REST surface for troubleshooting-logs.
+      operations:
+      - method: GET
+        name: getlogs
+        description: Retrieve system logs
+        call: rest-troubleshooting.getlogs
+        with:
+          type: rest.type
+          from: rest.from
+          to: rest.to
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-troubleshooting-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trellix Web Gateway REST API — Troubleshooting. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-feedback-files
+      description: List feedback files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-troubleshooting.getfeedbackfiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-system-logs
+      description: Retrieve system logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-troubleshooting.getlogs
+      with:
+        type: tools.type
+        from: tools.from
+        to: tools.to
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

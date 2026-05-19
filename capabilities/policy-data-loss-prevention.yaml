@@ -1,0 +1,139 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trellix Web Gateway Policy API — Data Loss Prevention
+  description: 'Trellix Web Gateway Policy API — Data Loss Prevention. 3 operations. Lead operation: List DLP classifiers.
+    Self-contained Naftiko capability covering one Trellix Web Gateway business surface.'
+  tags:
+  - Trellix Web Gateway
+  - Data Loss Prevention
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLIX_WEB_GATEWAY_API_KEY: TRELLIX_WEB_GATEWAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: policy-data-loss-prevention
+    baseUri: https://{mwg-server}:{port}/Konfigurator/REST/policy
+    description: Trellix Web Gateway Policy API — Data Loss Prevention business capability. Self-contained, no shared references.
+    resources:
+    - name: dlp-classifiers
+      path: /dlp/classifiers
+      operations:
+      - name: listdlpclassifiers
+        method: GET
+        description: List DLP classifiers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: dlp-settings
+      path: /dlp/settings
+      operations:
+      - name: getdlpsettings
+        method: GET
+        description: Get DLP settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatedlpsettings
+        method: PUT
+        description: Update DLP settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.TRELLIX_WEB_GATEWAY_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: policy-data-loss-prevention-rest
+    port: 8080
+    description: REST adapter for Trellix Web Gateway Policy API — Data Loss Prevention. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/dlp/classifiers
+      name: dlp-classifiers
+      description: REST surface for dlp-classifiers.
+      operations:
+      - method: GET
+        name: listdlpclassifiers
+        description: List DLP classifiers
+        call: policy-data-loss-prevention.listdlpclassifiers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/dlp/settings
+      name: dlp-settings
+      description: REST surface for dlp-settings.
+      operations:
+      - method: GET
+        name: getdlpsettings
+        description: Get DLP settings
+        call: policy-data-loss-prevention.getdlpsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatedlpsettings
+        description: Update DLP settings
+        call: policy-data-loss-prevention.updatedlpsettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: policy-data-loss-prevention-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trellix Web Gateway Policy API — Data Loss Prevention. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-dlp-classifiers
+      description: List DLP classifiers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: policy-data-loss-prevention.listdlpclassifiers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dlp-settings
+      description: Get DLP settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: policy-data-loss-prevention.getdlpsettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-dlp-settings
+      description: Update DLP settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: policy-data-loss-prevention.updatedlpsettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

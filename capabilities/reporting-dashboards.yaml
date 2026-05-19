@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trellix Web Gateway Reporting API — Dashboards
+  description: 'Trellix Web Gateway Reporting API — Dashboards. 1 operations. Lead operation: Get dashboard overview data.
+    Self-contained Naftiko capability covering one Trellix Web Gateway business surface.'
+  tags:
+  - Trellix Web Gateway
+  - Dashboards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLIX_WEB_GATEWAY_API_KEY: TRELLIX_WEB_GATEWAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reporting-dashboards
+    baseUri: https://{mwg-server}:{port}/reporter/api
+    description: Trellix Web Gateway Reporting API — Dashboards business capability. Self-contained, no shared references.
+    resources:
+    - name: dashboards-overview
+      path: /dashboards/overview
+      operations:
+      - name: getdashboardoverview
+        method: GET
+        description: Get dashboard overview data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: period
+          in: query
+          type: string
+          description: Time period for the dashboard data
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.TRELLIX_WEB_GATEWAY_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: reporting-dashboards-rest
+    port: 8080
+    description: REST adapter for Trellix Web Gateway Reporting API — Dashboards. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/dashboards/overview
+      name: dashboards-overview
+      description: REST surface for dashboards-overview.
+      operations:
+      - method: GET
+        name: getdashboardoverview
+        description: Get dashboard overview data
+        call: reporting-dashboards.getdashboardoverview
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reporting-dashboards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trellix Web Gateway Reporting API — Dashboards. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-dashboard-overview-data
+      description: Get dashboard overview data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-dashboards.getdashboardoverview
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.

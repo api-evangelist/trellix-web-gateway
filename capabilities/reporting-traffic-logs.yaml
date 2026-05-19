@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trellix Web Gateway Reporting API — Traffic Logs
+  description: 'Trellix Web Gateway Reporting API — Traffic Logs. 2 operations. Lead operation: Retrieve web traffic logs.
+    Self-contained Naftiko capability covering one Trellix Web Gateway business surface.'
+  tags:
+  - Trellix Web Gateway
+  - Traffic Logs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRELLIX_WEB_GATEWAY_API_KEY: TRELLIX_WEB_GATEWAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reporting-traffic-logs
+    baseUri: https://{mwg-server}:{port}/reporter/api
+    description: Trellix Web Gateway Reporting API — Traffic Logs business capability. Self-contained, no shared references.
+    resources:
+    - name: logs-traffic
+      path: /logs/traffic
+      operations:
+      - name: gettrafficlogs
+        method: GET
+        description: Retrieve web traffic logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sourceIp
+          in: query
+          type: string
+          description: Filter by source IP address
+        - name: destinationUrl
+          in: query
+          type: string
+          description: Filter by destination URL pattern
+        - name: action
+          in: query
+          type: string
+          description: Filter by action taken
+        - name: user
+          in: query
+          type: string
+          description: Filter by authenticated user name
+    - name: logs-traffic-logId
+      path: /logs/traffic/{logId}
+      operations:
+      - name: gettrafficlogentry
+        method: GET
+        description: Get a specific traffic log entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: JSESSIONID
+      value: '{{env.TRELLIX_WEB_GATEWAY_API_KEY}}'
+      placement: cookie
+  exposes:
+  - type: rest
+    namespace: reporting-traffic-logs-rest
+    port: 8080
+    description: REST adapter for Trellix Web Gateway Reporting API — Traffic Logs. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/logs/traffic
+      name: logs-traffic
+      description: REST surface for logs-traffic.
+      operations:
+      - method: GET
+        name: gettrafficlogs
+        description: Retrieve web traffic logs
+        call: reporting-traffic-logs.gettrafficlogs
+        with:
+          sourceIp: rest.sourceIp
+          destinationUrl: rest.destinationUrl
+          action: rest.action
+          user: rest.user
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/logs/traffic/{logid}
+      name: logs-traffic-logid
+      description: REST surface for logs-traffic-logId.
+      operations:
+      - method: GET
+        name: gettrafficlogentry
+        description: Get a specific traffic log entry
+        call: reporting-traffic-logs.gettrafficlogentry
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reporting-traffic-logs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Trellix Web Gateway Reporting API — Traffic Logs. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: retrieve-web-traffic-logs
+      description: Retrieve web traffic logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-traffic-logs.gettrafficlogs
+      with:
+        sourceIp: tools.sourceIp
+        destinationUrl: tools.destinationUrl
+        action: tools.action
+        user: tools.user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-traffic-log-entry
+      description: Get a specific traffic log entry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-traffic-logs.gettrafficlogentry
+      outputParameters:
+      - type: object
+        mapping: $.

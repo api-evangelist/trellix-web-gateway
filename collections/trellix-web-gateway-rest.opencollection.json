@@ -1,0 +1,401 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate and create a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/login"
+          },
+          "docs": "Authenticate with the Web Gateway appliance using administrator credentials. Returns a session cookie used for subsequent API calls."
+        },
+        {
+          "info": {
+            "name": "End the current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/logout"
+          },
+          "docs": "Terminate the current authenticated session and invalidate the session cookie."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get system information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/system"
+          },
+          "docs": "Retrieve system information about the Web Gateway appliance, including version, hostname, and operational status."
+        },
+        {
+          "info": {
+            "name": "List managed appliances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/system/appliances"
+          },
+          "docs": "Retrieve the list of all Web Gateway appliances in the management cluster."
+        },
+        {
+          "info": {
+            "name": "Get appliance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/system/appliances/:applianceId",
+            "params": [
+              {
+                "name": "applianceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the managed appliance"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific managed appliance by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/configuration"
+          },
+          "docs": "Retrieve the current running configuration of the Web Gateway appliance in XML format."
+        },
+        {
+          "info": {
+            "name": "Commit configuration changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/configuration/commit"
+          },
+          "docs": "Commit pending configuration changes to the Web Gateway appliance. Changes become active after a successful commit."
+        },
+        {
+          "info": {
+            "name": "Rollback configuration changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/configuration/rollback"
+          },
+          "docs": "Discard all uncommitted configuration changes and revert to the last committed state."
+        },
+        {
+          "info": {
+            "name": "Create a configuration backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/configuration/backup"
+          },
+          "docs": "Create a backup of the current configuration that can be restored later."
+        },
+        {
+          "info": {
+            "name": "Restore a configuration backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/configuration/restore"
+          },
+          "docs": "Restore a previously created configuration backup to the appliance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/files"
+          },
+          "docs": "List files available on the Web Gateway appliance, including rule set exports and configuration files."
+        },
+        {
+          "info": {
+            "name": "Download a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/files/:fileName",
+            "params": [
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the file"
+              }
+            ]
+          },
+          "docs": "Download a specific file from the Web Gateway appliance."
+        },
+        {
+          "info": {
+            "name": "Upload a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/files/:fileName",
+            "params": [
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the file"
+              }
+            ]
+          },
+          "docs": "Upload a file to the Web Gateway appliance, such as a rule set import or certificate file."
+        },
+        {
+          "info": {
+            "name": "Delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/files/:fileName",
+            "params": [
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the file"
+              }
+            ]
+          },
+          "docs": "Delete a specific file from the Web Gateway appliance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/lists"
+          },
+          "docs": "Retrieve all custom lists configured on the appliance, including URL whitelists, blacklists, and IP address lists."
+        },
+        {
+          "info": {
+            "name": "Get a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              }
+            ]
+          },
+          "docs": "Retrieve the contents and metadata of a specific custom list."
+        },
+        {
+          "info": {
+            "name": "Update a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the contents of a specific custom list with new entries."
+        },
+        {
+          "info": {
+            "name": "Add an entry to a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/lists/:listId/entries",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new entry to an existing custom list."
+        },
+        {
+          "info": {
+            "name": "Delete an entry from a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/lists/:listId/entries/:entryId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              },
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the list entry"
+              }
+            ]
+          },
+          "docs": "Remove a specific entry from a custom list."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Troubleshooting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve system logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/troubleshooting/logs",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of log to retrieve"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start timestamp for log retrieval"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp for log retrieval"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of log entries to return"
+              }
+            ]
+          },
+          "docs": "Access system and audit logs from the Web Gateway appliance for troubleshooting and monitoring purposes."
+        },
+        {
+          "info": {
+            "name": "List feedback files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/troubleshooting/feedback"
+          },
+          "docs": "Retrieve the list of available feedback and diagnostic files generated by the appliance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

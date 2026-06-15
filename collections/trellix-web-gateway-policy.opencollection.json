@@ -1,0 +1,542 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rule Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all rule sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by rule set type"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of all configured rule sets, including their status, order, and basic configuration."
+        },
+        {
+          "info": {
+            "name": "Create a new rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule set with the specified configuration. The rule set must be committed before it becomes active."
+        },
+        {
+          "info": {
+            "name": "Get a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Retrieve the full configuration of a specific rule set, including all contained rules and their conditions."
+        },
+        {
+          "info": {
+            "name": "Update a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of an existing rule set. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Delete a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Delete a rule set and all its contained rules. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Enable a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/enable",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Enable a disabled rule set. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Disable a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/disable",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Disable an active rule set without deleting it. Changes must be committed to take effect."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rules in a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Retrieve all rules within a specific rule set, including their conditions, actions, and order."
+        },
+        {
+          "info": {
+            "name": "Create a new rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new rule to a rule set with the specified conditions and actions. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Get a specific rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule"
+              }
+            ]
+          },
+          "docs": "Retrieve the full configuration of a specific rule within a rule set."
+        },
+        {
+          "info": {
+            "name": "Update a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of an existing rule. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Delete a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule"
+              }
+            ]
+          },
+          "docs": "Delete a specific rule from a rule set. Changes must be committed to take effect."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "URL Filtering",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List URL categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/categories"
+          },
+          "docs": "Retrieve the list of available URL categories used for web filtering and policy decisions."
+        },
+        {
+          "info": {
+            "name": "Look up URL categorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/lookup",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "URL to look up"
+              }
+            ]
+          },
+          "docs": "Look up the category and reputation of a specific URL against the Trellix Global Threat Intelligence database."
+        },
+        {
+          "info": {
+            "name": "Get URL filter settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/settings"
+          },
+          "docs": "Retrieve the current URL filtering configuration including blocked categories, allowed exceptions, and safe search settings."
+        },
+        {
+          "info": {
+            "name": "Update URL filter settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the URL filtering configuration. Changes must be committed to take effect."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Anti-Malware",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List anti-malware engines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/antimalware/engines"
+          },
+          "docs": "Retrieve the list of configured anti-malware scanning engines and their current status."
+        },
+        {
+          "info": {
+            "name": "Get anti-malware settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/antimalware/settings"
+          },
+          "docs": "Retrieve the current anti-malware scanning configuration including enabled engines, scan behavior, and file type handling."
+        },
+        {
+          "info": {
+            "name": "Update anti-malware settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/antimalware/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the anti-malware scanning configuration. Changes must be committed to take effect."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SSL Scanning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SSL scanning settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/ssl/settings"
+          },
+          "docs": "Retrieve the current SSL/TLS inspection configuration including certificate handling, bypass lists, and protocol settings."
+        },
+        {
+          "info": {
+            "name": "Update SSL scanning settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/ssl/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the SSL/TLS inspection configuration. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "List SSL certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/ssl/certificates"
+          },
+          "docs": "Retrieve the list of SSL/TLS certificates used by the gateway for SSL inspection."
+        },
+        {
+          "info": {
+            "name": "Upload an SSL certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/ssl/certificates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload a new SSL/TLS certificate for use in SSL inspection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Loss Prevention",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DLP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dlp/settings"
+          },
+          "docs": "Retrieve the current Data Loss Prevention configuration including enabled classifiers, actions, and sensitivity levels."
+        },
+        {
+          "info": {
+            "name": "Update DLP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dlp/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the Data Loss Prevention configuration. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "List DLP classifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dlp/classifiers"
+          },
+          "docs": "Retrieve the list of available data classifiers for content inspection and data loss prevention."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get authentication settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/authentication/settings"
+          },
+          "docs": "Retrieve the current user authentication configuration including authentication methods, directory services, and bypass rules."
+        },
+        {
+          "info": {
+            "name": "Update authentication settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/authentication/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the user authentication configuration. Changes must be committed to take effect."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

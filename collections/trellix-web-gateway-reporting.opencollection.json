@@ -1,0 +1,444 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Reporting API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Traffic Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve web traffic logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/logs/traffic",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "sourceIp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source IP address"
+              },
+              {
+                "name": "destinationUrl",
+                "value": "",
+                "type": "query",
+                "description": "Filter by destination URL pattern"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by action taken"
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Filter by authenticated user name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Query web traffic access logs with optional filtering by time range, source IP, destination URL, action, and other criteria."
+        },
+        {
+          "info": {
+            "name": "Get a specific traffic log entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/logs/traffic/:logId",
+            "params": [
+              {
+                "name": "logId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the log entry"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific traffic log entry."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Security Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve security events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/events/security",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event severity"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event type"
+              },
+              {
+                "name": "sourceIp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source IP address"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Query security events including malware detections, policy violations, blocked threats, and suspicious activity alerts."
+        },
+        {
+          "info": {
+            "name": "Get a specific security event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/events/security/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the security event"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific security event, including full threat analysis data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/reports"
+          },
+          "docs": "Retrieve a list of available report definitions and previously generated reports."
+        },
+        {
+          "info": {
+            "name": "Generate a new report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/reporter/api/reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new report based on specified parameters, time range, and report type."
+        },
+        {
+          "info": {
+            "name": "Get a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the report"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and results of a specific report."
+        },
+        {
+          "info": {
+            "name": "Delete a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/reporter/api/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the report"
+              }
+            ]
+          },
+          "docs": "Delete a previously generated report and its associated data."
+        },
+        {
+          "info": {
+            "name": "Download a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/reports/:reportId/download",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the report"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the report"
+              }
+            ]
+          },
+          "docs": "Download a generated report in the specified format (PDF, CSV, or XML)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get traffic statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/statistics/traffic",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Time granularity for aggregation"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated traffic statistics including request counts, bandwidth usage, and top destinations over a specified time period."
+        },
+        {
+          "info": {
+            "name": "Get threat statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/statistics/threats",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Time granularity for aggregation"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated threat detection statistics including malware detections, blocked URLs, and category violations over a specified time period."
+        },
+        {
+          "info": {
+            "name": "Get top accessed URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/statistics/top/urls",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieve the most frequently accessed URLs during the specified time period."
+        },
+        {
+          "info": {
+            "name": "Get top URL categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/statistics/top/categories",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieve the most accessed URL categories during the specified time period."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dashboard overview data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/reporter/api/dashboards/overview",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "Time period for the dashboard data"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated data for the main reporting dashboard, including traffic volume, threat counts, and top statistics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

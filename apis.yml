@@ -95,7 +95,7 @@ common:
     url: https://www.linkedin.com/company/trellixsecurity
   - type: GettingStarted
     url: https://docs.trellix.com/bundle/web-gateway-getting-started
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.trellix.com/
   - type: ChangeLog
     url: https://docs.trellix.com/bundle/web-gateway-release-notes
@@ -107,7 +107,7 @@ common:
     url: https://www.trellix.com/privacy/
   - type: Portal
     url: https://www.trellix.com/login/
-  - type: SDK
+  - type: SDKs
     url: https://github.com/trellix-enterprise/mwg-sdk
   - type: JSONLD
     url: json-ld/trellix-web-gateway-context.jsonld

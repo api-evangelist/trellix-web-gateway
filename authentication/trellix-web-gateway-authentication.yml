@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/trellix-web-gateway-policy-openapi.yml, openapi/trellix-web-gateway-reporting-openapi.yml,
+  openapi/trellix-web-gateway-rest-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - cookie
+schemes:
+- name: cookieAuth
+  type: apiKey
+  in: cookie
+  parameter: JSESSIONID
+  description: Session cookie obtained via the Konfigurator REST /login endpoint.
+  sources:
+  - openapi/trellix-web-gateway-policy-openapi.yml
+  - openapi/trellix-web-gateway-reporting-openapi.yml
+  - openapi/trellix-web-gateway-rest-openapi.yml

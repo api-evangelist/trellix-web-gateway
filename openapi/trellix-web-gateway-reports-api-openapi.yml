@@ -1,0 +1,253 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Reports API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Reports
+  description: Report generation and retrieval
+paths:
+  /reports:
+    get:
+      operationId: listReports
+      summary: List available reports
+      description: Retrieve a list of available report definitions and previously generated reports.
+      tags:
+      - Reports
+      responses:
+        '200':
+          description: List of reports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: generateReport
+      summary: Generate a new report
+      description: Generate a new report based on specified parameters, time range, and report type.
+      tags:
+      - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '202':
+          description: Report generation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '400':
+          description: Invalid report parameters
+        '401':
+          description: Unauthorized
+  /reports/{reportId}:
+    get:
+      operationId: getReport
+      summary: Get a report
+      description: Retrieve the status and results of a specific report.
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/reportId'
+      responses:
+        '200':
+          description: Report details and results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+    delete:
+      operationId: deleteReport
+      summary: Delete a report
+      description: Delete a previously generated report and its associated data.
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/reportId'
+      responses:
+        '200':
+          description: Report deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+  /reports/{reportId}/download:
+    get:
+      operationId: downloadReport
+      summary: Download a report
+      description: Download a generated report in the specified format (PDF, CSV, or XML).
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/reportId'
+      - name: format
+        in: query
+        description: Output format for the report
+        schema:
+          type: string
+          enum:
+          - pdf
+          - csv
+          - xml
+          default: pdf
+      responses:
+        '200':
+          description: Report file
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            text/csv:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Report not found
+components:
+  schemas:
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique report identifier
+        name:
+          type: string
+          description: Report name
+        type:
+          type: string
+          enum:
+          - traffic_summary
+          - security_summary
+          - user_activity
+          - url_categories
+          - threat_analysis
+          - bandwidth_usage
+          - policy_hits
+          description: Report type
+        status:
+          type: string
+          enum:
+          - pending
+          - generating
+          - completed
+          - failed
+          description: Report generation status
+        createdAt:
+          type: string
+          format: date-time
+          description: When the report was requested
+        completedAt:
+          type: string
+          format: date-time
+          description: When the report generation completed
+        startTime:
+          type: string
+          format: date-time
+          description: Report data start time
+        endTime:
+          type: string
+          format: date-time
+          description: Report data end time
+    ReportRequest:
+      type: object
+      required:
+      - name
+      - type
+      - startTime
+      - endTime
+      properties:
+        name:
+          type: string
+          description: Name for the report
+        type:
+          type: string
+          enum:
+          - traffic_summary
+          - security_summary
+          - user_activity
+          - url_categories
+          - threat_analysis
+          - bandwidth_usage
+          - policy_hits
+          description: Type of report to generate
+        startTime:
+          type: string
+          format: date-time
+          description: Start of the reporting period
+        endTime:
+          type: string
+          format: date-time
+          description: End of the reporting period
+        filters:
+          type: object
+          properties:
+            sourceIps:
+              type: array
+              items:
+                type: string
+              description: Filter by source IP addresses
+            users:
+              type: array
+              items:
+                type: string
+              description: Filter by user names
+            categories:
+              type: array
+              items:
+                type: string
+              description: Filter by URL categories
+  parameters:
+    reportId:
+      name: reportId
+      in: path
+      required: true
+      description: Unique identifier of the report
+      schema:
+        type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

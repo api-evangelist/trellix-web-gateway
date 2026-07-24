@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware SSL Scanning API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: SSL Scanning
+  description: SSL/TLS inspection configuration
+paths:
+  /ssl/settings:
+    get:
+      operationId: getSslSettings
+      summary: Get SSL scanning settings
+      description: Retrieve the current SSL/TLS inspection configuration including certificate handling, bypass lists, and protocol settings.
+      tags:
+      - SSL Scanning
+      responses:
+        '200':
+          description: SSL scanning settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SslSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateSslSettings
+      summary: Update SSL scanning settings
+      description: Update the SSL/TLS inspection configuration. Changes must be committed to take effect.
+      tags:
+      - SSL Scanning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SslSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+  /ssl/certificates:
+    get:
+      operationId: listSslCertificates
+      summary: List SSL certificates
+      description: Retrieve the list of SSL/TLS certificates used by the gateway for SSL inspection.
+      tags:
+      - SSL Scanning
+      responses:
+        '200':
+          description: List of certificates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  certificates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SslCertificate'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: uploadSslCertificate
+      summary: Upload an SSL certificate
+      description: Upload a new SSL/TLS certificate for use in SSL inspection.
+      tags:
+      - SSL Scanning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SslCertificateUpload'
+      responses:
+        '201':
+          description: Certificate uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SslCertificate'
+        '400':
+          description: Invalid certificate
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    SslCertificateUpload:
+      type: object
+      required:
+      - certificate
+      properties:
+        certificate:
+          type: string
+          description: PEM-encoded certificate data
+        privateKey:
+          type: string
+          description: PEM-encoded private key (for CA certificates)
+        passphrase:
+          type: string
+          description: Private key passphrase if encrypted
+    SslCertificate:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Certificate identifier
+        subject:
+          type: string
+          description: Certificate subject
+        issuer:
+          type: string
+          description: Certificate issuer
+        validFrom:
+          type: string
+          format: date-time
+          description: Certificate validity start date
+        validTo:
+          type: string
+          format: date-time
+          description: Certificate expiration date
+        serialNumber:
+          type: string
+          description: Certificate serial number
+        fingerprint:
+          type: string
+          description: Certificate SHA-256 fingerprint
+    SslSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether SSL inspection is enabled
+        verifyServerCertificates:
+          type: boolean
+          description: Whether to verify upstream server certificates
+        bypassDomains:
+          type: array
+          items:
+            type: string
+          description: Domains to bypass SSL inspection
+        bypassCategories:
+          type: array
+          items:
+            type: string
+          description: URL categories to bypass SSL inspection
+        minimumProtocolVersion:
+          type: string
+          enum:
+          - TLSv1.0
+          - TLSv1.1
+          - TLSv1.2
+          - TLSv1.3
+          description: Minimum TLS protocol version to accept
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

@@ -1,0 +1,277 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Rules API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Rules
+  description: Manage individual policy rules within rule sets
+paths:
+  /rulesets/{ruleSetId}/rules:
+    get:
+      operationId: listRules
+      summary: List rules in a rule set
+      description: Retrieve all rules within a specific rule set, including their conditions, actions, and order.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: List of rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+    post:
+      operationId: createRule
+      summary: Create a new rule
+      description: Add a new rule to a rule set with the specified conditions and actions. Changes must be committed to take effect.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCreate'
+      responses:
+        '201':
+          description: Rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Invalid rule definition
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/rules/{ruleId}:
+    get:
+      operationId: getRule
+      summary: Get a specific rule
+      description: Retrieve the full configuration of a specific rule within a rule set.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Rule details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule or rule set not found
+    put:
+      operationId: updateRule
+      summary: Update a rule
+      description: Update the configuration of an existing rule. Changes must be committed to take effect.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      - $ref: '#/components/parameters/ruleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleUpdate'
+      responses:
+        '200':
+          description: Rule updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Invalid rule configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule or rule set not found
+    delete:
+      operationId: deleteRule
+      summary: Delete a rule
+      description: Delete a specific rule from a rule set. Changes must be committed to take effect.
+      tags:
+      - Rules
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      - $ref: '#/components/parameters/ruleId'
+      responses:
+        '200':
+          description: Rule deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule or rule set not found
+components:
+  schemas:
+    RuleAction:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - allow
+          - block
+          - redirect
+          - authenticate
+          - log
+          - continue
+          - stop_rule_set
+          - stop_cycle
+          description: Action to take when the rule matches
+        blockTemplate:
+          type: string
+          description: Block page template to display
+        redirectUrl:
+          type: string
+          description: URL to redirect to
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+          - equals
+          - not_equals
+          - contains
+          - not_contains
+          - matches
+          - in_list
+          - not_in_list
+          - greater_than
+          - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
+    RuleCreate:
+      type: object
+      required:
+      - name
+      - condition
+      - action
+      properties:
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          default: true
+          description: Whether the rule is enabled
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique rule identifier
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          description: Whether the rule is active
+        order:
+          type: integer
+          description: Processing order within the rule set
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    RuleUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule
+        order:
+          type: integer
+          description: Updated processing order
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+  parameters:
+    ruleSetId:
+      name: ruleSetId
+      in: path
+      required: true
+      description: Unique identifier of the rule set
+      schema:
+        type: string
+    ruleId:
+      name: ruleId
+      in: path
+      required: true
+      description: Unique identifier of the rule
+      schema:
+        type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

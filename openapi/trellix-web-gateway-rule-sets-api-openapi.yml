@@ -1,0 +1,337 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Rule Sets API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Rule Sets
+  description: Manage policy rule sets
+paths:
+  /rulesets:
+    get:
+      operationId: listRuleSets
+      summary: List all rule sets
+      description: Retrieve the list of all configured rule sets, including their status, order, and basic configuration.
+      tags:
+      - Rule Sets
+      parameters:
+      - name: type
+        in: query
+        description: Filter by rule set type
+        schema:
+          type: string
+          enum:
+          - request
+          - response
+          - error
+      - name: enabled
+        in: query
+        description: Filter by enabled status
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of rule sets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ruleSets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RuleSet'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createRuleSet
+      summary: Create a new rule set
+      description: Create a new rule set with the specified configuration. The rule set must be committed before it becomes active.
+      tags:
+      - Rule Sets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleSetCreate'
+      responses:
+        '201':
+          description: Rule set created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSet'
+        '400':
+          description: Invalid rule set definition
+        '401':
+          description: Unauthorized
+  /rulesets/{ruleSetId}:
+    get:
+      operationId: getRuleSet
+      summary: Get a rule set
+      description: Retrieve the full configuration of a specific rule set, including all contained rules and their conditions.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSet'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+    put:
+      operationId: updateRuleSet
+      summary: Update a rule set
+      description: Update the configuration of an existing rule set. Changes must be committed to take effect.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleSetUpdate'
+      responses:
+        '200':
+          description: Rule set updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSet'
+        '400':
+          description: Invalid rule set configuration
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+    delete:
+      operationId: deleteRuleSet
+      summary: Delete a rule set
+      description: Delete a rule set and all its contained rules. Changes must be committed to take effect.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/enable:
+    post:
+      operationId: enableRuleSet
+      summary: Enable a rule set
+      description: Enable a disabled rule set. Changes must be committed to take effect.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set enabled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+  /rulesets/{ruleSetId}/disable:
+    post:
+      operationId: disableRuleSet
+      summary: Disable a rule set
+      description: Disable an active rule set without deleting it. Changes must be committed to take effect.
+      tags:
+      - Rule Sets
+      parameters:
+      - $ref: '#/components/parameters/ruleSetId'
+      responses:
+        '200':
+          description: Rule set disabled
+        '401':
+          description: Unauthorized
+        '404':
+          description: Rule set not found
+components:
+  schemas:
+    RuleSetCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Rule set name
+        description:
+          type: string
+          description: Rule set description
+        type:
+          type: string
+          enum:
+          - request
+          - response
+          - error
+          description: Processing phase
+        enabled:
+          type: boolean
+          default: true
+          description: Whether the rule set is enabled
+    RuleAction:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - allow
+          - block
+          - redirect
+          - authenticate
+          - log
+          - continue
+          - stop_rule_set
+          - stop_cycle
+          description: Action to take when the rule matches
+        blockTemplate:
+          type: string
+          description: Block page template to display
+        redirectUrl:
+          type: string
+          description: URL to redirect to
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+          - equals
+          - not_equals
+          - contains
+          - not_contains
+          - matches
+          - in_list
+          - not_in_list
+          - greater_than
+          - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique rule identifier
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          description: Whether the rule is active
+        order:
+          type: integer
+          description: Processing order within the rule set
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    RuleSetUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule set name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule set
+        order:
+          type: integer
+          description: Updated processing order
+    RuleSet:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique rule set identifier
+        name:
+          type: string
+          description: Rule set name
+        description:
+          type: string
+          description: Rule set description
+        type:
+          type: string
+          enum:
+          - request
+          - response
+          - error
+          description: Processing phase for the rule set
+        enabled:
+          type: boolean
+          description: Whether the rule set is active
+        order:
+          type: integer
+          description: Processing order of the rule set
+        ruleCount:
+          type: integer
+          description: Number of rules in the set
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: Rules contained in this rule set
+  parameters:
+    ruleSetId:
+      name: ruleSetId
+      in: path
+      required: true
+      description: Unique identifier of the rule set
+      schema:
+        type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

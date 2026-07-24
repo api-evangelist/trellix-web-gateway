@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware URL Filtering API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: URL Filtering
+  description: URL categorization and filtering settings
+paths:
+  /urlfilter/categories:
+    get:
+      operationId: listUrlCategories
+      summary: List URL categories
+      description: Retrieve the list of available URL categories used for web filtering and policy decisions.
+      tags:
+      - URL Filtering
+      responses:
+        '200':
+          description: List of URL categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UrlCategory'
+        '401':
+          description: Unauthorized
+  /urlfilter/lookup:
+    get:
+      operationId: lookupUrl
+      summary: Look up URL categorization
+      description: Look up the category and reputation of a specific URL against the Trellix Global Threat Intelligence database.
+      tags:
+      - URL Filtering
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: URL to look up
+        schema:
+          type: string
+      responses:
+        '200':
+          description: URL categorization result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlLookupResult'
+        '401':
+          description: Unauthorized
+  /urlfilter/settings:
+    get:
+      operationId: getUrlFilterSettings
+      summary: Get URL filter settings
+      description: Retrieve the current URL filtering configuration including blocked categories, allowed exceptions, and safe search settings.
+      tags:
+      - URL Filtering
+      responses:
+        '200':
+          description: URL filter settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlFilterSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateUrlFilterSettings
+      summary: Update URL filter settings
+      description: Update the URL filtering configuration. Changes must be committed to take effect.
+      tags:
+      - URL Filtering
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlFilterSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    UrlCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Category identifier
+        name:
+          type: string
+          description: Category name
+        description:
+          type: string
+          description: Category description
+        parentCategory:
+          type: string
+          description: Parent category name for subcategories
+    UrlFilterSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether URL filtering is enabled
+        blockedCategories:
+          type: array
+          items:
+            type: string
+          description: List of blocked URL category IDs
+        allowedExceptions:
+          type: array
+          items:
+            type: string
+          description: URLs or patterns excepted from filtering
+        safeSearchEnabled:
+          type: boolean
+          description: Whether safe search enforcement is enabled
+        blockUncategorized:
+          type: boolean
+          description: Whether to block uncategorized URLs
+    UrlLookupResult:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Looked up URL
+        categories:
+          type: array
+          items:
+            type: string
+          description: Assigned URL categories
+        reputation:
+          type: string
+          enum:
+          - trusted
+          - neutral
+          - suspicious
+          - high_risk
+          - malicious
+          description: URL reputation score
+        riskLevel:
+          type: integer
+          minimum: 0
+          maximum: 127
+          description: Numeric risk level (0-127)
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

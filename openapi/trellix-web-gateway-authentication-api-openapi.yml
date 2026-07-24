@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Authentication API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Authentication
+  description: Authentication policy settings
+paths:
+  /authentication/settings:
+    get:
+      operationId: getAuthenticationSettings
+      summary: Get authentication settings
+      description: Retrieve the current user authentication configuration including authentication methods, directory services, and bypass rules.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Authentication settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationSettings'
+        '401':
+          description: Unauthorized
+    put:
+      operationId: updateAuthenticationSettings
+      summary: Update authentication settings
+      description: Update the user authentication configuration. Changes must be committed to take effect.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationSettings'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid settings
+        '401':
+          description: Unauthorized
+  /login:
+    post:
+      operationId: login
+      summary: Authenticate and create a session
+      description: Authenticate with the Web Gateway appliance using administrator credentials. Returns a session cookie used for subsequent API calls.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                  description: Administrator username
+                password:
+                  type: string
+                  description: Administrator password
+              required:
+              - userName
+              - password
+      responses:
+        '200':
+          description: Authentication successful
+          headers:
+            Set-Cookie:
+              description: Session cookie for subsequent requests
+              schema:
+                type: string
+        '401':
+          description: Authentication failed - invalid credentials
+      security: []
+  /logout:
+    post:
+      operationId: logout
+      summary: End the current session
+      description: Terminate the current authenticated session and invalidate the session cookie.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Session terminated successfully
+components:
+  schemas:
+    AuthenticationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether user authentication is enabled
+        method:
+          type: string
+          enum:
+          - ntlm
+          - kerberos
+          - ldap
+          - radius
+          - basic
+          - cookie
+          description: Primary authentication method
+        fallbackMethod:
+          type: string
+          enum:
+          - ntlm
+          - kerberos
+          - ldap
+          - radius
+          - basic
+          - cookie
+          - none
+          description: Fallback authentication method
+        directoryServer:
+          type: string
+          description: LDAP/AD directory server address
+        directoryBaseDn:
+          type: string
+          description: Base DN for directory searches
+        bypassIps:
+          type: array
+          items:
+            type: string
+          description: IP addresses exempt from authentication
+        sessionTimeout:
+          type: integer
+          description: Authentication session timeout in seconds
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

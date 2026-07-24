@@ -1,0 +1,268 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Statistics API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Statistics
+  description: Aggregated traffic and security statistics
+paths:
+  /statistics/traffic:
+    get:
+      operationId: getTrafficStatistics
+      summary: Get traffic statistics
+      description: Retrieve aggregated traffic statistics including request counts, bandwidth usage, and top destinations over a specified time period.
+      tags:
+      - Statistics
+      parameters:
+      - $ref: '#/components/parameters/startTime'
+      - $ref: '#/components/parameters/endTime'
+      - name: granularity
+        in: query
+        description: Time granularity for aggregation
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          - weekly
+          - monthly
+          default: daily
+      responses:
+        '200':
+          description: Traffic statistics returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrafficStatistics'
+        '401':
+          description: Unauthorized
+  /statistics/threats:
+    get:
+      operationId: getThreatStatistics
+      summary: Get threat statistics
+      description: Retrieve aggregated threat detection statistics including malware detections, blocked URLs, and category violations over a specified time period.
+      tags:
+      - Statistics
+      parameters:
+      - $ref: '#/components/parameters/startTime'
+      - $ref: '#/components/parameters/endTime'
+      - name: granularity
+        in: query
+        description: Time granularity for aggregation
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          - weekly
+          - monthly
+          default: daily
+      responses:
+        '200':
+          description: Threat statistics returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatStatistics'
+        '401':
+          description: Unauthorized
+  /statistics/top/urls:
+    get:
+      operationId: getTopUrls
+      summary: Get top accessed URLs
+      description: Retrieve the most frequently accessed URLs during the specified time period.
+      tags:
+      - Statistics
+      parameters:
+      - $ref: '#/components/parameters/startTime'
+      - $ref: '#/components/parameters/endTime'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Top URLs returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TopUrlEntry'
+        '401':
+          description: Unauthorized
+  /statistics/top/categories:
+    get:
+      operationId: getTopCategories
+      summary: Get top URL categories
+      description: Retrieve the most accessed URL categories during the specified time period.
+      tags:
+      - Statistics
+      parameters:
+      - $ref: '#/components/parameters/startTime'
+      - $ref: '#/components/parameters/endTime'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Top categories returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TopCategoryEntry'
+        '401':
+          description: Unauthorized
+components:
+  parameters:
+    endTime:
+      name: endTime
+      in: query
+      description: End time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
+  schemas:
+    TopUrlEntry:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL
+        requestCount:
+          type: integer
+          description: Number of requests to this URL
+        totalBytes:
+          type: integer
+          description: Total bytes transferred
+    TopCategoryEntry:
+      type: object
+      properties:
+        category:
+          type: string
+          description: URL category name
+        requestCount:
+          type: integer
+          description: Number of requests in this category
+        blockedCount:
+          type: integer
+          description: Number of blocked requests
+        percentage:
+          type: number
+          format: float
+          description: Percentage of total traffic
+    ThreatStatistics:
+      type: object
+      properties:
+        totalThreats:
+          type: integer
+          description: Total threats detected
+        malwareDetections:
+          type: integer
+          description: Number of malware detections
+        phishingDetections:
+          type: integer
+          description: Number of phishing site detections
+        policyViolations:
+          type: integer
+          description: Number of policy violations
+        dataLeakEvents:
+          type: integer
+          description: Number of data leak prevention events
+        timeSeries:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              threats:
+                type: integer
+              malware:
+                type: integer
+              phishing:
+                type: integer
+    TrafficStatistics:
+      type: object
+      properties:
+        totalRequests:
+          type: integer
+          description: Total number of web requests
+        allowedRequests:
+          type: integer
+          description: Number of allowed requests
+        blockedRequests:
+          type: integer
+          description: Number of blocked requests
+        totalBytesIn:
+          type: integer
+          description: Total inbound bytes
+        totalBytesOut:
+          type: integer
+          description: Total outbound bytes
+        uniqueUsers:
+          type: integer
+          description: Number of unique users
+        uniqueDestinations:
+          type: integer
+          description: Number of unique destinations accessed
+        timeSeries:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              requests:
+                type: integer
+              bytesIn:
+                type: integer
+              bytesOut:
+                type: integer
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

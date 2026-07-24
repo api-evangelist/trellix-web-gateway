@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Dashboards API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Dashboards
+  description: Dashboard data for visualization
+paths:
+  /dashboards/overview:
+    get:
+      operationId: getDashboardOverview
+      summary: Get dashboard overview data
+      description: Retrieve aggregated data for the main reporting dashboard, including traffic volume, threat counts, and top statistics.
+      tags:
+      - Dashboards
+      parameters:
+      - name: period
+        in: query
+        description: Time period for the dashboard data
+        schema:
+          type: string
+          enum:
+          - last_hour
+          - last_24h
+          - last_7d
+          - last_30d
+          default: last_24h
+      responses:
+        '200':
+          description: Dashboard overview data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardOverview'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    DashboardOverview:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Time period for the data
+        totalRequests:
+          type: integer
+          description: Total web requests in the period
+        blockedRequests:
+          type: integer
+          description: Total blocked requests
+        threatsDetected:
+          type: integer
+          description: Total threats detected
+        activeUsers:
+          type: integer
+          description: Number of active users
+        topCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopCategoryEntry'
+        topThreats:
+          type: array
+          items:
+            type: object
+            properties:
+              threatName:
+                type: string
+              detectionCount:
+                type: integer
+        trafficTrend:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              requests:
+                type: integer
+              blocked:
+                type: integer
+    TopCategoryEntry:
+      type: object
+      properties:
+        category:
+          type: string
+          description: URL category name
+        requestCount:
+          type: integer
+          description: Number of requests in this category
+        blockedCount:
+          type: integer
+          description: Number of blocked requests
+        percentage:
+          type: number
+          format: float
+          description: Percentage of total traffic
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware System API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: System
+  description: System information and appliance management
+paths:
+  /system:
+    get:
+      operationId: getSystemInfo
+      summary: Get system information
+      description: Retrieve system information about the Web Gateway appliance, including version, hostname, and operational status.
+      tags:
+      - System
+      responses:
+        '200':
+          description: System information returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemInfo'
+        '401':
+          description: Unauthorized
+  /system/appliances:
+    get:
+      operationId: listAppliances
+      summary: List managed appliances
+      description: Retrieve the list of all Web Gateway appliances in the management cluster.
+      tags:
+      - System
+      responses:
+        '200':
+          description: List of managed appliances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appliances:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Appliance'
+        '401':
+          description: Unauthorized
+  /system/appliances/{applianceId}:
+    get:
+      operationId: getAppliance
+      summary: Get appliance details
+      description: Retrieve details of a specific managed appliance by its identifier.
+      tags:
+      - System
+      parameters:
+      - $ref: '#/components/parameters/applianceId'
+      responses:
+        '200':
+          description: Appliance details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appliance'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Appliance not found
+components:
+  parameters:
+    applianceId:
+      name: applianceId
+      in: path
+      required: true
+      description: Unique identifier of the managed appliance
+      schema:
+        type: string
+  schemas:
+    SystemInfo:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Web Gateway software version
+        hostname:
+          type: string
+          description: Appliance hostname
+        serialNumber:
+          type: string
+          description: Appliance serial number
+        status:
+          type: string
+          enum:
+          - running
+          - maintenance
+          - error
+          description: Current operational status
+        uptime:
+          type: integer
+          description: System uptime in seconds
+        cpuUsage:
+          type: number
+          format: float
+          description: Current CPU usage percentage
+        memoryUsage:
+          type: number
+          format: float
+          description: Current memory usage percentage
+        lastConfigChange:
+          type: string
+          format: date-time
+          description: Timestamp of the last configuration change
+    Appliance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the appliance
+        name:
+          type: string
+          description: Display name of the appliance
+        hostname:
+          type: string
+          description: Hostname or IP address
+        version:
+          type: string
+          description: Software version running on the appliance
+        role:
+          type: string
+          enum:
+          - primary
+          - secondary
+          - standalone
+          description: Role of the appliance in the cluster
+        status:
+          type: string
+          enum:
+          - online
+          - offline
+          - syncing
+          - error
+          description: Current status of the appliance
+        lastSync:
+          type: string
+          format: date-time
+          description: Last synchronization timestamp
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

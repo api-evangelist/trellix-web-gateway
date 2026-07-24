@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Configuration API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Configuration
+  description: Configuration management and commit operations
+paths:
+  /configuration:
+    get:
+      operationId: getConfiguration
+      summary: Get current configuration
+      description: Retrieve the current running configuration of the Web Gateway appliance in XML format.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Current configuration returned
+          content:
+            application/xml:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+  /configuration/commit:
+    post:
+      operationId: commitConfiguration
+      summary: Commit configuration changes
+      description: Commit pending configuration changes to the Web Gateway appliance. Changes become active after a successful commit.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Configuration committed successfully
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict - another commit is in progress
+  /configuration/rollback:
+    post:
+      operationId: rollbackConfiguration
+      summary: Rollback configuration changes
+      description: Discard all uncommitted configuration changes and revert to the last committed state.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Configuration rolled back successfully
+        '401':
+          description: Unauthorized
+  /configuration/backup:
+    post:
+      operationId: createBackup
+      summary: Create a configuration backup
+      description: Create a backup of the current configuration that can be restored later.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Backup created successfully
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+  /configuration/restore:
+    post:
+      operationId: restoreBackup
+      summary: Restore a configuration backup
+      description: Restore a previously created configuration backup to the appliance.
+      tags:
+      - Configuration
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Backup restored successfully
+        '400':
+          description: Invalid backup file
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

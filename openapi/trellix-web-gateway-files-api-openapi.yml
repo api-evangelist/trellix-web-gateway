@@ -1,0 +1,140 @@
+openapi: 3.1.0
+info:
+  title: Trellix Web Gateway Policy Anti-Malware Files API
+  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  version: '1.0'
+  contact:
+    name: Trellix Support
+    url: https://www.trellix.com/support/
+    email: support@trellix.com
+  termsOfService: https://www.trellix.com/legal/terms-of-use/
+servers:
+- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
+  description: Trellix Web Gateway Policy Endpoint
+  variables:
+    mwg-server:
+      default: mwg.example.com
+      description: Hostname or IP address of the Web Gateway appliance
+    port:
+      default: '4712'
+      description: Management port for the REST API
+security:
+- cookieAuth: []
+tags:
+- name: Files
+  description: File upload and download operations
+paths:
+  /files:
+    get:
+      operationId: listFiles
+      summary: List available files
+      description: List files available on the Web Gateway appliance, including rule set exports and configuration files.
+      tags:
+      - Files
+      responses:
+        '200':
+          description: List of available files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FileInfo'
+        '401':
+          description: Unauthorized
+  /files/{fileName}:
+    get:
+      operationId: downloadFile
+      summary: Download a file
+      description: Download a specific file from the Web Gateway appliance.
+      tags:
+      - Files
+      parameters:
+      - $ref: '#/components/parameters/fileName'
+      responses:
+        '200':
+          description: File content returned
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
+    put:
+      operationId: uploadFile
+      summary: Upload a file
+      description: Upload a file to the Web Gateway appliance, such as a rule set import or certificate file.
+      tags:
+      - Files
+      parameters:
+      - $ref: '#/components/parameters/fileName'
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File uploaded successfully
+        '400':
+          description: Invalid file
+        '401':
+          description: Unauthorized
+    delete:
+      operationId: deleteFile
+      summary: Delete a file
+      description: Delete a specific file from the Web Gateway appliance.
+      tags:
+      - Files
+      parameters:
+      - $ref: '#/components/parameters/fileName'
+      responses:
+        '200':
+          description: File deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
+components:
+  schemas:
+    FileInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: File name
+        size:
+          type: integer
+          description: File size in bytes
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+        type:
+          type: string
+          description: File type or MIME type
+  parameters:
+    fileName:
+      name: fileName
+      in: path
+      required: true
+      description: Name of the file
+      schema:
+        type: string
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+externalDocs:
+  description: Trellix Web Gateway Policy API Documentation
+  url: https://docs.trellix.com/bundle/web-gateway-policy-api

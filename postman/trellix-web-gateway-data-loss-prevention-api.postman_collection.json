@@ -1,0 +1,479 @@
+{
+  "info": {
+    "_postman_id": "41265a26-6f54-4832-a503-2aaac1b6bc82",
+    "name": "Trellix Web Gateway Policy Anti-Malware Data Loss Prevention API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:18:56.000Z",
+    "updatedAt": "2026-07-28T03:18:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-41265a26-6f54-4832-a503-2aaac1b6bc82"
+  },
+  "item": [
+    {
+      "name": "dlp",
+      "item": [
+        {
+          "name": "settings",
+          "item": [
+            {
+              "name": "Get DLP settings",
+              "id": "a32287e6-8f50-493e-99bc-18c57ff600db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dlp/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dlp",
+                    "settings"
+                  ]
+                },
+                "description": "Retrieve the current Data Loss Prevention configuration including enabled classifiers, actions, and sensitivity levels."
+              },
+              "response": [
+                {
+                  "id": "0c0d16c5-03ca-4348-9097-b189f4d9a3fb",
+                  "name": "DLP settings",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"enabled\": \"<boolean>\",\n  \"action\": \"log\",\n  \"enabledClassifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"scanUploads\": \"<boolean>\",\n  \"scanFormData\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-0c0d16c5-03ca-4348-9097-b189f4d9a3fb"
+                },
+                {
+                  "id": "58e39f7d-b465-46f8-84ef-500590994ff5",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-58e39f7d-b465-46f8-84ef-500590994ff5"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:57.000Z",
+              "updatedAt": "2026-07-28T03:18:57.000Z",
+              "uid": "35240-a32287e6-8f50-493e-99bc-18c57ff600db"
+            },
+            {
+              "name": "Update DLP settings",
+              "id": "6248d8e4-56b8-448e-8915-a1a035d0db49",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"action\": \"log\",\n  \"enabledClassifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"scanUploads\": \"<boolean>\",\n  \"scanFormData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/dlp/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dlp",
+                    "settings"
+                  ]
+                },
+                "description": "Update the Data Loss Prevention configuration. Changes must be committed to take effect."
+              },
+              "response": [
+                {
+                  "id": "ce5baac2-422c-417b-86e6-2a92648370e6",
+                  "name": "Settings updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"action\": \"log\",\n  \"enabledClassifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"scanUploads\": \"<boolean>\",\n  \"scanFormData\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-ce5baac2-422c-417b-86e6-2a92648370e6"
+                },
+                {
+                  "id": "bc9f7398-419a-4940-8320-216ef4a9d226",
+                  "name": "Invalid settings",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"action\": \"log\",\n  \"enabledClassifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"scanUploads\": \"<boolean>\",\n  \"scanFormData\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-bc9f7398-419a-4940-8320-216ef4a9d226"
+                },
+                {
+                  "id": "5ecb1187-aed6-4799-9c1a-6ecc91a9721f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"action\": \"log\",\n  \"enabledClassifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"scanUploads\": \"<boolean>\",\n  \"scanFormData\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-5ecb1187-aed6-4799-9c1a-6ecc91a9721f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:57.000Z",
+              "updatedAt": "2026-07-28T03:18:57.000Z",
+              "uid": "35240-6248d8e4-56b8-448e-8915-a1a035d0db49"
+            }
+          ],
+          "id": "712350f7-cf78-430d-ba68-1a2e9b3ca26d",
+          "createdAt": "2026-07-28T03:18:57.000Z",
+          "updatedAt": "2026-07-28T03:18:57.000Z",
+          "uid": "35240-712350f7-cf78-430d-ba68-1a2e9b3ca26d"
+        },
+        {
+          "name": "classifiers",
+          "item": [
+            {
+              "name": "List DLP classifiers",
+              "id": "24445375-44d2-4f7c-8721-ff692df06030",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dlp/classifiers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dlp",
+                    "classifiers"
+                  ]
+                },
+                "description": "Retrieve the list of available data classifiers for content inspection and data loss prevention."
+              },
+              "response": [
+                {
+                  "id": "9e0ba724-365e-4446-a492-de5189cad0f5",
+                  "name": "List of DLP classifiers",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/classifiers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "classifiers"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"classifiers\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"builtin\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"builtin\",\n      \"enabled\": \"<boolean>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-9e0ba724-365e-4446-a492-de5189cad0f5"
+                },
+                {
+                  "id": "189ad2d5-b764-440b-acb7-0cb479e49038",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dlp/classifiers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dlp",
+                        "classifiers"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:57.000Z",
+                  "updatedAt": "2026-07-28T03:18:57.000Z",
+                  "uid": "35240-189ad2d5-b764-440b-acb7-0cb479e49038"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:57.000Z",
+              "updatedAt": "2026-07-28T03:18:57.000Z",
+              "uid": "35240-24445375-44d2-4f7c-8721-ff692df06030"
+            }
+          ],
+          "id": "4b6e3755-980c-4dba-8ce7-2df7fb4f4eb9",
+          "createdAt": "2026-07-28T03:18:57.000Z",
+          "updatedAt": "2026-07-28T03:18:57.000Z",
+          "uid": "35240-4b6e3755-980c-4dba-8ce7-2df7fb4f4eb9"
+        }
+      ],
+      "id": "3f38cf51-a73c-4854-96bf-d462dd2dc1c0",
+      "createdAt": "2026-07-28T03:18:57.000Z",
+      "updatedAt": "2026-07-28T03:18:57.000Z",
+      "uid": "35240-3f38cf51-a73c-4854-96bf-d462dd2dc1c0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

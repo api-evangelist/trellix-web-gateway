@@ -1,0 +1,196 @@
+{
+  "info": {
+    "_postman_id": "0ba8d12f-a167-4277-bd0b-fc33fcd3bbe7",
+    "name": "Trellix Web Gateway Policy Anti-Malware Dashboards API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:18:56.000Z",
+    "updatedAt": "2026-07-28T03:18:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0ba8d12f-a167-4277-bd0b-fc33fcd3bbe7"
+  },
+  "item": [
+    {
+      "name": "dashboards",
+      "item": [
+        {
+          "name": "overview",
+          "item": [
+            {
+              "name": "Get dashboard overview data",
+              "id": "ea753009-3513-4275-846b-2f6320f692f7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboards/overview?period=last_24h",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dashboards",
+                    "overview"
+                  ],
+                  "query": [
+                    {
+                      "description": "Time period for the dashboard data",
+                      "key": "period",
+                      "value": "last_24h"
+                    }
+                  ]
+                },
+                "description": "Retrieve aggregated data for the main reporting dashboard, including traffic volume, threat counts, and top statistics."
+              },
+              "response": [
+                {
+                  "id": "29f02128-2562-48d8-83ac-547db3d67dcf",
+                  "name": "Dashboard overview data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dashboards/overview?period=last_24h",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dashboards",
+                        "overview"
+                      ],
+                      "query": [
+                        {
+                          "description": "Time period for the dashboard data",
+                          "key": "period",
+                          "value": "last_24h"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"period\": \"<string>\",\n  \"totalRequests\": \"<integer>\",\n  \"blockedRequests\": \"<integer>\",\n  \"threatsDetected\": \"<integer>\",\n  \"activeUsers\": \"<integer>\",\n  \"topCategories\": [\n    {\n      \"category\": \"<string>\",\n      \"requestCount\": \"<integer>\",\n      \"blockedCount\": \"<integer>\",\n      \"percentage\": \"<float>\"\n    },\n    {\n      \"category\": \"<string>\",\n      \"requestCount\": \"<integer>\",\n      \"blockedCount\": \"<integer>\",\n      \"percentage\": \"<float>\"\n    }\n  ],\n  \"topThreats\": [\n    {\n      \"threatName\": \"<string>\",\n      \"detectionCount\": \"<integer>\"\n    },\n    {\n      \"threatName\": \"<string>\",\n      \"detectionCount\": \"<integer>\"\n    }\n  ],\n  \"trafficTrend\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"requests\": \"<integer>\",\n      \"blocked\": \"<integer>\"\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"requests\": \"<integer>\",\n      \"blocked\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:18:56.000Z",
+                  "updatedAt": "2026-07-28T03:18:56.000Z",
+                  "uid": "35240-29f02128-2562-48d8-83ac-547db3d67dcf"
+                },
+                {
+                  "id": "d074eaac-d5db-464f-a225-c7f3089feed1",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dashboards/overview?period=last_24h",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dashboards",
+                        "overview"
+                      ],
+                      "query": [
+                        {
+                          "description": "Time period for the dashboard data",
+                          "key": "period",
+                          "value": "last_24h"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:56.000Z",
+                  "updatedAt": "2026-07-28T03:18:56.000Z",
+                  "uid": "35240-d074eaac-d5db-464f-a225-c7f3089feed1"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:56.000Z",
+              "updatedAt": "2026-07-28T03:18:56.000Z",
+              "uid": "35240-ea753009-3513-4275-846b-2f6320f692f7"
+            }
+          ],
+          "id": "fed54db9-e222-4cb7-bb95-67a2aefdb4e1",
+          "createdAt": "2026-07-28T03:18:56.000Z",
+          "updatedAt": "2026-07-28T03:18:56.000Z",
+          "uid": "35240-fed54db9-e222-4cb7-bb95-67a2aefdb4e1"
+        }
+      ],
+      "id": "fb03cce2-4db6-47ae-bb9f-f7df0cbb7591",
+      "createdAt": "2026-07-28T03:18:56.000Z",
+      "updatedAt": "2026-07-28T03:18:56.000Z",
+      "uid": "35240-fb03cce2-4db6-47ae-bb9f-f7df0cbb7591"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

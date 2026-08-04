@@ -1,0 +1,1326 @@
+{
+  "info": {
+    "_postman_id": "40ea1bf4-f1d9-45a0-8cc2-2b59cca95bc2",
+    "name": "Trellix Web Gateway Policy Anti-Malware Rule Sets API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:20.000Z",
+    "updatedAt": "2026-07-28T03:19:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-40ea1bf4-f1d9-45a0-8cc2-2b59cca95bc2"
+  },
+  "item": [
+    {
+      "name": "rulesets",
+      "item": [
+        {
+          "name": "{ruleSetId}",
+          "item": [
+            {
+              "name": "enable",
+              "item": [
+                {
+                  "name": "Enable a rule set",
+                  "id": "a9ac40b1-54c7-45dc-9554-e8d50f51dfc7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId/enable",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId",
+                        "enable"
+                      ],
+                      "variable": [
+                        {
+                          "id": "aa32b38c-49f7-4e70-9c11-4a80b0513a19",
+                          "key": "ruleSetId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the rule set"
+                        }
+                      ]
+                    },
+                    "description": "Enable a disabled rule set. Changes must be committed to take effect."
+                  },
+                  "response": [
+                    {
+                      "id": "af47247a-9256-40e8-96fd-bd7ab2bbab2e",
+                      "name": "Rule set enabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/rulesets/:ruleSetId/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rulesets",
+                            ":ruleSetId",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ruleSetId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:21.000Z",
+                      "updatedAt": "2026-07-28T03:19:21.000Z",
+                      "uid": "35240-af47247a-9256-40e8-96fd-bd7ab2bbab2e"
+                    },
+                    {
+                      "id": "e86312d5-7a3b-49da-a200-a942a98d639d",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/rulesets/:ruleSetId/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rulesets",
+                            ":ruleSetId",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ruleSetId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:21.000Z",
+                      "updatedAt": "2026-07-28T03:19:21.000Z",
+                      "uid": "35240-e86312d5-7a3b-49da-a200-a942a98d639d"
+                    },
+                    {
+                      "id": "968b91cf-9daf-4499-8578-fa9351a986af",
+                      "name": "Rule set not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/rulesets/:ruleSetId/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rulesets",
+                            ":ruleSetId",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ruleSetId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:21.000Z",
+                      "updatedAt": "2026-07-28T03:19:21.000Z",
+                      "uid": "35240-968b91cf-9daf-4499-8578-fa9351a986af"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-a9ac40b1-54c7-45dc-9554-e8d50f51dfc7"
+                }
+              ],
+              "id": "9bf8f0c7-f083-4caa-b53f-51bb3a8e8ff9",
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-9bf8f0c7-f083-4caa-b53f-51bb3a8e8ff9"
+            },
+            {
+              "name": "disable",
+              "item": [
+                {
+                  "name": "Disable a rule set",
+                  "id": "2b07bf60-3864-4598-81a5-1e797e770592",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId/disable",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId",
+                        "disable"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5bca1868-81cf-4059-bec9-78c99985bcb6",
+                          "key": "ruleSetId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the rule set"
+                        }
+                      ]
+                    },
+                    "description": "Disable an active rule set without deleting it. Changes must be committed to take effect."
+                  },
+                  "response": [
+                    {
+                      "id": "997b1c9c-0621-480c-8873-df8980f12116",
+                      "name": "Rule set disabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/rulesets/:ruleSetId/disable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rulesets",
+                            ":ruleSetId",
+                            "disable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ruleSetId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:21.000Z",
+                      "updatedAt": "2026-07-28T03:19:21.000Z",
+                      "uid": "35240-997b1c9c-0621-480c-8873-df8980f12116"
+                    },
+                    {
+                      "id": "227a1c90-7982-42c4-be9a-001bfc21cf4a",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/rulesets/:ruleSetId/disable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rulesets",
+                            ":ruleSetId",
+                            "disable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ruleSetId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:21.000Z",
+                      "updatedAt": "2026-07-28T03:19:21.000Z",
+                      "uid": "35240-227a1c90-7982-42c4-be9a-001bfc21cf4a"
+                    },
+                    {
+                      "id": "c0d9fd94-6928-46e6-8cd6-4f1208677704",
+                      "name": "Rule set not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/rulesets/:ruleSetId/disable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rulesets",
+                            ":ruleSetId",
+                            "disable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "ruleSetId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:21.000Z",
+                      "updatedAt": "2026-07-28T03:19:21.000Z",
+                      "uid": "35240-c0d9fd94-6928-46e6-8cd6-4f1208677704"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-2b07bf60-3864-4598-81a5-1e797e770592"
+                }
+              ],
+              "id": "5639bd41-aa9f-4a24-ad3a-cce7b6e43327",
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-5639bd41-aa9f-4a24-ad3a-cce7b6e43327"
+            },
+            {
+              "name": "Get a rule set",
+              "id": "2ed74e8c-5416-45e0-98ef-9ff819aaaf35",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "974bc3c5-8ae6-4176-94f2-0676176e9db8",
+                      "key": "ruleSetId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the rule set"
+                    }
+                  ]
+                },
+                "description": "Retrieve the full configuration of a specific rule set, including all contained rules and their conditions."
+              },
+              "response": [
+                {
+                  "id": "013817b7-84f2-4cea-9a64-8413011cf524",
+                  "name": "Rule set details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"response\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"ruleCount\": \"<integer>\",\n  \"rules\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"condition\": {\n        \"property\": \"<string>\",\n        \"operator\": \"not_equals\",\n        \"value\": \"<string>\",\n        \"listRef\": \"<string>\"\n      },\n      \"action\": {\n        \"type\": \"block\",\n        \"blockTemplate\": \"<string>\",\n        \"redirectUrl\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"condition\": {\n        \"property\": \"<string>\",\n        \"operator\": \"equals\",\n        \"value\": \"<string>\",\n        \"listRef\": \"<string>\"\n      },\n      \"action\": {\n        \"type\": \"allow\",\n        \"blockTemplate\": \"<string>\",\n        \"redirectUrl\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-013817b7-84f2-4cea-9a64-8413011cf524"
+                },
+                {
+                  "id": "f04979e5-213d-4501-a37b-21dc22214efd",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-f04979e5-213d-4501-a37b-21dc22214efd"
+                },
+                {
+                  "id": "7e18d649-ec85-47e8-a8fb-a4a5f4f6906a",
+                  "name": "Rule set not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-7e18d649-ec85-47e8-a8fb-a4a5f4f6906a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-2ed74e8c-5416-45e0-98ef-9ff819aaaf35"
+            },
+            {
+              "name": "Update a rule set",
+              "id": "5168563e-015f-4fe7-bc62-3f1a1d9f6c9b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "19ffc8b9-574e-4014-9e87-e88a6a0f8251",
+                      "key": "ruleSetId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the rule set"
+                    }
+                  ]
+                },
+                "description": "Update the configuration of an existing rule set. Changes must be committed to take effect."
+              },
+              "response": [
+                {
+                  "id": "4e6d074f-f6fe-4592-aebc-77ce72c6c002",
+                  "name": "Rule set updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"response\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"ruleCount\": \"<integer>\",\n  \"rules\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"condition\": {\n        \"property\": \"<string>\",\n        \"operator\": \"not_equals\",\n        \"value\": \"<string>\",\n        \"listRef\": \"<string>\"\n      },\n      \"action\": {\n        \"type\": \"block\",\n        \"blockTemplate\": \"<string>\",\n        \"redirectUrl\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"condition\": {\n        \"property\": \"<string>\",\n        \"operator\": \"equals\",\n        \"value\": \"<string>\",\n        \"listRef\": \"<string>\"\n      },\n      \"action\": {\n        \"type\": \"allow\",\n        \"blockTemplate\": \"<string>\",\n        \"redirectUrl\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-4e6d074f-f6fe-4592-aebc-77ce72c6c002"
+                },
+                {
+                  "id": "7a7bdbac-0d15-4e71-a41a-40a04636ab5b",
+                  "name": "Invalid rule set configuration",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-7a7bdbac-0d15-4e71-a41a-40a04636ab5b"
+                },
+                {
+                  "id": "9eb37eb7-9f65-4698-a7ae-1b197217bd64",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-9eb37eb7-9f65-4698-a7ae-1b197217bd64"
+                },
+                {
+                  "id": "14f64dde-daa9-4e5d-8882-639ed2a6a3b0",
+                  "name": "Rule set not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-14f64dde-daa9-4e5d-8882-639ed2a6a3b0"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-5168563e-015f-4fe7-bc62-3f1a1d9f6c9b"
+            },
+            {
+              "name": "Delete a rule set",
+              "id": "23fc2f68-10f4-4263-90a7-dabfbfd66691",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "442a7928-9800-4236-b114-a86a3b0047ea",
+                      "key": "ruleSetId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the rule set"
+                    }
+                  ]
+                },
+                "description": "Delete a rule set and all its contained rules. Changes must be committed to take effect."
+              },
+              "response": [
+                {
+                  "id": "ca3bc0d9-adfa-4a91-9435-023f0f0364b1",
+                  "name": "Rule set deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-ca3bc0d9-adfa-4a91-9435-023f0f0364b1"
+                },
+                {
+                  "id": "8942ac02-87f4-4655-a775-f381898675f7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-8942ac02-87f4-4655-a775-f381898675f7"
+                },
+                {
+                  "id": "cbf5098b-9e9a-49bc-82bd-d8b253160b92",
+                  "name": "Rule set not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/rulesets/:ruleSetId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rulesets",
+                        ":ruleSetId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ruleSetId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:21.000Z",
+                  "updatedAt": "2026-07-28T03:19:21.000Z",
+                  "uid": "35240-cbf5098b-9e9a-49bc-82bd-d8b253160b92"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-23fc2f68-10f4-4263-90a7-dabfbfd66691"
+            }
+          ],
+          "id": "c6034256-f0c4-4e5f-8c51-b4ab64dbb4e2",
+          "createdAt": "2026-07-28T03:19:21.000Z",
+          "updatedAt": "2026-07-28T03:19:21.000Z",
+          "uid": "35240-c6034256-f0c4-4e5f-8c51-b4ab64dbb4e2"
+        },
+        {
+          "name": "List all rule sets",
+          "id": "f1024d04-452d-40f8-94b7-4877922fbf9e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/rulesets?type=request&enabled=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rulesets"
+              ],
+              "query": [
+                {
+                  "description": "Filter by rule set type",
+                  "key": "type",
+                  "value": "request"
+                },
+                {
+                  "description": "Filter by enabled status",
+                  "key": "enabled",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Retrieve the list of all configured rule sets, including their status, order, and basic configuration."
+          },
+          "response": [
+            {
+              "id": "9f6f203e-d33c-43aa-8292-b5842ce5eda3",
+              "name": "List of rule sets",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets?type=request&enabled=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by rule set type",
+                      "key": "type",
+                      "value": "request"
+                    },
+                    {
+                      "description": "Filter by enabled status",
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ruleSets\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"error\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"ruleCount\": \"<integer>\",\n      \"rules\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"enabled\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"condition\": {\n            \"property\": \"<string>\",\n            \"operator\": \"not_contains\",\n            \"value\": \"<string>\",\n            \"listRef\": \"<string>\"\n          },\n          \"action\": {\n            \"type\": \"allow\",\n            \"blockTemplate\": \"<string>\",\n            \"redirectUrl\": \"<string>\"\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"enabled\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"condition\": {\n            \"property\": \"<string>\",\n            \"operator\": \"not_contains\",\n            \"value\": \"<string>\",\n            \"listRef\": \"<string>\"\n          },\n          \"action\": {\n            \"type\": \"log\",\n            \"blockTemplate\": \"<string>\",\n            \"redirectUrl\": \"<string>\"\n          }\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"error\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"ruleCount\": \"<integer>\",\n      \"rules\": [\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"enabled\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"condition\": {\n            \"property\": \"<string>\",\n            \"operator\": \"equals\",\n            \"value\": \"<string>\",\n            \"listRef\": \"<string>\"\n          },\n          \"action\": {\n            \"type\": \"log\",\n            \"blockTemplate\": \"<string>\",\n            \"redirectUrl\": \"<string>\"\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"enabled\": \"<boolean>\",\n          \"order\": \"<integer>\",\n          \"condition\": {\n            \"property\": \"<string>\",\n            \"operator\": \"not_in_list\",\n            \"value\": \"<string>\",\n            \"listRef\": \"<string>\"\n          },\n          \"action\": {\n            \"type\": \"authenticate\",\n            \"blockTemplate\": \"<string>\",\n            \"redirectUrl\": \"<string>\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-9f6f203e-d33c-43aa-8292-b5842ce5eda3"
+            },
+            {
+              "id": "63a4550d-fae8-4a96-baee-319f632cfe68",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets?type=request&enabled=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by rule set type",
+                      "key": "type",
+                      "value": "request"
+                    },
+                    {
+                      "description": "Filter by enabled status",
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-63a4550d-fae8-4a96-baee-319f632cfe68"
+            }
+          ],
+          "createdAt": "2026-07-28T03:19:21.000Z",
+          "updatedAt": "2026-07-28T03:19:21.000Z",
+          "uid": "35240-f1024d04-452d-40f8-94b7-4877922fbf9e"
+        },
+        {
+          "name": "Create a new rule set",
+          "id": "22b842d7-4ca9-43e0-8f64-29e270d91d88",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"response\",\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rulesets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rulesets"
+              ]
+            },
+            "description": "Create a new rule set with the specified configuration. The rule set must be committed before it becomes active."
+          },
+          "response": [
+            {
+              "id": "0d200dc0-0c63-4476-976d-b8cdb31d6f2d",
+              "name": "Rule set created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"response\",\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"response\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"ruleCount\": \"<integer>\",\n  \"rules\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"condition\": {\n        \"property\": \"<string>\",\n        \"operator\": \"not_equals\",\n        \"value\": \"<string>\",\n        \"listRef\": \"<string>\"\n      },\n      \"action\": {\n        \"type\": \"block\",\n        \"blockTemplate\": \"<string>\",\n        \"redirectUrl\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"order\": \"<integer>\",\n      \"condition\": {\n        \"property\": \"<string>\",\n        \"operator\": \"equals\",\n        \"value\": \"<string>\",\n        \"listRef\": \"<string>\"\n      },\n      \"action\": {\n        \"type\": \"allow\",\n        \"blockTemplate\": \"<string>\",\n        \"redirectUrl\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-0d200dc0-0c63-4476-976d-b8cdb31d6f2d"
+            },
+            {
+              "id": "fa9c74e7-e83f-4dc7-91b2-d949dfaad0bf",
+              "name": "Invalid rule set definition",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"response\",\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-fa9c74e7-e83f-4dc7-91b2-d949dfaad0bf"
+            },
+            {
+              "id": "dd7af150-3c5e-4557-b509-c09e7bd484da",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"response\",\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rulesets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rulesets"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:21.000Z",
+              "updatedAt": "2026-07-28T03:19:21.000Z",
+              "uid": "35240-dd7af150-3c5e-4557-b509-c09e7bd484da"
+            }
+          ],
+          "createdAt": "2026-07-28T03:19:21.000Z",
+          "updatedAt": "2026-07-28T03:19:21.000Z",
+          "uid": "35240-22b842d7-4ca9-43e0-8f64-29e270d91d88"
+        }
+      ],
+      "id": "b356a053-c2a9-4367-ac77-c781dcc17685",
+      "createdAt": "2026-07-28T03:19:21.000Z",
+      "updatedAt": "2026-07-28T03:19:21.000Z",
+      "uid": "35240-b356a053-c2a9-4367-ac77-c781dcc17685"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

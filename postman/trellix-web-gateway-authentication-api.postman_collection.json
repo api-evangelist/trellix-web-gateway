@@ -1,0 +1,583 @@
+{
+  "info": {
+    "_postman_id": "01c2ac38-d948-4acb-8f2f-6ca7e1c64b6f",
+    "name": "Trellix Web Gateway Policy Anti-Malware Authentication API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:18:54.000Z",
+    "updatedAt": "2026-07-28T03:18:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-01c2ac38-d948-4acb-8f2f-6ca7e1c64b6f"
+  },
+  "item": [
+    {
+      "name": "authentication",
+      "item": [
+        {
+          "name": "settings",
+          "item": [
+            {
+              "name": "Get authentication settings",
+              "id": "719b1f7b-2bf3-4ca3-900c-39bc628dcef4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/authentication/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ]
+                },
+                "description": "Retrieve the current user authentication configuration including authentication methods, directory services, and bypass rules."
+              },
+              "response": [
+                {
+                  "id": "c503f875-d276-429d-a20a-6c8351a4c6fd",
+                  "name": "Authentication settings",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/authentication/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authentication",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"ntlm\",\n  \"fallbackMethod\": \"radius\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T03:18:54.000Z",
+                  "updatedAt": "2026-07-28T03:18:54.000Z",
+                  "uid": "35240-c503f875-d276-429d-a20a-6c8351a4c6fd"
+                },
+                {
+                  "id": "d1b44337-d73d-4536-b222-4c46e3831069",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/authentication/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authentication",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:54.000Z",
+                  "updatedAt": "2026-07-28T03:18:54.000Z",
+                  "uid": "35240-d1b44337-d73d-4536-b222-4c46e3831069"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:54.000Z",
+              "updatedAt": "2026-07-28T03:18:54.000Z",
+              "uid": "35240-719b1f7b-2bf3-4ca3-900c-39bc628dcef4"
+            },
+            {
+              "name": "Update authentication settings",
+              "id": "b49d434f-93a6-4457-8e70-47a28cc4c088",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"ntlm\",\n  \"fallbackMethod\": \"radius\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/authentication/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ]
+                },
+                "description": "Update the user authentication configuration. Changes must be committed to take effect."
+              },
+              "response": [
+                {
+                  "id": "77ecbc92-82e9-4729-a7ea-3c42c1ff2af1",
+                  "name": "Settings updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"ntlm\",\n  \"fallbackMethod\": \"radius\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/authentication/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authentication",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:54.000Z",
+                  "updatedAt": "2026-07-28T03:18:54.000Z",
+                  "uid": "35240-77ecbc92-82e9-4729-a7ea-3c42c1ff2af1"
+                },
+                {
+                  "id": "5ab42d32-868b-4126-9aeb-6f0c8a490706",
+                  "name": "Invalid settings",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"ntlm\",\n  \"fallbackMethod\": \"radius\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/authentication/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authentication",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:54.000Z",
+                  "updatedAt": "2026-07-28T03:18:54.000Z",
+                  "uid": "35240-5ab42d32-868b-4126-9aeb-6f0c8a490706"
+                },
+                {
+                  "id": "52c150b0-0b07-41f4-820a-beef48776383",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"ntlm\",\n  \"fallbackMethod\": \"radius\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/authentication/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "authentication",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:54.000Z",
+                  "updatedAt": "2026-07-28T03:18:54.000Z",
+                  "uid": "35240-52c150b0-0b07-41f4-820a-beef48776383"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:54.000Z",
+              "updatedAt": "2026-07-28T03:18:54.000Z",
+              "uid": "35240-b49d434f-93a6-4457-8e70-47a28cc4c088"
+            }
+          ],
+          "id": "8363c224-1deb-4fae-886d-c038776bd2c3",
+          "createdAt": "2026-07-28T03:18:54.000Z",
+          "updatedAt": "2026-07-28T03:18:54.000Z",
+          "uid": "35240-8363c224-1deb-4fae-886d-c038776bd2c3"
+        }
+      ],
+      "id": "950b5b24-6016-40d3-99f6-94b50f6c7c28",
+      "createdAt": "2026-07-28T03:18:54.000Z",
+      "updatedAt": "2026-07-28T03:18:54.000Z",
+      "uid": "35240-950b5b24-6016-40d3-99f6-94b50f6c7c28"
+    },
+    {
+      "name": "login",
+      "item": [
+        {
+          "name": "Authenticate and create a session",
+          "id": "c81fc705-b7e5-443c-9b0f-637efa3bab4c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <userName>(string)</userName>\n  <password>(string)</password>\n</element>",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ]
+            },
+            "description": "Authenticate with the Web Gateway appliance using administrator credentials. Returns a session cookie used for subsequent API calls."
+          },
+          "response": [
+            {
+              "id": "aff11013-23c2-45f8-8254-6b86048e87f8",
+              "name": "Authentication successful",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <userName>(string)</userName>\n  <password>(string)</password>\n</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Session cookie for subsequent requests",
+                    "type": "text/plain"
+                  },
+                  "key": "Set-Cookie",
+                  "value": "<string>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:18:54.000Z",
+              "updatedAt": "2026-07-28T03:18:54.000Z",
+              "uid": "35240-aff11013-23c2-45f8-8254-6b86048e87f8"
+            },
+            {
+              "id": "01c88499-9a48-4b0c-b6b5-2101dba86864",
+              "name": "Authentication failed - invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <userName>(string)</userName>\n  <password>(string)</password>\n</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:18:54.000Z",
+              "updatedAt": "2026-07-28T03:18:54.000Z",
+              "uid": "35240-01c88499-9a48-4b0c-b6b5-2101dba86864"
+            }
+          ],
+          "createdAt": "2026-07-28T03:18:54.000Z",
+          "updatedAt": "2026-07-28T03:18:54.000Z",
+          "uid": "35240-c81fc705-b7e5-443c-9b0f-637efa3bab4c"
+        }
+      ],
+      "id": "95d590bc-d29e-46d3-b182-5e99ed715e9c",
+      "createdAt": "2026-07-28T03:18:54.000Z",
+      "updatedAt": "2026-07-28T03:18:54.000Z",
+      "uid": "35240-95d590bc-d29e-46d3-b182-5e99ed715e9c"
+    },
+    {
+      "name": "logout",
+      "item": [
+        {
+          "name": "End the current session",
+          "id": "608d1dd2-e15a-4722-a1fe-ab804f77be44",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            },
+            "description": "Terminate the current authenticated session and invalidate the session cookie."
+          },
+          "response": [
+            {
+              "id": "4b4c51a2-9563-41fa-b554-6c68459bb704",
+              "name": "Session terminated successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logout",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logout"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:18:54.000Z",
+              "updatedAt": "2026-07-28T03:18:54.000Z",
+              "uid": "35240-4b4c51a2-9563-41fa-b554-6c68459bb704"
+            }
+          ],
+          "createdAt": "2026-07-28T03:18:54.000Z",
+          "updatedAt": "2026-07-28T03:18:54.000Z",
+          "uid": "35240-608d1dd2-e15a-4722-a1fe-ab804f77be44"
+        }
+      ],
+      "id": "37e93932-cda3-4245-9393-784d7da35cf6",
+      "createdAt": "2026-07-28T03:18:54.000Z",
+      "updatedAt": "2026-07-28T03:18:54.000Z",
+      "uid": "35240-37e93932-cda3-4245-9393-784d7da35cf6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

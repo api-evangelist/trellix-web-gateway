@@ -1,0 +1,694 @@
+{
+  "info": {
+    "_postman_id": "b7e45511-1cb2-40aa-bf12-efc57435d550",
+    "name": "Trellix Web Gateway Policy Anti-Malware Configuration API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:18:55.000Z",
+    "updatedAt": "2026-07-28T03:18:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b7e45511-1cb2-40aa-bf12-efc57435d550"
+  },
+  "item": [
+    {
+      "name": "configuration",
+      "item": [
+        {
+          "name": "commit",
+          "item": [
+            {
+              "name": "Commit configuration changes",
+              "id": "1b16318a-8e03-4e33-ae61-9241af9ed71a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/configuration/commit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configuration",
+                    "commit"
+                  ]
+                },
+                "description": "Commit pending configuration changes to the Web Gateway appliance. Changes become active after a successful commit."
+              },
+              "response": [
+                {
+                  "id": "9d33263c-037c-4ad5-883e-91ed6b86387f",
+                  "name": "Configuration committed successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/commit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "commit"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-9d33263c-037c-4ad5-883e-91ed6b86387f"
+                },
+                {
+                  "id": "0d8a4284-19ca-4971-b201-3a90bac329e3",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/commit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "commit"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-0d8a4284-19ca-4971-b201-3a90bac329e3"
+                },
+                {
+                  "id": "f07c7466-d06a-4c89-94d8-85a2ed9aae49",
+                  "name": "Conflict - another commit is in progress",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/commit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "commit"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-f07c7466-d06a-4c89-94d8-85a2ed9aae49"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:55.000Z",
+              "updatedAt": "2026-07-28T03:18:55.000Z",
+              "uid": "35240-1b16318a-8e03-4e33-ae61-9241af9ed71a"
+            }
+          ],
+          "id": "9533cbc4-d432-4f75-8b3c-252b87b18e2d",
+          "createdAt": "2026-07-28T03:18:55.000Z",
+          "updatedAt": "2026-07-28T03:18:55.000Z",
+          "uid": "35240-9533cbc4-d432-4f75-8b3c-252b87b18e2d"
+        },
+        {
+          "name": "rollback",
+          "item": [
+            {
+              "name": "Rollback configuration changes",
+              "id": "45a0a2c5-4977-435e-a27a-59e420ca6c12",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/configuration/rollback",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configuration",
+                    "rollback"
+                  ]
+                },
+                "description": "Discard all uncommitted configuration changes and revert to the last committed state."
+              },
+              "response": [
+                {
+                  "id": "403db573-ee2a-43e6-aa01-046dd15788c5",
+                  "name": "Configuration rolled back successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/rollback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "rollback"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-403db573-ee2a-43e6-aa01-046dd15788c5"
+                },
+                {
+                  "id": "6c8372f6-14f2-4e9b-9e3a-165bfe91c71a",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/rollback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "rollback"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-6c8372f6-14f2-4e9b-9e3a-165bfe91c71a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:55.000Z",
+              "updatedAt": "2026-07-28T03:18:55.000Z",
+              "uid": "35240-45a0a2c5-4977-435e-a27a-59e420ca6c12"
+            }
+          ],
+          "id": "0ed99da5-7def-4c06-89ed-282f319294db",
+          "createdAt": "2026-07-28T03:18:55.000Z",
+          "updatedAt": "2026-07-28T03:18:55.000Z",
+          "uid": "35240-0ed99da5-7def-4c06-89ed-282f319294db"
+        },
+        {
+          "name": "backup",
+          "item": [
+            {
+              "name": "Create a configuration backup",
+              "id": "ff185ec8-f52b-4b37-a4bc-7d757fe37157",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configuration/backup",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configuration",
+                    "backup"
+                  ]
+                },
+                "description": "Create a backup of the current configuration that can be restored later."
+              },
+              "response": [
+                {
+                  "id": "6bd2d57a-bef2-4885-8a8e-e4811e9bbe1e",
+                  "name": "Backup created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/backup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "backup"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/octet-stream"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-6bd2d57a-bef2-4885-8a8e-e4811e9bbe1e"
+                },
+                {
+                  "id": "46d35673-64ee-4c71-9c39-d2111a4230c4",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/backup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "backup"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-46d35673-64ee-4c71-9c39-d2111a4230c4"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:55.000Z",
+              "updatedAt": "2026-07-28T03:18:55.000Z",
+              "uid": "35240-ff185ec8-f52b-4b37-a4bc-7d757fe37157"
+            }
+          ],
+          "id": "5d913cd6-4227-48a5-a7aa-15954d5641cf",
+          "createdAt": "2026-07-28T03:18:55.000Z",
+          "updatedAt": "2026-07-28T03:18:55.000Z",
+          "uid": "35240-5d913cd6-4227-48a5-a7aa-15954d5641cf"
+        },
+        {
+          "name": "restore",
+          "item": [
+            {
+              "name": "Restore a configuration backup",
+              "id": "a91027ef-febf-4988-a7ae-ce8f4ede9f90",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/configuration/restore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configuration",
+                    "restore"
+                  ]
+                },
+                "description": "Restore a previously created configuration backup to the appliance."
+              },
+              "response": [
+                {
+                  "id": "f8ebe1d0-50a2-4e9d-aaed-929e31d9f00a",
+                  "name": "Backup restored successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/restore",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "restore"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-f8ebe1d0-50a2-4e9d-aaed-929e31d9f00a"
+                },
+                {
+                  "id": "5ba68f0e-9613-4637-8ed9-170b12aee6e1",
+                  "name": "Invalid backup file",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/restore",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "restore"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-5ba68f0e-9613-4637-8ed9-170b12aee6e1"
+                },
+                {
+                  "id": "daf8d2f2-4daa-4a7f-847f-555cfa0cb1a7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/configuration/restore",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configuration",
+                        "restore"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:55.000Z",
+                  "updatedAt": "2026-07-28T03:18:55.000Z",
+                  "uid": "35240-daf8d2f2-4daa-4a7f-847f-555cfa0cb1a7"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:55.000Z",
+              "updatedAt": "2026-07-28T03:18:55.000Z",
+              "uid": "35240-a91027ef-febf-4988-a7ae-ce8f4ede9f90"
+            }
+          ],
+          "id": "6fe17518-0912-4e34-a4ad-a23dc78d7643",
+          "createdAt": "2026-07-28T03:18:55.000Z",
+          "updatedAt": "2026-07-28T03:18:55.000Z",
+          "uid": "35240-6fe17518-0912-4e34-a4ad-a23dc78d7643"
+        },
+        {
+          "name": "Get current configuration",
+          "id": "99ebc37f-064a-452b-888a-f7951a892285",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/configuration",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "configuration"
+              ]
+            },
+            "description": "Retrieve the current running configuration of the Web Gateway appliance in XML format."
+          },
+          "response": [
+            {
+              "id": "8495dfdd-78bf-42f7-8c0f-5b1242ee1816",
+              "name": "Current configuration returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configuration",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configuration"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "createdAt": "2026-07-28T03:18:55.000Z",
+              "updatedAt": "2026-07-28T03:18:55.000Z",
+              "uid": "35240-8495dfdd-78bf-42f7-8c0f-5b1242ee1816"
+            },
+            {
+              "id": "78b5685d-05d6-4e9e-960d-2a13b7b21bbb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configuration",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configuration"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:18:55.000Z",
+              "updatedAt": "2026-07-28T03:18:55.000Z",
+              "uid": "35240-78b5685d-05d6-4e9e-960d-2a13b7b21bbb"
+            }
+          ],
+          "createdAt": "2026-07-28T03:18:55.000Z",
+          "updatedAt": "2026-07-28T03:18:55.000Z",
+          "uid": "35240-99ebc37f-064a-452b-888a-f7951a892285"
+        }
+      ],
+      "id": "7ca985f2-a627-46d0-8479-6c54ea807dcb",
+      "createdAt": "2026-07-28T03:18:55.000Z",
+      "updatedAt": "2026-07-28T03:18:55.000Z",
+      "uid": "35240-7ca985f2-a627-46d0-8479-6c54ea807dcb"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

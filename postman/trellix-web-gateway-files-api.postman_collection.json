@@ -1,0 +1,675 @@
+{
+  "info": {
+    "_postman_id": "7ddd695c-3a53-4c12-9a2e-3b7592095625",
+    "name": "Trellix Web Gateway Policy Anti-Malware Files API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:18:57.000Z",
+    "updatedAt": "2026-07-28T03:18:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7ddd695c-3a53-4c12-9a2e-3b7592095625"
+  },
+  "item": [
+    {
+      "name": "files",
+      "item": [
+        {
+          "name": "{fileName}",
+          "item": [
+            {
+              "name": "Download a file",
+              "id": "b19696cc-9d2a-4322-a661-8e9f93fc7c68",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:fileName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":fileName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "355d3b8c-c20c-48fd-a445-4f9dc4111556",
+                      "key": "fileName",
+                      "value": "<string>",
+                      "description": "(Required) Name of the file"
+                    }
+                  ]
+                },
+                "description": "Download a specific file from the Web Gateway appliance."
+              },
+              "response": [
+                {
+                  "id": "1776e6f1-5bc4-4da0-b34f-bf55bcf88876",
+                  "name": "File content returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/octet-stream"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-1776e6f1-5bc4-4da0-b34f-bf55bcf88876"
+                },
+                {
+                  "id": "e641418e-cc1f-416f-a4f3-2096bb24e96b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-e641418e-cc1f-416f-a4f3-2096bb24e96b"
+                },
+                {
+                  "id": "da1d1833-cff7-42b4-b45c-51a389fea75c",
+                  "name": "File not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-da1d1833-cff7-42b4-b45c-51a389fea75c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:58.000Z",
+              "updatedAt": "2026-07-28T03:18:58.000Z",
+              "uid": "35240-b19696cc-9d2a-4322-a661-8e9f93fc7c68"
+            },
+            {
+              "name": "Upload a file",
+              "id": "7c1e18ec-7287-4b70-ba2d-3f4d922b24a4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/files/:fileName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":fileName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d719c8ec-3e3e-425c-95e5-396493021e70",
+                      "key": "fileName",
+                      "value": "<string>",
+                      "description": "(Required) Name of the file"
+                    }
+                  ]
+                },
+                "description": "Upload a file to the Web Gateway appliance, such as a rule set import or certificate file."
+              },
+              "response": [
+                {
+                  "id": "9919be1e-a824-4e2c-a26e-a6bdac029f73",
+                  "name": "File uploaded successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-9919be1e-a824-4e2c-a26e-a6bdac029f73"
+                },
+                {
+                  "id": "99d665d3-e073-4f24-ae73-ccf0b138da49",
+                  "name": "Invalid file",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-99d665d3-e073-4f24-ae73-ccf0b138da49"
+                },
+                {
+                  "id": "b2afde47-ab7b-4158-b30c-9df4b94b1b06",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "<binary>"
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-b2afde47-ab7b-4158-b30c-9df4b94b1b06"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:58.000Z",
+              "updatedAt": "2026-07-28T03:18:58.000Z",
+              "uid": "35240-7c1e18ec-7287-4b70-ba2d-3f4d922b24a4"
+            },
+            {
+              "name": "Delete a file",
+              "id": "221bacbe-94fc-4b67-a128-8c4ffcbba7d4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:fileName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":fileName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "19a5e232-7c58-43dd-8e15-39110996a117",
+                      "key": "fileName",
+                      "value": "<string>",
+                      "description": "(Required) Name of the file"
+                    }
+                  ]
+                },
+                "description": "Delete a specific file from the Web Gateway appliance."
+              },
+              "response": [
+                {
+                  "id": "ca03247c-6653-459e-b4bb-72f95c81d740",
+                  "name": "File deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-ca03247c-6653-459e-b4bb-72f95c81d740"
+                },
+                {
+                  "id": "3fca2b11-7c27-47d8-843f-710beb408845",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-3fca2b11-7c27-47d8-843f-710beb408845"
+                },
+                {
+                  "id": "9d4ae7f5-29f2-49fd-ad2f-9b1b1a537817",
+                  "name": "File not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:fileName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":fileName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "fileName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:18:58.000Z",
+                  "updatedAt": "2026-07-28T03:18:58.000Z",
+                  "uid": "35240-9d4ae7f5-29f2-49fd-ad2f-9b1b1a537817"
+                }
+              ],
+              "createdAt": "2026-07-28T03:18:58.000Z",
+              "updatedAt": "2026-07-28T03:18:58.000Z",
+              "uid": "35240-221bacbe-94fc-4b67-a128-8c4ffcbba7d4"
+            }
+          ],
+          "id": "8a6f329f-2b85-4e8f-8111-230f383fdacf",
+          "createdAt": "2026-07-28T03:18:58.000Z",
+          "updatedAt": "2026-07-28T03:18:58.000Z",
+          "uid": "35240-8a6f329f-2b85-4e8f-8111-230f383fdacf"
+        },
+        {
+          "name": "List available files",
+          "id": "6762d018-ef4a-4471-9a1e-ae5c0cb0f842",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "files"
+              ]
+            },
+            "description": "List files available on the Web Gateway appliance, including rule set exports and configuration files."
+          },
+          "response": [
+            {
+              "id": "7e3803ee-978d-444c-bcbb-28225cb71f72",
+              "name": "List of available files",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"files\": [\n    {\n      \"name\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"lastModified\": \"<dateTime>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"lastModified\": \"<dateTime>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:18:58.000Z",
+              "updatedAt": "2026-07-28T03:18:58.000Z",
+              "uid": "35240-7e3803ee-978d-444c-bcbb-28225cb71f72"
+            },
+            {
+              "id": "76df57cd-11c4-46b2-8280-31cb543baaf9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:18:58.000Z",
+              "updatedAt": "2026-07-28T03:18:58.000Z",
+              "uid": "35240-76df57cd-11c4-46b2-8280-31cb543baaf9"
+            }
+          ],
+          "createdAt": "2026-07-28T03:18:58.000Z",
+          "updatedAt": "2026-07-28T03:18:58.000Z",
+          "uid": "35240-6762d018-ef4a-4471-9a1e-ae5c0cb0f842"
+        }
+      ],
+      "id": "4c5a9fa5-f5d2-45e9-9ee4-910d9b4c40c6",
+      "createdAt": "2026-07-28T03:18:58.000Z",
+      "updatedAt": "2026-07-28T03:18:58.000Z",
+      "uid": "35240-4c5a9fa5-f5d2-45e9-9ee4-910d9b4c40c6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

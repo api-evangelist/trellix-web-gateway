@@ -1,0 +1,678 @@
+{
+  "info": {
+    "_postman_id": "4b0dcd38-85e4-4fb2-b091-ef283dc257e1",
+    "name": "Trellix Web Gateway Policy Anti-Malware SSL Scanning API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:27.000Z",
+    "updatedAt": "2026-07-28T03:19:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4b0dcd38-85e4-4fb2-b091-ef283dc257e1"
+  },
+  "item": [
+    {
+      "name": "ssl",
+      "item": [
+        {
+          "name": "settings",
+          "item": [
+            {
+              "name": "Get SSL scanning settings",
+              "id": "57b2fcdf-c6e1-4186-8c16-33f9fa9ffbe4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ssl/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssl",
+                    "settings"
+                  ]
+                },
+                "description": "Retrieve the current SSL/TLS inspection configuration including certificate handling, bypass lists, and protocol settings."
+              },
+              "response": [
+                {
+                  "id": "213f691a-0aac-4d2d-94f5-3c72cb874b7a",
+                  "name": "SSL scanning settings",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"enabled\": \"<boolean>\",\n  \"verifyServerCertificates\": \"<boolean>\",\n  \"bypassDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bypassCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minimumProtocolVersion\": \"TLSv1.2\"\n}",
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-213f691a-0aac-4d2d-94f5-3c72cb874b7a"
+                },
+                {
+                  "id": "a2e76d64-d578-4641-85de-adabf2af5541",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-a2e76d64-d578-4641-85de-adabf2af5541"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:27.000Z",
+              "updatedAt": "2026-07-28T03:19:27.000Z",
+              "uid": "35240-57b2fcdf-c6e1-4186-8c16-33f9fa9ffbe4"
+            },
+            {
+              "name": "Update SSL scanning settings",
+              "id": "699103b4-4de1-48a3-8420-0e4b1bd78655",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"verifyServerCertificates\": \"<boolean>\",\n  \"bypassDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bypassCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minimumProtocolVersion\": \"TLSv1.2\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ssl/settings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssl",
+                    "settings"
+                  ]
+                },
+                "description": "Update the SSL/TLS inspection configuration. Changes must be committed to take effect."
+              },
+              "response": [
+                {
+                  "id": "27e996ca-e6a2-446a-a3d0-00990412fad4",
+                  "name": "Settings updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"verifyServerCertificates\": \"<boolean>\",\n  \"bypassDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bypassCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minimumProtocolVersion\": \"TLSv1.2\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-27e996ca-e6a2-446a-a3d0-00990412fad4"
+                },
+                {
+                  "id": "c94b6dfc-8418-4203-a1d7-ca59ec3206da",
+                  "name": "Invalid settings",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"verifyServerCertificates\": \"<boolean>\",\n  \"bypassDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bypassCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minimumProtocolVersion\": \"TLSv1.2\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-c94b6dfc-8418-4203-a1d7-ca59ec3206da"
+                },
+                {
+                  "id": "06d721b5-3c8c-4e45-bd5f-59a6772c87a6",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"verifyServerCertificates\": \"<boolean>\",\n  \"bypassDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bypassCategories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"minimumProtocolVersion\": \"TLSv1.2\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/settings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "settings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-06d721b5-3c8c-4e45-bd5f-59a6772c87a6"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:27.000Z",
+              "updatedAt": "2026-07-28T03:19:27.000Z",
+              "uid": "35240-699103b4-4de1-48a3-8420-0e4b1bd78655"
+            }
+          ],
+          "id": "da97999d-d123-44d4-a964-33cf1c6d3d63",
+          "createdAt": "2026-07-28T03:19:27.000Z",
+          "updatedAt": "2026-07-28T03:19:27.000Z",
+          "uid": "35240-da97999d-d123-44d4-a964-33cf1c6d3d63"
+        },
+        {
+          "name": "certificates",
+          "item": [
+            {
+              "name": "List SSL certificates",
+              "id": "9f794e4b-050e-409a-a4c5-6d20c51944d9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ssl/certificates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssl",
+                    "certificates"
+                  ]
+                },
+                "description": "Retrieve the list of SSL/TLS certificates used by the gateway for SSL inspection."
+              },
+              "response": [
+                {
+                  "id": "c4d29894-90df-4fe0-bf70-490b740cf655",
+                  "name": "List of certificates",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/certificates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "certificates"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"certificates\": [\n    {\n      \"id\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"validFrom\": \"<dateTime>\",\n      \"validTo\": \"<dateTime>\",\n      \"serialNumber\": \"<string>\",\n      \"fingerprint\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"validFrom\": \"<dateTime>\",\n      \"validTo\": \"<dateTime>\",\n      \"serialNumber\": \"<string>\",\n      \"fingerprint\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-c4d29894-90df-4fe0-bf70-490b740cf655"
+                },
+                {
+                  "id": "e65d6ae4-522b-4a7b-a814-67f3312c7821",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/certificates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "certificates"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-e65d6ae4-522b-4a7b-a814-67f3312c7821"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:27.000Z",
+              "updatedAt": "2026-07-28T03:19:27.000Z",
+              "uid": "35240-9f794e4b-050e-409a-a4c5-6d20c51944d9"
+            },
+            {
+              "name": "Upload an SSL certificate",
+              "id": "93b17eaa-ab8a-44a1-afa1-7da6348a536b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"certificate\": \"<string>\",\n  \"privateKey\": \"<string>\",\n  \"passphrase\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ssl/certificates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssl",
+                    "certificates"
+                  ]
+                },
+                "description": "Upload a new SSL/TLS certificate for use in SSL inspection."
+              },
+              "response": [
+                {
+                  "id": "f91a9849-1216-47a1-b463-496992e66531",
+                  "name": "Certificate uploaded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"certificate\": \"<string>\",\n  \"privateKey\": \"<string>\",\n  \"passphrase\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/certificates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "certificates"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"serialNumber\": \"<string>\",\n  \"fingerprint\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-f91a9849-1216-47a1-b463-496992e66531"
+                },
+                {
+                  "id": "02c22527-d06d-453c-abc6-b4bf6a759943",
+                  "name": "Invalid certificate",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"certificate\": \"<string>\",\n  \"privateKey\": \"<string>\",\n  \"passphrase\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/certificates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "certificates"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-02c22527-d06d-453c-abc6-b4bf6a759943"
+                },
+                {
+                  "id": "ee665571-81b2-4a48-99b5-bb684819e0f7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"certificate\": \"<string>\",\n  \"privateKey\": \"<string>\",\n  \"passphrase\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssl/certificates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssl",
+                        "certificates"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:27.000Z",
+                  "updatedAt": "2026-07-28T03:19:27.000Z",
+                  "uid": "35240-ee665571-81b2-4a48-99b5-bb684819e0f7"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:27.000Z",
+              "updatedAt": "2026-07-28T03:19:27.000Z",
+              "uid": "35240-93b17eaa-ab8a-44a1-afa1-7da6348a536b"
+            }
+          ],
+          "id": "dfa6194e-2f89-4357-91ef-de3ebce2921f",
+          "createdAt": "2026-07-28T03:19:27.000Z",
+          "updatedAt": "2026-07-28T03:19:27.000Z",
+          "uid": "35240-dfa6194e-2f89-4357-91ef-de3ebce2921f"
+        }
+      ],
+      "id": "4f16cf1f-3526-4c47-9d35-90da09fa380b",
+      "createdAt": "2026-07-28T03:19:27.000Z",
+      "updatedAt": "2026-07-28T03:19:27.000Z",
+      "uid": "35240-4f16cf1f-3526-4c47-9d35-90da09fa380b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

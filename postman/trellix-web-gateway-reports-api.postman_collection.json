@@ -1,0 +1,892 @@
+{
+  "info": {
+    "_postman_id": "6cad79b6-689f-4681-96e9-cfb8fa418ed3",
+    "name": "Trellix Web Gateway Policy Anti-Malware Reports API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:05.000Z",
+    "updatedAt": "2026-07-28T03:19:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6cad79b6-689f-4681-96e9-cfb8fa418ed3"
+  },
+  "item": [
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "{reportId}",
+          "item": [
+            {
+              "name": "download",
+              "item": [
+                {
+                  "name": "Download a report",
+                  "id": "82add09b-e67b-4d04-9907-32f557ec478b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId/download?format=pdf",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId",
+                        "download"
+                      ],
+                      "query": [
+                        {
+                          "description": "Output format for the report",
+                          "key": "format",
+                          "value": "pdf"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a68f9c2-46c3-4551-b272-19c2aa8549b9",
+                          "key": "reportId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the report"
+                        }
+                      ]
+                    },
+                    "description": "Download a generated report in the specified format (PDF, CSV, or XML)."
+                  },
+                  "response": [
+                    {
+                      "id": "2f5619b0-7268-4073-8489-0f9716d9a7eb",
+                      "name": "Report file",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/download?format=pdf",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "download"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for the report",
+                              "key": "format",
+                              "value": "pdf"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "xml",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/xml"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                      "createdAt": "2026-07-28T03:19:05.000Z",
+                      "updatedAt": "2026-07-28T03:19:05.000Z",
+                      "uid": "35240-2f5619b0-7268-4073-8489-0f9716d9a7eb"
+                    },
+                    {
+                      "id": "29c9c658-4c3d-49f6-98de-064a9ef17cf9",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/download?format=pdf",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "download"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for the report",
+                              "key": "format",
+                              "value": "pdf"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:05.000Z",
+                      "updatedAt": "2026-07-28T03:19:05.000Z",
+                      "uid": "35240-29c9c658-4c3d-49f6-98de-064a9ef17cf9"
+                    },
+                    {
+                      "id": "2b8f20b8-0cef-47c9-8355-50096ad2df4b",
+                      "name": "Report not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/download?format=pdf",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "download"
+                          ],
+                          "query": [
+                            {
+                              "description": "Output format for the report",
+                              "key": "format",
+                              "value": "pdf"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:05.000Z",
+                      "updatedAt": "2026-07-28T03:19:05.000Z",
+                      "uid": "35240-2b8f20b8-0cef-47c9-8355-50096ad2df4b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-82add09b-e67b-4d04-9907-32f557ec478b"
+                }
+              ],
+              "id": "22b217e8-c7ec-4dc8-8fba-edf23d1315ff",
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-22b217e8-c7ec-4dc8-8fba-edf23d1315ff"
+            },
+            {
+              "name": "Get a report",
+              "id": "1b1bb758-4f76-4a0f-9fa9-8b2c608f771b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:reportId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":reportId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d00c5c75-6306-47db-90a7-68e5ec6a0e19",
+                      "key": "reportId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the report"
+                    }
+                  ]
+                },
+                "description": "Retrieve the status and results of a specific report."
+              },
+              "response": [
+                {
+                  "id": "b4c055ac-6591-4792-a781-11e3ae4c4d33",
+                  "name": "Report details and results",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"security_summary\",\n  \"status\": \"generating\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-b4c055ac-6591-4792-a781-11e3ae4c4d33"
+                },
+                {
+                  "id": "ad3d4d07-15f2-4fcc-857a-fb050e74ddd0",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-ad3d4d07-15f2-4fcc-857a-fb050e74ddd0"
+                },
+                {
+                  "id": "68b08cdb-5cb8-44fa-9acc-b2166661de6f",
+                  "name": "Report not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-68b08cdb-5cb8-44fa-9acc-b2166661de6f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-1b1bb758-4f76-4a0f-9fa9-8b2c608f771b"
+            },
+            {
+              "name": "Delete a report",
+              "id": "1c839c97-5ae9-4c0e-8156-2e3358b310e4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:reportId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":reportId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c191fcea-6da7-4111-b502-157000a5430b",
+                      "key": "reportId",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the report"
+                    }
+                  ]
+                },
+                "description": "Delete a previously generated report and its associated data."
+              },
+              "response": [
+                {
+                  "id": "6a7a70f5-e8f6-49d9-a3fb-927e0a52c51d",
+                  "name": "Report deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-6a7a70f5-e8f6-49d9-a3fb-927e0a52c51d"
+                },
+                {
+                  "id": "89f58145-d597-4dbb-848f-6ae81a17e81f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-89f58145-d597-4dbb-848f-6ae81a17e81f"
+                },
+                {
+                  "id": "20701cb5-0d6a-4c32-8c98-ccced06cc802",
+                  "name": "Report not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:05.000Z",
+                  "updatedAt": "2026-07-28T03:19:05.000Z",
+                  "uid": "35240-20701cb5-0d6a-4c32-8c98-ccced06cc802"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-1c839c97-5ae9-4c0e-8156-2e3358b310e4"
+            }
+          ],
+          "id": "5d4979de-18a3-4ed5-87ac-8e4cd95debef",
+          "createdAt": "2026-07-28T03:19:05.000Z",
+          "updatedAt": "2026-07-28T03:19:05.000Z",
+          "uid": "35240-5d4979de-18a3-4ed5-87ac-8e4cd95debef"
+        },
+        {
+          "name": "List available reports",
+          "id": "88600d5f-91e5-440d-9d8d-e3b1cd7be516",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ]
+            },
+            "description": "Retrieve a list of available report definitions and previously generated reports."
+          },
+          "response": [
+            {
+              "id": "4d5503af-d375-446c-a5de-dbdd4ce08e27",
+              "name": "List of reports",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"reports\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"user_activity\",\n      \"status\": \"generating\",\n      \"createdAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"traffic_summary\",\n      \"status\": \"failed\",\n      \"createdAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-4d5503af-d375-446c-a5de-dbdd4ce08e27"
+            },
+            {
+              "id": "2d35f5d1-b1e8-4b3c-afce-d161cab809f8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-2d35f5d1-b1e8-4b3c-afce-d161cab809f8"
+            }
+          ],
+          "createdAt": "2026-07-28T03:19:05.000Z",
+          "updatedAt": "2026-07-28T03:19:05.000Z",
+          "uid": "35240-88600d5f-91e5-440d-9d8d-e3b1cd7be516"
+        },
+        {
+          "name": "Generate a new report",
+          "id": "3d47bde8-2019-4477-9763-59179edb9f83",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"bandwidth_usage\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"filters\": {\n    \"sourceIps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ]
+            },
+            "description": "Generate a new report based on specified parameters, time range, and report type."
+          },
+          "response": [
+            {
+              "id": "78b95dd8-f4d1-4e00-b303-f0f6a72f0ff8",
+              "name": "Report generation started",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"bandwidth_usage\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"filters\": {\n    \"sourceIps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"security_summary\",\n  \"status\": \"generating\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-78b95dd8-f4d1-4e00-b303-f0f6a72f0ff8"
+            },
+            {
+              "id": "21f6deb4-0745-42f9-b1ec-0869a7bcf7c4",
+              "name": "Invalid report parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"bandwidth_usage\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"filters\": {\n    \"sourceIps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-21f6deb4-0745-42f9-b1ec-0869a7bcf7c4"
+            },
+            {
+              "id": "c1d8c8bf-f9e4-4a18-8193-5b1eeb404ff0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"bandwidth_usage\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"filters\": {\n    \"sourceIps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"categories\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:05.000Z",
+              "updatedAt": "2026-07-28T03:19:05.000Z",
+              "uid": "35240-c1d8c8bf-f9e4-4a18-8193-5b1eeb404ff0"
+            }
+          ],
+          "createdAt": "2026-07-28T03:19:05.000Z",
+          "updatedAt": "2026-07-28T03:19:05.000Z",
+          "uid": "35240-3d47bde8-2019-4477-9763-59179edb9f83"
+        }
+      ],
+      "id": "32931971-7744-4ddf-934e-fcab382a1dba",
+      "createdAt": "2026-07-28T03:19:05.000Z",
+      "updatedAt": "2026-07-28T03:19:05.000Z",
+      "uid": "35240-32931971-7744-4ddf-934e-fcab382a1dba"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

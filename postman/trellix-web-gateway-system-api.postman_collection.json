@@ -1,0 +1,460 @@
+{
+  "info": {
+    "_postman_id": "55cd267e-b600-4d0a-be17-34409e61d6d8",
+    "name": "Trellix Web Gateway Policy Anti-Malware System API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:29.000Z",
+    "updatedAt": "2026-07-28T03:19:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55cd267e-b600-4d0a-be17-34409e61d6d8"
+  },
+  "item": [
+    {
+      "name": "system",
+      "item": [
+        {
+          "name": "appliances",
+          "item": [
+            {
+              "name": "{applianceId}",
+              "item": [
+                {
+                  "name": "Get appliance details",
+                  "id": "1b03e5eb-72f0-43cf-88b2-5ee422cde59f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/system/appliances/:applianceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "system",
+                        "appliances",
+                        ":applianceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "aa08e59d-a7d6-4757-a0e7-effd14fc6ebe",
+                          "key": "applianceId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the managed appliance"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve details of a specific managed appliance by its identifier."
+                  },
+                  "response": [
+                    {
+                      "id": "10fd9cc3-1419-4a92-b0db-c1b8126bb5fa",
+                      "name": "Appliance details returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/system/appliances/:applianceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "system",
+                            "appliances",
+                            ":applianceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applianceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"version\": \"<string>\",\n  \"role\": \"secondary\",\n  \"status\": \"online\",\n  \"lastSync\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:19:30.000Z",
+                      "updatedAt": "2026-07-28T03:19:30.000Z",
+                      "uid": "35240-10fd9cc3-1419-4a92-b0db-c1b8126bb5fa"
+                    },
+                    {
+                      "id": "e4021ef4-ef56-4d5d-be41-c2e5f365730f",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/system/appliances/:applianceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "system",
+                            "appliances",
+                            ":applianceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applianceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:30.000Z",
+                      "updatedAt": "2026-07-28T03:19:30.000Z",
+                      "uid": "35240-e4021ef4-ef56-4d5d-be41-c2e5f365730f"
+                    },
+                    {
+                      "id": "dfe0151b-fb78-4f38-bfba-ddba50635a0f",
+                      "name": "Appliance not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/system/appliances/:applianceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "system",
+                            "appliances",
+                            ":applianceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applianceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:30.000Z",
+                      "updatedAt": "2026-07-28T03:19:30.000Z",
+                      "uid": "35240-dfe0151b-fb78-4f38-bfba-ddba50635a0f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:30.000Z",
+                  "updatedAt": "2026-07-28T03:19:30.000Z",
+                  "uid": "35240-1b03e5eb-72f0-43cf-88b2-5ee422cde59f"
+                }
+              ],
+              "id": "b0519cd9-bf8b-43b5-b09b-bd48930dd093",
+              "createdAt": "2026-07-28T03:19:30.000Z",
+              "updatedAt": "2026-07-28T03:19:30.000Z",
+              "uid": "35240-b0519cd9-bf8b-43b5-b09b-bd48930dd093"
+            },
+            {
+              "name": "List managed appliances",
+              "id": "663efb5f-abd8-4ede-8103-80851e87d069",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/system/appliances",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "system",
+                    "appliances"
+                  ]
+                },
+                "description": "Retrieve the list of all Web Gateway appliances in the management cluster."
+              },
+              "response": [
+                {
+                  "id": "32b448df-50d9-447d-b35c-3a04f7f55f94",
+                  "name": "List of managed appliances",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/system/appliances",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "system",
+                        "appliances"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"appliances\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"hostname\": \"<string>\",\n      \"version\": \"<string>\",\n      \"role\": \"secondary\",\n      \"status\": \"offline\",\n      \"lastSync\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"hostname\": \"<string>\",\n      \"version\": \"<string>\",\n      \"role\": \"primary\",\n      \"status\": \"syncing\",\n      \"lastSync\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:30.000Z",
+                  "updatedAt": "2026-07-28T03:19:30.000Z",
+                  "uid": "35240-32b448df-50d9-447d-b35c-3a04f7f55f94"
+                },
+                {
+                  "id": "f8b3906c-8b7d-4d18-a38d-bc9870bb3cce",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/system/appliances",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "system",
+                        "appliances"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:30.000Z",
+                  "updatedAt": "2026-07-28T03:19:30.000Z",
+                  "uid": "35240-f8b3906c-8b7d-4d18-a38d-bc9870bb3cce"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:30.000Z",
+              "updatedAt": "2026-07-28T03:19:30.000Z",
+              "uid": "35240-663efb5f-abd8-4ede-8103-80851e87d069"
+            }
+          ],
+          "id": "1afa1bdb-0509-477c-9164-7a6b09b91dad",
+          "createdAt": "2026-07-28T03:19:30.000Z",
+          "updatedAt": "2026-07-28T03:19:30.000Z",
+          "uid": "35240-1afa1bdb-0509-477c-9164-7a6b09b91dad"
+        },
+        {
+          "name": "Get system information",
+          "id": "c2ec7ce2-b871-4c9d-9b07-ab64355f37bb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/system",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "system"
+              ]
+            },
+            "description": "Retrieve system information about the Web Gateway appliance, including version, hostname, and operational status."
+          },
+          "response": [
+            {
+              "id": "733c7dd8-8ac6-4fcd-bcdf-c70dcb994f31",
+              "name": "System information returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/system",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "system"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"version\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"status\": \"running\",\n  \"uptime\": \"<integer>\",\n  \"cpuUsage\": \"<float>\",\n  \"memoryUsage\": \"<float>\",\n  \"lastConfigChange\": \"<dateTime>\"\n}",
+              "createdAt": "2026-07-28T03:19:30.000Z",
+              "updatedAt": "2026-07-28T03:19:30.000Z",
+              "uid": "35240-733c7dd8-8ac6-4fcd-bcdf-c70dcb994f31"
+            },
+            {
+              "id": "b49d0247-76e6-4269-9380-52b17952bfc1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/system",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "system"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:19:30.000Z",
+              "updatedAt": "2026-07-28T03:19:30.000Z",
+              "uid": "35240-b49d0247-76e6-4269-9380-52b17952bfc1"
+            }
+          ],
+          "createdAt": "2026-07-28T03:19:30.000Z",
+          "updatedAt": "2026-07-28T03:19:30.000Z",
+          "uid": "35240-c2ec7ce2-b871-4c9d-9b07-ab64355f37bb"
+        }
+      ],
+      "id": "42422a20-f3bb-45ce-ab96-f5784f3ded04",
+      "createdAt": "2026-07-28T03:19:30.000Z",
+      "updatedAt": "2026-07-28T03:19:30.000Z",
+      "uid": "35240-42422a20-f3bb-45ce-ab96-f5784f3ded04"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

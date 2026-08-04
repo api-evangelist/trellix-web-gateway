@@ -1,0 +1,480 @@
+{
+  "info": {
+    "_postman_id": "180be68c-8731-40dd-81c9-578ede8366ae",
+    "name": "Trellix Web Gateway Policy Anti-Malware Traffic Logs API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:30.000Z",
+    "updatedAt": "2026-07-28T03:19:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-180be68c-8731-40dd-81c9-578ede8366ae"
+  },
+  "item": [
+    {
+      "name": "logs",
+      "item": [
+        {
+          "name": "traffic",
+          "item": [
+            {
+              "name": "{logId}",
+              "item": [
+                {
+                  "name": "Get a specific traffic log entry",
+                  "id": "9a967553-7da0-44cf-82fa-00912d4a3302",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/logs/traffic/:logId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "logs",
+                        "traffic",
+                        ":logId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "277c47a3-ec5e-4890-bc69-e7664977ea36",
+                          "key": "logId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the log entry"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve detailed information about a specific traffic log entry."
+                  },
+                  "response": [
+                    {
+                      "id": "b9863d62-fbaa-4355-9dd3-ff569b968c3f",
+                      "name": "Traffic log entry details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/logs/traffic/:logId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "logs",
+                            "traffic",
+                            ":logId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "logId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"sourceIp\": \"<string>\",\n  \"user\": \"<string>\",\n  \"method\": \"<string>\",\n  \"url\": \"<string>\",\n  \"statusCode\": \"<integer>\",\n  \"action\": \"allowed\",\n  \"category\": \"<string>\",\n  \"bytesIn\": \"<integer>\",\n  \"bytesOut\": \"<integer>\",\n  \"duration\": \"<integer>\",\n  \"ruleName\": \"<string>\",\n  \"mediaType\": \"<string>\",\n  \"userAgent\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:19:31.000Z",
+                      "updatedAt": "2026-07-28T03:19:31.000Z",
+                      "uid": "35240-b9863d62-fbaa-4355-9dd3-ff569b968c3f"
+                    },
+                    {
+                      "id": "7012ab3f-68d5-49dd-bf8d-9c6bc70ef686",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/logs/traffic/:logId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "logs",
+                            "traffic",
+                            ":logId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "logId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:31.000Z",
+                      "updatedAt": "2026-07-28T03:19:31.000Z",
+                      "uid": "35240-7012ab3f-68d5-49dd-bf8d-9c6bc70ef686"
+                    },
+                    {
+                      "id": "257d0cd6-d1ac-4c96-8312-5304a0454721",
+                      "name": "Log entry not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/logs/traffic/:logId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "logs",
+                            "traffic",
+                            ":logId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "logId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:31.000Z",
+                      "updatedAt": "2026-07-28T03:19:31.000Z",
+                      "uid": "35240-257d0cd6-d1ac-4c96-8312-5304a0454721"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:31.000Z",
+                  "updatedAt": "2026-07-28T03:19:31.000Z",
+                  "uid": "35240-9a967553-7da0-44cf-82fa-00912d4a3302"
+                }
+              ],
+              "id": "cf94608c-9e91-4652-b360-59c946de3cff",
+              "createdAt": "2026-07-28T03:19:31.000Z",
+              "updatedAt": "2026-07-28T03:19:31.000Z",
+              "uid": "35240-cf94608c-9e91-4652-b360-59c946de3cff"
+            },
+            {
+              "name": "Retrieve web traffic logs",
+              "id": "6eff4469-e0f0-4df4-b620-62cfeb15eeb4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/logs/traffic?startTime=<dateTime>&endTime=<dateTime>&sourceIp=<string>&destinationUrl=<string>&action=allowed&user=<string>&limit=100&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "logs",
+                    "traffic"
+                  ],
+                  "query": [
+                    {
+                      "description": "Start time for the query range (ISO 8601)",
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "End time for the query range (ISO 8601)",
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by source IP address",
+                      "key": "sourceIp",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by destination URL pattern",
+                      "key": "destinationUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by action taken",
+                      "key": "action",
+                      "value": "allowed"
+                    },
+                    {
+                      "description": "Filter by authenticated user name",
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Query web traffic access logs with optional filtering by time range, source IP, destination URL, action, and other criteria."
+              },
+              "response": [
+                {
+                  "id": "d7686c2e-cea8-467b-b7ab-3d8979f764f9",
+                  "name": "Traffic log entries returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/logs/traffic?startTime=<dateTime>&endTime=<dateTime>&sourceIp=<string>&destinationUrl=<string>&action=allowed&user=<string>&limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "logs",
+                        "traffic"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by source IP address",
+                          "key": "sourceIp",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by destination URL pattern",
+                          "key": "destinationUrl",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by action taken",
+                          "key": "action",
+                          "value": "allowed"
+                        },
+                        {
+                          "description": "Filter by authenticated user name",
+                          "key": "user",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"totalCount\": \"<integer>\",\n  \"entries\": [\n    {\n      \"id\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"sourceIp\": \"<string>\",\n      \"user\": \"<string>\",\n      \"method\": \"<string>\",\n      \"url\": \"<string>\",\n      \"statusCode\": \"<integer>\",\n      \"action\": \"redirected\",\n      \"category\": \"<string>\",\n      \"bytesIn\": \"<integer>\",\n      \"bytesOut\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"ruleName\": \"<string>\",\n      \"mediaType\": \"<string>\",\n      \"userAgent\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"sourceIp\": \"<string>\",\n      \"user\": \"<string>\",\n      \"method\": \"<string>\",\n      \"url\": \"<string>\",\n      \"statusCode\": \"<integer>\",\n      \"action\": \"redirected\",\n      \"category\": \"<string>\",\n      \"bytesIn\": \"<integer>\",\n      \"bytesOut\": \"<integer>\",\n      \"duration\": \"<integer>\",\n      \"ruleName\": \"<string>\",\n      \"mediaType\": \"<string>\",\n      \"userAgent\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:31.000Z",
+                  "updatedAt": "2026-07-28T03:19:31.000Z",
+                  "uid": "35240-d7686c2e-cea8-467b-b7ab-3d8979f764f9"
+                },
+                {
+                  "id": "83f8f4c5-41e2-4c4f-bc94-836410401130",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/logs/traffic?startTime=<dateTime>&endTime=<dateTime>&sourceIp=<string>&destinationUrl=<string>&action=allowed&user=<string>&limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "logs",
+                        "traffic"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by source IP address",
+                          "key": "sourceIp",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by destination URL pattern",
+                          "key": "destinationUrl",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by action taken",
+                          "key": "action",
+                          "value": "allowed"
+                        },
+                        {
+                          "description": "Filter by authenticated user name",
+                          "key": "user",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:31.000Z",
+                  "updatedAt": "2026-07-28T03:19:31.000Z",
+                  "uid": "35240-83f8f4c5-41e2-4c4f-bc94-836410401130"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:31.000Z",
+              "updatedAt": "2026-07-28T03:19:31.000Z",
+              "uid": "35240-6eff4469-e0f0-4df4-b620-62cfeb15eeb4"
+            }
+          ],
+          "id": "85821a92-d687-473a-a84c-806effd6362a",
+          "createdAt": "2026-07-28T03:19:31.000Z",
+          "updatedAt": "2026-07-28T03:19:31.000Z",
+          "uid": "35240-85821a92-d687-473a-a84c-806effd6362a"
+        }
+      ],
+      "id": "d00b5d8a-9fe7-4b3e-9ab0-b36174fab3c7",
+      "createdAt": "2026-07-28T03:19:31.000Z",
+      "updatedAt": "2026-07-28T03:19:31.000Z",
+      "uid": "35240-d00b5d8a-9fe7-4b3e-9ab0-b36174fab3c7"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

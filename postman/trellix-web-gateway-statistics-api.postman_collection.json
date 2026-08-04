@@ -1,0 +1,748 @@
+{
+  "info": {
+    "_postman_id": "4f75db4a-d543-46c6-9828-35328eaecd5b",
+    "name": "Trellix Web Gateway Policy Anti-Malware Statistics API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:28.000Z",
+    "updatedAt": "2026-07-28T03:19:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4f75db4a-d543-46c6-9828-35328eaecd5b"
+  },
+  "item": [
+    {
+      "name": "statistics",
+      "item": [
+        {
+          "name": "traffic",
+          "item": [
+            {
+              "name": "Get traffic statistics",
+              "id": "ec77b224-7c05-4440-b62a-40ecab5599e0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/statistics/traffic?startTime=<dateTime>&endTime=<dateTime>&granularity=daily",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "statistics",
+                    "traffic"
+                  ],
+                  "query": [
+                    {
+                      "description": "Start time for the query range (ISO 8601)",
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "End time for the query range (ISO 8601)",
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Time granularity for aggregation",
+                      "key": "granularity",
+                      "value": "daily"
+                    }
+                  ]
+                },
+                "description": "Retrieve aggregated traffic statistics including request counts, bandwidth usage, and top destinations over a specified time period."
+              },
+              "response": [
+                {
+                  "id": "aa25ee66-5ad0-4ac6-aea1-ea46f2273665",
+                  "name": "Traffic statistics returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/statistics/traffic?startTime=<dateTime>&endTime=<dateTime>&granularity=daily",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "statistics",
+                        "traffic"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Time granularity for aggregation",
+                          "key": "granularity",
+                          "value": "daily"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"totalRequests\": \"<integer>\",\n  \"allowedRequests\": \"<integer>\",\n  \"blockedRequests\": \"<integer>\",\n  \"totalBytesIn\": \"<integer>\",\n  \"totalBytesOut\": \"<integer>\",\n  \"uniqueUsers\": \"<integer>\",\n  \"uniqueDestinations\": \"<integer>\",\n  \"timeSeries\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"requests\": \"<integer>\",\n      \"bytesIn\": \"<integer>\",\n      \"bytesOut\": \"<integer>\"\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"requests\": \"<integer>\",\n      \"bytesIn\": \"<integer>\",\n      \"bytesOut\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:28.000Z",
+                  "updatedAt": "2026-07-28T03:19:28.000Z",
+                  "uid": "35240-aa25ee66-5ad0-4ac6-aea1-ea46f2273665"
+                },
+                {
+                  "id": "734cac68-6ad1-4e0e-91c8-af10e89af0fc",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/statistics/traffic?startTime=<dateTime>&endTime=<dateTime>&granularity=daily",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "statistics",
+                        "traffic"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Time granularity for aggregation",
+                          "key": "granularity",
+                          "value": "daily"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:28.000Z",
+                  "updatedAt": "2026-07-28T03:19:28.000Z",
+                  "uid": "35240-734cac68-6ad1-4e0e-91c8-af10e89af0fc"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:28.000Z",
+              "updatedAt": "2026-07-28T03:19:28.000Z",
+              "uid": "35240-ec77b224-7c05-4440-b62a-40ecab5599e0"
+            }
+          ],
+          "id": "2c181f28-12b7-49c4-818d-29e8c15e0c9d",
+          "createdAt": "2026-07-28T03:19:28.000Z",
+          "updatedAt": "2026-07-28T03:19:28.000Z",
+          "uid": "35240-2c181f28-12b7-49c4-818d-29e8c15e0c9d"
+        },
+        {
+          "name": "threats",
+          "item": [
+            {
+              "name": "Get threat statistics",
+              "id": "53b52673-c76d-4c35-8ef5-028e2b7cce3d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/statistics/threats?startTime=<dateTime>&endTime=<dateTime>&granularity=daily",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "statistics",
+                    "threats"
+                  ],
+                  "query": [
+                    {
+                      "description": "Start time for the query range (ISO 8601)",
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "End time for the query range (ISO 8601)",
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Time granularity for aggregation",
+                      "key": "granularity",
+                      "value": "daily"
+                    }
+                  ]
+                },
+                "description": "Retrieve aggregated threat detection statistics including malware detections, blocked URLs, and category violations over a specified time period."
+              },
+              "response": [
+                {
+                  "id": "9c422c7c-9976-4318-a9fb-13893d65f9f2",
+                  "name": "Threat statistics returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/statistics/threats?startTime=<dateTime>&endTime=<dateTime>&granularity=daily",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "statistics",
+                        "threats"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Time granularity for aggregation",
+                          "key": "granularity",
+                          "value": "daily"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"totalThreats\": \"<integer>\",\n  \"malwareDetections\": \"<integer>\",\n  \"phishingDetections\": \"<integer>\",\n  \"policyViolations\": \"<integer>\",\n  \"dataLeakEvents\": \"<integer>\",\n  \"timeSeries\": [\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"threats\": \"<integer>\",\n      \"malware\": \"<integer>\",\n      \"phishing\": \"<integer>\"\n    },\n    {\n      \"timestamp\": \"<dateTime>\",\n      \"threats\": \"<integer>\",\n      \"malware\": \"<integer>\",\n      \"phishing\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:28.000Z",
+                  "updatedAt": "2026-07-28T03:19:28.000Z",
+                  "uid": "35240-9c422c7c-9976-4318-a9fb-13893d65f9f2"
+                },
+                {
+                  "id": "9679a7d8-89db-413a-b5eb-8f5673cc3d25",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/statistics/threats?startTime=<dateTime>&endTime=<dateTime>&granularity=daily",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "statistics",
+                        "threats"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Time granularity for aggregation",
+                          "key": "granularity",
+                          "value": "daily"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:28.000Z",
+                  "updatedAt": "2026-07-28T03:19:28.000Z",
+                  "uid": "35240-9679a7d8-89db-413a-b5eb-8f5673cc3d25"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:28.000Z",
+              "updatedAt": "2026-07-28T03:19:28.000Z",
+              "uid": "35240-53b52673-c76d-4c35-8ef5-028e2b7cce3d"
+            }
+          ],
+          "id": "9db057b7-4dbf-4d73-8643-a2da92453575",
+          "createdAt": "2026-07-28T03:19:28.000Z",
+          "updatedAt": "2026-07-28T03:19:28.000Z",
+          "uid": "35240-9db057b7-4dbf-4d73-8643-a2da92453575"
+        },
+        {
+          "name": "top",
+          "item": [
+            {
+              "name": "urls",
+              "item": [
+                {
+                  "name": "Get top accessed URLs",
+                  "id": "f51b3d33-b1c7-4914-bd73-dc1ed975c540",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/statistics/top/urls?startTime=<dateTime>&endTime=<dateTime>&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "statistics",
+                        "top",
+                        "urls"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the most frequently accessed URLs during the specified time period."
+                  },
+                  "response": [
+                    {
+                      "id": "2e375ef6-9b42-4c06-a8a0-4ec910dd23c6",
+                      "name": "Top URLs returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/statistics/top/urls?startTime=<dateTime>&endTime=<dateTime>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "statistics",
+                            "top",
+                            "urls"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start time for the query range (ISO 8601)",
+                              "key": "startTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End time for the query range (ISO 8601)",
+                              "key": "endTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"entries\": [\n    {\n      \"url\": \"<string>\",\n      \"requestCount\": \"<integer>\",\n      \"totalBytes\": \"<integer>\"\n    },\n    {\n      \"url\": \"<string>\",\n      \"requestCount\": \"<integer>\",\n      \"totalBytes\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:19:28.000Z",
+                      "updatedAt": "2026-07-28T03:19:28.000Z",
+                      "uid": "35240-2e375ef6-9b42-4c06-a8a0-4ec910dd23c6"
+                    },
+                    {
+                      "id": "7f8d7e01-474b-4cb7-87ed-d5e1b360a420",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/statistics/top/urls?startTime=<dateTime>&endTime=<dateTime>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "statistics",
+                            "top",
+                            "urls"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start time for the query range (ISO 8601)",
+                              "key": "startTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End time for the query range (ISO 8601)",
+                              "key": "endTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:28.000Z",
+                      "updatedAt": "2026-07-28T03:19:28.000Z",
+                      "uid": "35240-7f8d7e01-474b-4cb7-87ed-d5e1b360a420"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:28.000Z",
+                  "updatedAt": "2026-07-28T03:19:28.000Z",
+                  "uid": "35240-f51b3d33-b1c7-4914-bd73-dc1ed975c540"
+                }
+              ],
+              "id": "e721d01e-0f28-4579-bb19-b8778559acd8",
+              "createdAt": "2026-07-28T03:19:28.000Z",
+              "updatedAt": "2026-07-28T03:19:28.000Z",
+              "uid": "35240-e721d01e-0f28-4579-bb19-b8778559acd8"
+            },
+            {
+              "name": "categories",
+              "item": [
+                {
+                  "name": "Get top URL categories",
+                  "id": "80ee4c36-ae81-4c78-9a5a-50be1bf6b268",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/statistics/top/categories?startTime=<dateTime>&endTime=<dateTime>&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "statistics",
+                        "top",
+                        "categories"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the most accessed URL categories during the specified time period."
+                  },
+                  "response": [
+                    {
+                      "id": "e3d29c11-52ea-4e70-8331-cd2a1937d141",
+                      "name": "Top categories returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/statistics/top/categories?startTime=<dateTime>&endTime=<dateTime>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "statistics",
+                            "top",
+                            "categories"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start time for the query range (ISO 8601)",
+                              "key": "startTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End time for the query range (ISO 8601)",
+                              "key": "endTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"entries\": [\n    {\n      \"category\": \"<string>\",\n      \"requestCount\": \"<integer>\",\n      \"blockedCount\": \"<integer>\",\n      \"percentage\": \"<float>\"\n    },\n    {\n      \"category\": \"<string>\",\n      \"requestCount\": \"<integer>\",\n      \"blockedCount\": \"<integer>\",\n      \"percentage\": \"<float>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:19:28.000Z",
+                      "updatedAt": "2026-07-28T03:19:28.000Z",
+                      "uid": "35240-e3d29c11-52ea-4e70-8331-cd2a1937d141"
+                    },
+                    {
+                      "id": "f2894083-44de-4a40-aaf9-69396fcae674",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/statistics/top/categories?startTime=<dateTime>&endTime=<dateTime>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "statistics",
+                            "top",
+                            "categories"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start time for the query range (ISO 8601)",
+                              "key": "startTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End time for the query range (ISO 8601)",
+                              "key": "endTime",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Maximum number of results to return",
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:28.000Z",
+                      "updatedAt": "2026-07-28T03:19:28.000Z",
+                      "uid": "35240-f2894083-44de-4a40-aaf9-69396fcae674"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:28.000Z",
+                  "updatedAt": "2026-07-28T03:19:28.000Z",
+                  "uid": "35240-80ee4c36-ae81-4c78-9a5a-50be1bf6b268"
+                }
+              ],
+              "id": "f6e26922-a20a-4609-a6f1-8c1f86f2426f",
+              "createdAt": "2026-07-28T03:19:28.000Z",
+              "updatedAt": "2026-07-28T03:19:28.000Z",
+              "uid": "35240-f6e26922-a20a-4609-a6f1-8c1f86f2426f"
+            }
+          ],
+          "id": "a8527552-e855-43db-bd5e-efa1d75fe7cf",
+          "createdAt": "2026-07-28T03:19:28.000Z",
+          "updatedAt": "2026-07-28T03:19:28.000Z",
+          "uid": "35240-a8527552-e855-43db-bd5e-efa1d75fe7cf"
+        }
+      ],
+      "id": "61cbc7b6-0b22-4d82-842b-d182025bf8cb",
+      "createdAt": "2026-07-28T03:19:28.000Z",
+      "updatedAt": "2026-07-28T03:19:28.000Z",
+      "uid": "35240-61cbc7b6-0b22-4d82-842b-d182025bf8cb"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

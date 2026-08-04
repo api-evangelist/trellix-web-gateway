@@ -1,0 +1,465 @@
+{
+  "info": {
+    "_postman_id": "c499b57b-cfa0-456d-a6d9-dee2dd990506",
+    "name": "Trellix Web Gateway Policy Anti-Malware Security Events API",
+    "description": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:19:22.000Z",
+    "updatedAt": "2026-07-28T03:19:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c499b57b-cfa0-456d-a6d9-dee2dd990506"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "security",
+          "item": [
+            {
+              "name": "{eventId}",
+              "item": [
+                {
+                  "name": "Get a specific security event",
+                  "id": "b331127c-05b3-47a4-b421-e90c3e76a30c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/security/:eventId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "security",
+                        ":eventId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ca2fb747-d1fe-481f-8c93-e66c816f719c",
+                          "key": "eventId",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the security event"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve detailed information about a specific security event, including full threat analysis data."
+                  },
+                  "response": [
+                    {
+                      "id": "d556417c-d330-4ae6-a0f9-610278a6f150",
+                      "name": "Security event details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/events/security/:eventId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "security",
+                            ":eventId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "eventId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"severity\": \"low\",\n  \"eventType\": \"certificate_error\",\n  \"sourceIp\": \"<string>\",\n  \"user\": \"<string>\",\n  \"url\": \"<string>\",\n  \"threatName\": \"<string>\",\n  \"action\": \"quarantined\",\n  \"ruleName\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:19:23.000Z",
+                      "updatedAt": "2026-07-28T03:19:23.000Z",
+                      "uid": "35240-d556417c-d330-4ae6-a0f9-610278a6f150"
+                    },
+                    {
+                      "id": "27aa9607-b121-4346-8498-509798d60eb0",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/events/security/:eventId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "security",
+                            ":eventId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "eventId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:23.000Z",
+                      "updatedAt": "2026-07-28T03:19:23.000Z",
+                      "uid": "35240-27aa9607-b121-4346-8498-509798d60eb0"
+                    },
+                    {
+                      "id": "91eb1165-4767-488a-b948-b73923a0fe83",
+                      "name": "Event not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "JSESSIONID",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/events/security/:eventId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "events",
+                            "security",
+                            ":eventId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "eventId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:19:23.000Z",
+                      "updatedAt": "2026-07-28T03:19:23.000Z",
+                      "uid": "35240-91eb1165-4767-488a-b948-b73923a0fe83"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:19:23.000Z",
+                  "updatedAt": "2026-07-28T03:19:23.000Z",
+                  "uid": "35240-b331127c-05b3-47a4-b421-e90c3e76a30c"
+                }
+              ],
+              "id": "fdaf7429-e78c-4b3c-a5b5-94110661a672",
+              "createdAt": "2026-07-28T03:19:23.000Z",
+              "updatedAt": "2026-07-28T03:19:23.000Z",
+              "uid": "35240-fdaf7429-e78c-4b3c-a5b5-94110661a672"
+            },
+            {
+              "name": "Retrieve security events",
+              "id": "c8aed94d-b21c-4c11-8e7c-5dcfdcec8fde",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events/security?startTime=<dateTime>&endTime=<dateTime>&severity=high&eventType=certificate_error&sourceIp=<string>&limit=100&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    "security"
+                  ],
+                  "query": [
+                    {
+                      "description": "Start time for the query range (ISO 8601)",
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "End time for the query range (ISO 8601)",
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by event severity",
+                      "key": "severity",
+                      "value": "high"
+                    },
+                    {
+                      "description": "Filter by event type",
+                      "key": "eventType",
+                      "value": "certificate_error"
+                    },
+                    {
+                      "description": "Filter by source IP address",
+                      "key": "sourceIp",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Query security events including malware detections, policy violations, blocked threats, and suspicious activity alerts."
+              },
+              "response": [
+                {
+                  "id": "bc370c1c-d5e1-42c0-942d-58a9b7df275e",
+                  "name": "Security events returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/security?startTime=<dateTime>&endTime=<dateTime>&severity=high&eventType=certificate_error&sourceIp=<string>&limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "security"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by event severity",
+                          "key": "severity",
+                          "value": "high"
+                        },
+                        {
+                          "description": "Filter by event type",
+                          "key": "eventType",
+                          "value": "certificate_error"
+                        },
+                        {
+                          "description": "Filter by source IP address",
+                          "key": "sourceIp",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"totalCount\": \"<integer>\",\n  \"events\": [\n    {\n      \"id\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"severity\": \"low\",\n      \"eventType\": \"certificate_error\",\n      \"sourceIp\": \"<string>\",\n      \"user\": \"<string>\",\n      \"url\": \"<string>\",\n      \"threatName\": \"<string>\",\n      \"action\": \"quarantined\",\n      \"ruleName\": \"<string>\",\n      \"details\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"severity\": \"critical\",\n      \"eventType\": \"certificate_error\",\n      \"sourceIp\": \"<string>\",\n      \"user\": \"<string>\",\n      \"url\": \"<string>\",\n      \"threatName\": \"<string>\",\n      \"action\": \"quarantined\",\n      \"ruleName\": \"<string>\",\n      \"details\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:19:23.000Z",
+                  "updatedAt": "2026-07-28T03:19:23.000Z",
+                  "uid": "35240-bc370c1c-d5e1-42c0-942d-58a9b7df275e"
+                },
+                {
+                  "id": "e8c9ac5a-8049-4d01-b78c-b656a299eb42",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "JSESSIONID",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/security?startTime=<dateTime>&endTime=<dateTime>&severity=high&eventType=certificate_error&sourceIp=<string>&limit=100&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "security"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start time for the query range (ISO 8601)",
+                          "key": "startTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End time for the query range (ISO 8601)",
+                          "key": "endTime",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by event severity",
+                          "key": "severity",
+                          "value": "high"
+                        },
+                        {
+                          "description": "Filter by event type",
+                          "key": "eventType",
+                          "value": "certificate_error"
+                        },
+                        {
+                          "description": "Filter by source IP address",
+                          "key": "sourceIp",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "limit",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:19:23.000Z",
+                  "updatedAt": "2026-07-28T03:19:23.000Z",
+                  "uid": "35240-e8c9ac5a-8049-4d01-b78c-b656a299eb42"
+                }
+              ],
+              "createdAt": "2026-07-28T03:19:23.000Z",
+              "updatedAt": "2026-07-28T03:19:23.000Z",
+              "uid": "35240-c8aed94d-b21c-4c11-8e7c-5dcfdcec8fde"
+            }
+          ],
+          "id": "71d66830-e51e-40d1-bf72-6c951f177918",
+          "createdAt": "2026-07-28T03:19:23.000Z",
+          "updatedAt": "2026-07-28T03:19:23.000Z",
+          "uid": "35240-71d66830-e51e-40d1-bf72-6c951f177918"
+        }
+      ],
+      "id": "badf74a2-915b-4565-96cb-8cff5baea565",
+      "createdAt": "2026-07-28T03:19:23.000Z",
+      "updatedAt": "2026-07-28T03:19:23.000Z",
+      "uid": "35240-badf74a2-915b-4565-96cb-8cff5baea565"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "mwg-server",
+      "value": "mwg.example.com"
+    },
+    {
+      "key": "port",
+      "value": "4712"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Security Events API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Security Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve security events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/events/security",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event severity"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event type"
+              },
+              {
+                "name": "sourceIp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source IP address"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Query security events including malware detections, policy violations, blocked threats, and suspicious activity alerts."
+        },
+        {
+          "info": {
+            "name": "Get a specific security event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/events/security/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the security event"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific security event, including full threat analysis data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

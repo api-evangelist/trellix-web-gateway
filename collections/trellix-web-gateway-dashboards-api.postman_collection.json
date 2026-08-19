@@ -1,0 +1,243 @@
+{
+  "item": [
+    {
+      "id": "5070e32a-ac07-4452-a7c8-b58bb94d6075",
+      "name": "Dashboards",
+      "description": {
+        "content": "Dashboard data for visualization",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36f7af87-c08c-493b-876e-d1af83c19df5",
+          "name": "Get dashboard overview data",
+          "request": {
+            "name": "Get dashboard overview data",
+            "description": {
+              "content": "Retrieve aggregated data for the main reporting dashboard, including traffic volume, threat counts, and top statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dashboards",
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "last_24h",
+                  "description": "Time period for the dashboard data"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "355d4398-8b25-4d92-bace-dcebb2b02640",
+              "name": "Dashboard overview data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboards",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "last_24h"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"period\": \"string\",\n  \"totalRequests\": 2028,\n  \"blockedRequests\": 9219,\n  \"threatsDetected\": 5409,\n  \"activeUsers\": 4141,\n  \"topCategories\": [\n    {\n      \"category\": \"string\",\n      \"requestCount\": 8491,\n      \"blockedCount\": 8538,\n      \"percentage\": 8481.476573601976\n    },\n    {\n      \"category\": \"string\",\n      \"requestCount\": 8741,\n      \"blockedCount\": 5240,\n      \"percentage\": 7528.165639495227\n    }\n  ],\n  \"topThreats\": [\n    {\n      \"threatName\": \"string\",\n      \"detectionCount\": 1081\n    },\n    {\n      \"threatName\": \"string\",\n      \"detectionCount\": 3505\n    }\n  ],\n  \"trafficTrend\": [\n    {\n      \"timestamp\": \"2016-09-13T15:39:57.762Z\",\n      \"requests\": 142,\n      \"blocked\": 9237\n    },\n    {\n      \"timestamp\": \"1985-11-14T22:52:51.057Z\",\n      \"requests\": 7201,\n      \"blocked\": 3078\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4789d55-ed1f-4e76-9c08-f569cd9ec3f0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboards",
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "last_24h"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eb35ac4c-3b9f-4ddd-9a69-cbbd5ebac311",
+    "name": "Trellix Web Gateway Policy Anti-Malware Dashboards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

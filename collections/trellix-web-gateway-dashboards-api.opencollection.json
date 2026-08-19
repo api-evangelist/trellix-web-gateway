@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Dashboards API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dashboard overview data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dashboards/overview",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "Time period for the dashboard data"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated data for the main reporting dashboard, including traffic volume, threat counts, and top statistics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

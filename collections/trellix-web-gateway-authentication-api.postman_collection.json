@@ -1,0 +1,744 @@
+{
+  "item": [
+    {
+      "id": "c32e0ad2-21d0-4899-b148-933739c212d3",
+      "name": "Authentication",
+      "description": {
+        "content": "Authentication policy settings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17d36740-c5b4-4195-935e-5d07c65c85ad",
+          "name": "Get authentication settings",
+          "request": {
+            "name": "Get authentication settings",
+            "description": {
+              "content": "Retrieve the current user authentication configuration including authentication methods, directory services, and bypass rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authentication",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b53c59a6-893e-4c2d-89b3-d55b4f2ec92e",
+              "name": "Authentication settings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enabled\": false,\n  \"method\": \"radius\",\n  \"fallbackMethod\": \"none\",\n  \"directoryServer\": \"string\",\n  \"directoryBaseDn\": \"string\",\n  \"bypassIps\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sessionTimeout\": 5413\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61dd460c-dce7-4288-afd6-8e774df45910",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1419ba8c-093d-4d82-b5fd-0d1cb3e60e37",
+          "name": "Update authentication settings",
+          "request": {
+            "name": "Update authentication settings",
+            "description": {
+              "content": "Update the user authentication configuration. Changes must be committed to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authentication",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"<string>\",\n  \"fallbackMethod\": \"<string>\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3cdacce-bca6-44cb-8dd0-dcc7fb090ff2",
+              "name": "Settings updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"<string>\",\n  \"fallbackMethod\": \"<string>\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9f3c19c-c081-4ced-8e18-48ccf1250c13",
+              "name": "Invalid settings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"<string>\",\n  \"fallbackMethod\": \"<string>\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c4a5458-3ae6-4939-ae3a-6cd01f1ba2ab",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authentication",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"method\": \"<string>\",\n  \"fallbackMethod\": \"<string>\",\n  \"directoryServer\": \"<string>\",\n  \"directoryBaseDn\": \"<string>\",\n  \"bypassIps\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sessionTimeout\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a271987-56d4-4b97-bb8b-331a93383331",
+          "name": "Authenticate and create a session",
+          "request": {
+            "name": "Authenticate and create a session",
+            "description": {
+              "content": "Authenticate with the Web Gateway appliance using administrator credentials. Returns a session cookie used for subsequent API calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <userName>(string)</userName>\n  <password>(string)</password>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e210da62-dbe2-4249-a737-eab3316f71fa",
+              "name": "Authentication successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <userName>(string)</userName>\n  <password>(string)</password>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Session cookie for subsequent requests",
+                  "key": "Set-Cookie",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9fe47a1-47ba-49b7-90c4-dd485e22f863",
+              "name": "Authentication failed - invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <userName>(string)</userName>\n  <password>(string)</password>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b7abba7-3193-4cb4-a6a3-06c0951ceb73",
+          "name": "End the current session",
+          "request": {
+            "name": "End the current session",
+            "description": {
+              "content": "Terminate the current authenticated session and invalidate the session cookie.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4059698-043f-461a-bd52-561496799bb1",
+              "name": "Session terminated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b220979c-9bdf-4c0b-b508-789a69ffb8b4",
+    "name": "Trellix Web Gateway Policy Anti-Malware Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

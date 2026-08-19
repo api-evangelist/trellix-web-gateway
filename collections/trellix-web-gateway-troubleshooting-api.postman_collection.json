@@ -1,0 +1,444 @@
+{
+  "item": [
+    {
+      "id": "ac016d42-312b-4ec9-af97-ce5f554fe4bf",
+      "name": "Troubleshooting",
+      "description": {
+        "content": "Log access and diagnostic operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "071e9d36-eb68-4c7a-90f6-3391e884f352",
+          "name": "Retrieve system logs",
+          "request": {
+            "name": "Retrieve system logs",
+            "description": {
+              "content": "Access system and audit logs from the Web Gateway appliance for troubleshooting and monitoring purposes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "troubleshooting",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of log to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "Start timestamp for log retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>",
+                  "description": "End timestamp for log retrieval"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of log entries to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad7a56ae-4a78-4808-b4d2-b2118146467b",
+              "name": "Log entries returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleshooting",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"timestamp\": \"2020-09-22T19:15:32.929Z\",\n      \"level\": \"ERROR\",\n      \"source\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"timestamp\": \"1962-11-22T23:33:13.940Z\",\n      \"level\": \"CRITICAL\",\n      \"source\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bd847fa-b56e-4f63-8c7c-9e87124db531",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleshooting",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2dc8abd-2f46-4343-9b65-d23e1d92e8b2",
+          "name": "List feedback files",
+          "request": {
+            "name": "List feedback files",
+            "description": {
+              "content": "Retrieve the list of available feedback and diagnostic files generated by the appliance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "troubleshooting",
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "214b9e40-a8fb-4603-8adb-a0e912bfc517",
+              "name": "Feedback files listed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleshooting",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"files\": [\n    {\n      \"name\": \"string\",\n      \"size\": 6201,\n      \"lastModified\": \"1946-08-15T04:46:38.193Z\",\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"size\": 5063,\n      \"lastModified\": \"2017-05-04T12:30:09.784Z\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5e5a2bb-65bf-4ce5-bafa-d232d1bab4fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "troubleshooting",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2acd35db-d0a8-43c7-8697-6ed95ad61fe4",
+    "name": "Trellix Web Gateway Policy Anti-Malware Troubleshooting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Reports API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/reports"
+          },
+          "docs": "Retrieve a list of available report definitions and previously generated reports."
+        },
+        {
+          "info": {
+            "name": "Generate a new report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new report based on specified parameters, time range, and report type."
+        },
+        {
+          "info": {
+            "name": "Get a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the report"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and results of a specific report."
+        },
+        {
+          "info": {
+            "name": "Delete a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/reports/:reportId",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the report"
+              }
+            ]
+          },
+          "docs": "Delete a previously generated report and its associated data."
+        },
+        {
+          "info": {
+            "name": "Download a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/reports/:reportId/download",
+            "params": [
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the report"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the report"
+              }
+            ]
+          },
+          "docs": "Download a generated report in the specified format (PDF, CSV, or XML)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

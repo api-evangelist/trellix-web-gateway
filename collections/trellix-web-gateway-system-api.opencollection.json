@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware System API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get system information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/system"
+          },
+          "docs": "Retrieve system information about the Web Gateway appliance, including version, hostname, and operational status."
+        },
+        {
+          "info": {
+            "name": "List managed appliances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/system/appliances"
+          },
+          "docs": "Retrieve the list of all Web Gateway appliances in the management cluster."
+        },
+        {
+          "info": {
+            "name": "Get appliance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/system/appliances/:applianceId",
+            "params": [
+              {
+                "name": "applianceId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the managed appliance"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific managed appliance by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

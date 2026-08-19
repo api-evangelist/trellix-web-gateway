@@ -1,0 +1,571 @@
+{
+  "item": [
+    {
+      "id": "c781d942-1f64-4f29-a2ea-7ef58cfd660e",
+      "name": "Security Events",
+      "description": {
+        "content": "Security event and threat detection data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7dd4ce2-9e2e-4a98-a2d5-8e6f788ff734",
+          "name": "Retrieve security events",
+          "request": {
+            "name": "Retrieve security events",
+            "description": {
+              "content": "Query security events including malware detections, policy violations, blocked threats, and suspicious activity alerts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "security"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Filter by event severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventType",
+                  "value": "<string>",
+                  "description": "Filter by event type"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceIp",
+                  "value": "<string>",
+                  "description": "Filter by source IP address"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5fb4e1b-2f7f-4e41-b303-7f2ec5a267f8",
+              "name": "Security events returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sourceIp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 2414,\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"timestamp\": \"1978-04-30T05:04:17.479Z\",\n      \"severity\": \"high\",\n      \"eventType\": \"policy_violation\",\n      \"sourceIp\": \"string\",\n      \"user\": \"string\",\n      \"url\": \"string\",\n      \"threatName\": \"string\",\n      \"action\": \"blocked\",\n      \"ruleName\": \"string\",\n      \"details\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"timestamp\": \"2007-11-22T02:05:38.341Z\",\n      \"severity\": \"medium\",\n      \"eventType\": \"malware\",\n      \"sourceIp\": \"string\",\n      \"user\": \"string\",\n      \"url\": \"string\",\n      \"threatName\": \"string\",\n      \"action\": \"blocked\",\n      \"ruleName\": \"string\",\n      \"details\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "052848fd-081f-4857-b04b-330816f0d045",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "security"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sourceIp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29f45233-4fb1-4a2f-b9b9-9cd6a97a7517",
+          "name": "Get a specific security event",
+          "request": {
+            "name": "Get a specific security event",
+            "description": {
+              "content": "Retrieve detailed information about a specific security event, including full threat analysis data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "security",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Unique identifier of the security event"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85eedddf-10dd-4c60-be99-829fe7ce5777",
+              "name": "Security event details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "security",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the security event"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"timestamp\": \"1967-07-21T20:36:12.710Z\",\n  \"severity\": \"critical\",\n  \"eventType\": \"policy_violation\",\n  \"sourceIp\": \"string\",\n  \"user\": \"string\",\n  \"url\": \"string\",\n  \"threatName\": \"string\",\n  \"action\": \"blocked\",\n  \"ruleName\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b856b03-1470-47bc-aba3-150f5acd4d45",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "security",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the security event"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd763895-45f6-40b1-bb0f-2af8110b79b5",
+              "name": "Event not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "security",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Unique identifier of the security event"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4bd5aa08-1020-4113-85ed-b432a7efdb10",
+    "name": "Trellix Web Gateway Policy Anti-Malware Security Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

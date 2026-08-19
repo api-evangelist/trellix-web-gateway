@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Rule Sets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rule Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all rule sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by rule set type"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter by enabled status"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of all configured rule sets, including their status, order, and basic configuration."
+        },
+        {
+          "info": {
+            "name": "Create a new rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rule set with the specified configuration. The rule set must be committed before it becomes active."
+        },
+        {
+          "info": {
+            "name": "Get a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Retrieve the full configuration of a specific rule set, including all contained rules and their conditions."
+        },
+        {
+          "info": {
+            "name": "Update a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of an existing rule set. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Delete a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Delete a rule set and all its contained rules. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Enable a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/enable",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Enable a disabled rule set. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Disable a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/disable",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Disable an active rule set without deleting it. Changes must be committed to take effect."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

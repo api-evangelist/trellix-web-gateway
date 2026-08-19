@@ -1,0 +1,585 @@
+{
+  "item": [
+    {
+      "id": "c354fd5a-8086-4f68-8566-d1a4e54a017c",
+      "name": "Traffic Logs",
+      "description": {
+        "content": "Web traffic log access and search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81a7d85b-77cb-4004-b5c2-4d3035c9b2e0",
+          "name": "Retrieve web traffic logs",
+          "request": {
+            "name": "Retrieve web traffic logs",
+            "description": {
+              "content": "Query web traffic access logs with optional filtering by time range, source IP, destination URL, action, and other criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logs",
+                "traffic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceIp",
+                  "value": "<string>",
+                  "description": "Filter by source IP address"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinationUrl",
+                  "value": "<string>",
+                  "description": "Filter by destination URL pattern"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Filter by action taken"
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "Filter by authenticated user name"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b6a89e8-e0bc-4ba6-9ab6-988ba7eb158e",
+              "name": "Traffic log entries returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "traffic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sourceIp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinationUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalCount\": 158,\n  \"entries\": [\n    {\n      \"id\": \"string\",\n      \"timestamp\": \"1954-05-16T23:55:13.851Z\",\n      \"sourceIp\": \"string\",\n      \"user\": \"string\",\n      \"method\": \"string\",\n      \"url\": \"string\",\n      \"statusCode\": 1593,\n      \"action\": \"allowed\",\n      \"category\": \"string\",\n      \"bytesIn\": 1254,\n      \"bytesOut\": 5864,\n      \"duration\": 4004,\n      \"ruleName\": \"string\",\n      \"mediaType\": \"string\",\n      \"userAgent\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"timestamp\": \"1963-06-30T10:09:57.085Z\",\n      \"sourceIp\": \"string\",\n      \"user\": \"string\",\n      \"method\": \"string\",\n      \"url\": \"string\",\n      \"statusCode\": 7715,\n      \"action\": \"redirected\",\n      \"category\": \"string\",\n      \"bytesIn\": 3412,\n      \"bytesOut\": 2816,\n      \"duration\": 4389,\n      \"ruleName\": \"string\",\n      \"mediaType\": \"string\",\n      \"userAgent\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89cb07f7-a406-4113-a629-9561f49ee199",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "traffic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sourceIp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinationUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5b17a3c-bbc8-48ce-afb0-3f9f55201d9a",
+          "name": "Get a specific traffic log entry",
+          "request": {
+            "name": "Get a specific traffic log entry",
+            "description": {
+              "content": "Retrieve detailed information about a specific traffic log entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logs",
+                "traffic",
+                ":logId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "logId",
+                  "description": "(Required) Unique identifier of the log entry"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "235c2c7b-24ce-4646-b336-e908f99ab8ec",
+              "name": "Traffic log entry details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "traffic",
+                    ":logId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "logId",
+                      "description": "(Required) Unique identifier of the log entry"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"timestamp\": \"1953-06-29T10:18:14.316Z\",\n  \"sourceIp\": \"string\",\n  \"user\": \"string\",\n  \"method\": \"string\",\n  \"url\": \"string\",\n  \"statusCode\": 8084,\n  \"action\": \"redirected\",\n  \"category\": \"string\",\n  \"bytesIn\": 4343,\n  \"bytesOut\": 3489,\n  \"duration\": 1173,\n  \"ruleName\": \"string\",\n  \"mediaType\": \"string\",\n  \"userAgent\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "750c7046-bde3-4919-a0e4-46487353a661",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "traffic",
+                    ":logId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "logId",
+                      "description": "(Required) Unique identifier of the log entry"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdf36b5c-d580-4f82-bd0f-091b254c8ec5",
+              "name": "Log entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "traffic",
+                    ":logId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "logId",
+                      "description": "(Required) Unique identifier of the log entry"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cc54ac3b-b435-4ca4-afee-6c354b315937",
+    "name": "Trellix Web Gateway Policy Anti-Malware Traffic Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

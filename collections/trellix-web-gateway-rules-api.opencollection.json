@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Rules API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rules in a rule set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ]
+          },
+          "docs": "Retrieve all rules within a specific rule set, including their conditions, actions, and order."
+        },
+        {
+          "info": {
+            "name": "Create a new rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new rule to a rule set with the specified conditions and actions. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Get a specific rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule"
+              }
+            ]
+          },
+          "docs": "Retrieve the full configuration of a specific rule within a rule set."
+        },
+        {
+          "info": {
+            "name": "Update a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of an existing rule. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Delete a rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/rulesets/:ruleSetId/rules/:ruleId",
+            "params": [
+              {
+                "name": "ruleSetId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule set"
+              },
+              {
+                "name": "ruleId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the rule"
+              }
+            ]
+          },
+          "docs": "Delete a specific rule from a rule set. Changes must be committed to take effect."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

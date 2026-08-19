@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Traffic Logs API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Traffic Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve web traffic logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/logs/traffic",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "sourceIp",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source IP address"
+              },
+              {
+                "name": "destinationUrl",
+                "value": "",
+                "type": "query",
+                "description": "Filter by destination URL pattern"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by action taken"
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Filter by authenticated user name"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Query web traffic access logs with optional filtering by time range, source IP, destination URL, action, and other criteria."
+        },
+        {
+          "info": {
+            "name": "Get a specific traffic log entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/logs/traffic/:logId",
+            "params": [
+              {
+                "name": "logId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the log entry"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific traffic log entry."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

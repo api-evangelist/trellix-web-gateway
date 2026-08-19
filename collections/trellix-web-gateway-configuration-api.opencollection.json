@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Configuration API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/configuration"
+          },
+          "docs": "Retrieve the current running configuration of the Web Gateway appliance in XML format."
+        },
+        {
+          "info": {
+            "name": "Commit configuration changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/configuration/commit"
+          },
+          "docs": "Commit pending configuration changes to the Web Gateway appliance. Changes become active after a successful commit."
+        },
+        {
+          "info": {
+            "name": "Rollback configuration changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/configuration/rollback"
+          },
+          "docs": "Discard all uncommitted configuration changes and revert to the last committed state."
+        },
+        {
+          "info": {
+            "name": "Create a configuration backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/configuration/backup"
+          },
+          "docs": "Create a backup of the current configuration that can be restored later."
+        },
+        {
+          "info": {
+            "name": "Restore a configuration backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/configuration/restore"
+          },
+          "docs": "Restore a previously created configuration backup to the appliance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

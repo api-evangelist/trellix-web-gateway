@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Data Loss Prevention API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Loss Prevention",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DLP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dlp/settings"
+          },
+          "docs": "Retrieve the current Data Loss Prevention configuration including enabled classifiers, actions, and sensitivity levels."
+        },
+        {
+          "info": {
+            "name": "Update DLP settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dlp/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the Data Loss Prevention configuration. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "List DLP classifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/dlp/classifiers"
+          },
+          "docs": "Retrieve the list of available data classifiers for content inspection and data loss prevention."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Authentication API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get authentication settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/authentication/settings"
+          },
+          "docs": "Retrieve the current user authentication configuration including authentication methods, directory services, and bypass rules."
+        },
+        {
+          "info": {
+            "name": "Update authentication settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/authentication/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the user authentication configuration. Changes must be committed to take effect."
+        },
+        {
+          "info": {
+            "name": "Authenticate and create a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/login"
+          },
+          "docs": "Authenticate with the Web Gateway appliance using administrator credentials. Returns a session cookie used for subsequent API calls."
+        },
+        {
+          "info": {
+            "name": "End the current session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/logout"
+          },
+          "docs": "Terminate the current authenticated session and invalidate the session cookie."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

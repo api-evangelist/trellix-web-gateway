@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Statistics API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get traffic statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/statistics/traffic",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Time granularity for aggregation"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated traffic statistics including request counts, bandwidth usage, and top destinations over a specified time period."
+        },
+        {
+          "info": {
+            "name": "Get threat statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/statistics/threats",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Time granularity for aggregation"
+              }
+            ]
+          },
+          "docs": "Retrieve aggregated threat detection statistics including malware detections, blocked URLs, and category violations over a specified time period."
+        },
+        {
+          "info": {
+            "name": "Get top accessed URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/statistics/top/urls",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieve the most frequently accessed URLs during the specified time period."
+        },
+        {
+          "info": {
+            "name": "Get top URL categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/statistics/top/categories",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the query range (ISO 8601)"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for the query range (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              }
+            ]
+          },
+          "docs": "Retrieve the most accessed URL categories during the specified time period."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

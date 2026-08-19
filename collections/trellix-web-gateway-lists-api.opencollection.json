@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware Lists API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/lists"
+          },
+          "docs": "Retrieve all custom lists configured on the appliance, including URL whitelists, blacklists, and IP address lists."
+        },
+        {
+          "info": {
+            "name": "Get a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              }
+            ]
+          },
+          "docs": "Retrieve the contents and metadata of a specific custom list."
+        },
+        {
+          "info": {
+            "name": "Update a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/lists/:listId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the contents of a specific custom list with new entries."
+        },
+        {
+          "info": {
+            "name": "Add an entry to a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/lists/:listId/entries",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new entry to an existing custom list."
+        },
+        {
+          "info": {
+            "name": "Delete an entry from a custom list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/lists/:listId/entries/:entryId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the custom list"
+              },
+              {
+                "name": "entryId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the list entry"
+              }
+            ]
+          },
+          "docs": "Remove a specific entry from a custom list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1593 @@
+{
+  "item": [
+    {
+      "id": "8f327cff-181f-436a-8088-0d671fb2ed0c",
+      "name": "Rules",
+      "description": {
+        "content": "Manage individual policy rules within rule sets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f5692f1-e4cd-4064-b3d2-6edf6a830762",
+          "name": "List rules in a rule set",
+          "request": {
+            "name": "List rules in a rule set",
+            "description": {
+              "content": "Retrieve all rules within a specific rule set, including their conditions, actions, and order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rulesets",
+                ":ruleSetId",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleSetId",
+                  "description": "(Required) Unique identifier of the rule set"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28360aaa-c8d0-4835-ad6c-7f48121d50a1",
+              "name": "List of rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rules\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"enabled\": true,\n      \"order\": 3264,\n      \"condition\": {\n        \"property\": \"string\",\n        \"operator\": \"less_than\",\n        \"value\": \"string\",\n        \"listRef\": \"string\"\n      },\n      \"action\": {\n        \"type\": \"redirect\",\n        \"blockTemplate\": \"string\",\n        \"redirectUrl\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"enabled\": false,\n      \"order\": 7119,\n      \"condition\": {\n        \"property\": \"string\",\n        \"operator\": \"not_equals\",\n        \"value\": \"string\",\n        \"listRef\": \"string\"\n      },\n      \"action\": {\n        \"type\": \"stop_cycle\",\n        \"blockTemplate\": \"string\",\n        \"redirectUrl\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab8fbf5-622d-4237-8761-91411c1a8482",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18965942-0807-4500-b776-91952a2e0524",
+              "name": "Rule set not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64be288d-66e9-4210-9286-8fee9720afac",
+          "name": "Create a new rule",
+          "request": {
+            "name": "Create a new rule",
+            "description": {
+              "content": "Add a new rule to a rule set with the specified conditions and actions. Changes must be committed to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rulesets",
+                ":ruleSetId",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleSetId",
+                  "description": "(Required) Unique identifier of the rule set"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": {\n    \"property\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"value\": \"<string>\",\n    \"listRef\": \"<string>\"\n  },\n  \"action\": {\n    \"type\": \"<string>\",\n    \"blockTemplate\": \"<string>\",\n    \"redirectUrl\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26ddc6b8-b3e1-45f0-b552-d0a61902b58e",
+              "name": "Rule created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"not_equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  },\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enabled\": false,\n  \"order\": 9638,\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"redirect\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87171f7d-1921-4fb9-9f3d-da4cd4f3b327",
+              "name": "Invalid rule definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"not_equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  },\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ece3e6c-9bb0-4dd7-a0bc-91a741f5eb5d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"not_equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  },\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2914317-fca8-408b-8aad-bc3007e45458",
+              "name": "Rule set not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"not_equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  },\n  \"description\": \"<string>\",\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "011874c5-f583-4526-9a2d-cee0e4bb86e8",
+          "name": "Get a specific rule",
+          "request": {
+            "name": "Get a specific rule",
+            "description": {
+              "content": "Retrieve the full configuration of a specific rule within a rule set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rulesets",
+                ":ruleSetId",
+                "rules",
+                ":ruleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleSetId",
+                  "description": "(Required) Unique identifier of the rule set"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleId",
+                  "description": "(Required) Unique identifier of the rule"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c87593cf-2ae7-49f3-90b0-9191de0c2ee3",
+              "name": "Rule details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enabled\": false,\n  \"order\": 9638,\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"redirect\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94d634b1-c3c2-4157-845a-5f2d24309bf0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2581924-e42c-4a49-bdbe-0f8e775ac783",
+              "name": "Rule or rule set not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a226b303-3599-4c5e-b95f-159dab1f868e",
+          "name": "Update a rule",
+          "request": {
+            "name": "Update a rule",
+            "description": {
+              "content": "Update the configuration of an existing rule. Changes must be committed to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rulesets",
+                ":ruleSetId",
+                "rules",
+                ":ruleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleSetId",
+                  "description": "(Required) Unique identifier of the rule set"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleId",
+                  "description": "(Required) Unique identifier of the rule"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"condition\": {\n    \"property\": \"<string>\",\n    \"operator\": \"<string>\",\n    \"value\": \"<string>\",\n    \"listRef\": \"<string>\"\n  },\n  \"action\": {\n    \"type\": \"<string>\",\n    \"blockTemplate\": \"<string>\",\n    \"redirectUrl\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c24e599c-e167-4b3c-9cd2-4d3255c88dbc",
+              "name": "Rule updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"greater_than\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enabled\": false,\n  \"order\": 9638,\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"equals\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"redirect\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97b4b9a2-f8bb-4c3b-aa65-af8e1423298f",
+              "name": "Invalid rule configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"greater_than\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c129c445-36ee-4042-a3e1-749bdc1aa7f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"greater_than\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "645ee580-2455-46c0-bc00-11887fd10f76",
+              "name": "Rule or rule set not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"order\": \"<integer>\",\n  \"condition\": {\n    \"property\": \"string\",\n    \"operator\": \"greater_than\",\n    \"value\": \"string\",\n    \"listRef\": \"string\"\n  },\n  \"action\": {\n    \"type\": \"stop_cycle\",\n    \"blockTemplate\": \"string\",\n    \"redirectUrl\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffac96fd-a64e-46e4-b8ab-42997799eb88",
+          "name": "Delete a rule",
+          "request": {
+            "name": "Delete a rule",
+            "description": {
+              "content": "Delete a specific rule from a rule set. Changes must be committed to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rulesets",
+                ":ruleSetId",
+                "rules",
+                ":ruleId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleSetId",
+                  "description": "(Required) Unique identifier of the rule set"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ruleId",
+                  "description": "(Required) Unique identifier of the rule"
+                },
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d15986b7-ba4f-49ca-9f71-d1299f81d03b",
+              "name": "Rule deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e49194de-0dbe-4f76-8c65-1302bea5bbed",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71b548c6-4dd5-4705-8494-52afc2cead47",
+              "name": "Rule or rule set not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rulesets",
+                    ":ruleSetId",
+                    "rules",
+                    ":ruleId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleSetId",
+                      "description": "(Required) Unique identifier of the rule set"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ruleId",
+                      "description": "(Required) Unique identifier of the rule"
+                    },
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a6ed8529-67ef-4043-8ca3-13b0d246cfcb",
+    "name": "Trellix Web Gateway Policy Anti-Malware Rules API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

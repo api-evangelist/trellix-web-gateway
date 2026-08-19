@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trellix Web Gateway Policy Anti-Malware URL Filtering API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "JSESSIONID",
+      "value": "{{JSESSIONID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "URL Filtering",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List URL categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/categories"
+          },
+          "docs": "Retrieve the list of available URL categories used for web filtering and policy decisions."
+        },
+        {
+          "info": {
+            "name": "Look up URL categorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/lookup",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "URL to look up"
+              }
+            ]
+          },
+          "docs": "Look up the category and reputation of a specific URL against the Trellix Global Threat Intelligence database."
+        },
+        {
+          "info": {
+            "name": "Get URL filter settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/settings"
+          },
+          "docs": "Retrieve the current URL filtering configuration including blocked categories, allowed exceptions, and safe search settings."
+        },
+        {
+          "info": {
+            "name": "Update URL filter settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{mwg-server}:{port}/Konfigurator/REST/policy/urlfilter/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the URL filtering configuration. Changes must be committed to take effect."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

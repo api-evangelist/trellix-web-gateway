@@ -1,0 +1,889 @@
+{
+  "item": [
+    {
+      "id": "7777a217-74d5-42c4-87e9-73f6d856a432",
+      "name": "Statistics",
+      "description": {
+        "content": "Aggregated traffic and security statistics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7538b4f2-3ff0-4a70-9be1-d1ba15db2440",
+          "name": "Get traffic statistics",
+          "request": {
+            "name": "Get traffic statistics",
+            "description": {
+              "content": "Retrieve aggregated traffic statistics including request counts, bandwidth usage, and top destinations over a specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "statistics",
+                "traffic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "daily",
+                  "description": "Time granularity for aggregation"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e059852-8029-4ae4-ad45-8fda257be074",
+              "name": "Traffic statistics returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "traffic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "daily"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalRequests\": 9768,\n  \"allowedRequests\": 9376,\n  \"blockedRequests\": 7135,\n  \"totalBytesIn\": 8028,\n  \"totalBytesOut\": 6909,\n  \"uniqueUsers\": 678,\n  \"uniqueDestinations\": 6582,\n  \"timeSeries\": [\n    {\n      \"timestamp\": \"1983-03-08T11:28:06.956Z\",\n      \"requests\": 2266,\n      \"bytesIn\": 5279,\n      \"bytesOut\": 5203\n    },\n    {\n      \"timestamp\": \"1966-04-07T11:59:32.271Z\",\n      \"requests\": 6612,\n      \"bytesIn\": 4218,\n      \"bytesOut\": 2357\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea6249ca-f817-42dc-a7ad-aa9011333e75",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "traffic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "daily"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94f93111-8d1c-45b2-ab31-b41a905e817b",
+          "name": "Get threat statistics",
+          "request": {
+            "name": "Get threat statistics",
+            "description": {
+              "content": "Retrieve aggregated threat detection statistics including malware detections, blocked URLs, and category violations over a specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "statistics",
+                "threats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "daily",
+                  "description": "Time granularity for aggregation"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4707ebe7-2ef6-406a-9e3e-4f0a9912649e",
+              "name": "Threat statistics returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "threats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "daily"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalThreats\": 5288,\n  \"malwareDetections\": 8702,\n  \"phishingDetections\": 2981,\n  \"policyViolations\": 1748,\n  \"dataLeakEvents\": 2999,\n  \"timeSeries\": [\n    {\n      \"timestamp\": \"1990-08-05T10:27:29.825Z\",\n      \"threats\": 9611,\n      \"malware\": 9968,\n      \"phishing\": 5832\n    },\n    {\n      \"timestamp\": \"1958-08-31T00:37:00.954Z\",\n      \"threats\": 6201,\n      \"malware\": 7402,\n      \"phishing\": 2171\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "218a5ec5-647b-49ab-be43-13001b207070",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "threats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "daily"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8de68cd7-c60e-4c69-8e8a-04d4ca173ff6",
+          "name": "Get top accessed URLs",
+          "request": {
+            "name": "Get top accessed URLs",
+            "description": {
+              "content": "Retrieve the most frequently accessed URLs during the specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "statistics",
+                "top",
+                "urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "973e063a-ed03-4bfd-b90f-b40899e9f768",
+              "name": "Top URLs returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "top",
+                    "urls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"url\": \"string\",\n      \"requestCount\": 9153,\n      \"totalBytes\": 1777\n    },\n    {\n      \"url\": \"string\",\n      \"requestCount\": 4744,\n      \"totalBytes\": 8622\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f0d58e6-f6f1-4bc1-b0d2-fb6fc240fa78",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "top",
+                    "urls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1e671e2-bb15-4a6d-a092-b287d4863312",
+          "name": "Get top URL categories",
+          "request": {
+            "name": "Get top URL categories",
+            "description": {
+              "content": "Retrieve the most accessed URL categories during the specified time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "statistics",
+                "top",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Start time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "End time for the query range (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the Web Gateway appliance",
+                  "type": "any",
+                  "value": "{{mwg-server}}",
+                  "key": "mwg-server"
+                },
+                {
+                  "description": "Management port for the REST API",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f38d272d-14cd-49e8-a333-31aa4802eb68",
+              "name": "Top categories returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "top",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"category\": \"string\",\n      \"requestCount\": 8064,\n      \"blockedCount\": 9837,\n      \"percentage\": 9414.148486797398\n    },\n    {\n      \"category\": \"string\",\n      \"requestCount\": 6021,\n      \"blockedCount\": 4624,\n      \"percentage\": 2627.5930935245283\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93d61a65-a73a-4839-a58b-d8cf83a10775",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "statistics",
+                    "top",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the Web Gateway appliance",
+                      "type": "any",
+                      "value": "{{mwg-server}}",
+                      "key": "mwg-server"
+                    },
+                    {
+                      "description": "Management port for the REST API",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "JSESSIONID",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the Web Gateway appliance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mwg.example.com",
+      "key": "mwg-server"
+    },
+    {
+      "description": {
+        "content": "Management port for the REST API",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "4712",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "https://{{mwg-server}}:{{port}}/Konfigurator/REST/policy",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "JSESSIONID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c01c689-17b4-4cd2-8f5f-78299d98da03",
+    "name": "Trellix Web Gateway Policy Anti-Malware Statistics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.\n\nContact Support:\n Name: Trellix Support\n Email: support@trellix.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -40,6 +40,8 @@ apis:
   humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
   baseURL: https://<mwg-server>:<port>/Konfigurator/REST
   tags:
+  - Anti Malware
+  tags_raw:
   - Anti-Malware
   properties:
   - type: OpenAPI
@@ -160,6 +162,8 @@ apis:
   humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
   baseURL: https://<mwg-server>:<port>/Konfigurator/REST
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -184,6 +188,8 @@ apis:
   humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
   baseURL: https://<mwg-server>:<port>/Konfigurator/REST
   tags:
+  - List
+  tags_raw:
   - Lists
   properties:
   - type: OpenAPI
@@ -232,6 +238,8 @@ apis:
   humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
   baseURL: https://<mwg-server>:<port>/Konfigurator/REST
   tags:
+  - Rulesets
+  tags_raw:
   - Rule Sets
   properties:
   - type: OpenAPI

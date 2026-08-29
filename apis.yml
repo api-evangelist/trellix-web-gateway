@@ -5,6 +5,18 @@ description: >-
   enterprises. It offers URL filtering, malware detection, data loss prevention, SSL inspection, and cloud security
   capabilities through a comprehensive web security platform with REST APIs for appliance management, policy
   configuration, and security reporting.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve

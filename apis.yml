@@ -52,7 +52,7 @@ apis:
   humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
   baseURL: https://<mwg-server>:<port>/Konfigurator/REST
   tags:
-  - Anti-Malware
+  - Anti Malware
   tags_raw:
   - Anti-Malware
   properties:
@@ -250,7 +250,7 @@ apis:
   humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
   baseURL: https://<mwg-server>:<port>/Konfigurator/REST
   tags:
-  - Rule Sets
+  - Rulesets
   tags_raw:
   - Rule Sets
   properties:

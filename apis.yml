@@ -244,32 +244,6 @@ apis:
     url: https://docs.trellix.com/bundle/web-gateway-policy-api
   - type: Examples
     url: https://github.com/trellix-enterprise/mwg-api-examples
-- aid: trellix-web-gateway:trellix-web-gateway-rule-sets-api
-  name: Trellix Web Gateway Rule Sets API
-  description: Manage policy rule sets
-  humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
-  baseURL: https://<mwg-server>:<port>/Konfigurator/REST
-  tags:
-  - Rulesets
-  tags_raw:
-  - Rule Sets
-  properties:
-  - type: OpenAPI
-    url: openapi/trellix-web-gateway-rule-sets-api-openapi.yml
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
-  - type: Authentication
-    url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
-  - type: PostmanCollection
-    url: https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-reporting-api
-  - type: APIReference
-    url: https://docs.trellix.com/api/web-gateway/reporting/
-  - type: Documentation
-    url: https://docs.trellix.com/bundle/web-gateway-policy-api
-  - type: Examples
-    url: https://github.com/trellix-enterprise/mwg-api-examples
 - aid: trellix-web-gateway:trellix-web-gateway-rules-api
   name: Trellix Web Gateway Rules API
   description: Manage individual policy rules within rule sets
@@ -448,6 +422,30 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/trellix-web-gateway-url-filtering-api-openapi.yml
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
+  - type: Authentication
+    url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide/page/authentication.html
+  - type: PostmanCollection
+    url: https://www.postman.com/trellix/workspace/trellix-public/collection/web-gateway-api
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-reporting-api
+  - type: APIReference
+    url: https://docs.trellix.com/api/web-gateway/reporting/
+  - type: Documentation
+    url: https://docs.trellix.com/bundle/web-gateway-policy-api
+  - type: Examples
+    url: https://github.com/trellix-enterprise/mwg-api-examples
+- aid: trellix-web-gateway:trellix-web-gateway-rulesets-api
+  name: Trellix Web Gateway Rulesets API
+  description: Manage policy rule sets
+  humanURL: https://docs.trellix.com/bundle/web-gateway-product-guide
+  baseURL: https://<mwg-server>:<port>/Konfigurator/REST
+  tags:
+  - Rulesets
+  properties:
+  - type: OpenAPI
+    url: openapi/trellix-web-gateway-rulesets-api-openapi.yml
   - type: Documentation
     url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide
   - type: Authentication

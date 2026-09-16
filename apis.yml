@@ -1,10 +1,9 @@
 aid: trellix-web-gateway
 name: Trellix Web Gateway
-description: >-
-  Trellix Web Gateway (formerly McAfee Web Gateway) provides advanced threat protection and secure web access for
-  enterprises. It offers URL filtering, malware detection, data loss prevention, SSL inspection, and cloud security
-  capabilities through a comprehensive web security platform with REST APIs for appliance management, policy
-  configuration, and security reporting.
+description: Trellix Web Gateway (formerly McAfee Web Gateway) provides advanced threat protection and
+  secure web access for enterprises. It offers URL filtering, malware detection, data loss prevention,
+  SSL inspection, and cloud security capabilities through a comprehensive web security platform with REST
+  APIs for appliance management, policy configuration, and security reporting.
 deliveryModel:
   model: saas
   open_source: false
@@ -34,18 +33,18 @@ accessModel:
 image: https://www.trellix.com/assets/images/trellix-logo.png
 url: https://www.trellix.com/products/web-gateway/
 created: '2024'
-modified: '2026-05-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 tags:
-  - Cybersecurity
-  - Data Loss Prevention
-  - Enterprise Security
-  - Malware Protection
-  - Network Security
-  - SSL Inspection
-  - Threat Protection
-  - URL Filtering
-  - Web Gateway
+- Cybersecurity
+- Data Loss Prevention
+- Enterprise Security
+- Malware Protection
+- Network Security
+- SSL Inspection
+- Threat Protection
+- URL Filtering
+- Web Gateway
 apis:
 - aid: trellix-web-gateway:trellix-web-gateway-anti-malware-api
   name: Trellix Web Gateway Anti-Malware API
@@ -464,44 +463,46 @@ apis:
   - type: Examples
     url: https://github.com/trellix-enterprise/mwg-api-examples
 common:
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/trellix-web-gateway/overview
-  - type: AgenticAccess
-    url: agentic-access/trellix-web-gateway-agentic-access.yml
-  - type: DomainSecurity
-    url: security/trellix-web-gateway-domain-security.yml
-  - type: Authentication
-    url: authentication/trellix-web-gateway-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/trellixsecurity
-  - type: GettingStarted
-    url: https://docs.trellix.com/bundle/web-gateway-getting-started
-  - type: DeveloperPortal
-    url: https://developer.trellix.com/
-  - type: ChangeLog
-    url: https://docs.trellix.com/bundle/web-gateway-release-notes
-  - type: StatusPage
-    url: https://status.trellix.com/
-  - type: TermsOfService
-    url: https://www.trellix.com/legal/terms-of-use/
-  - type: PrivacyPolicy
-    url: https://www.trellix.com/privacy/
-  - type: Portal
-    url: https://www.trellix.com/login/
-  - type: SDKs
-    url: https://github.com/trellix-enterprise/mwg-sdk
-  - type: JSONLD
-    url: json-ld/trellix-web-gateway-context.jsonld
-  - type: JSONSchema
-    url: json-schema/trellix-web-gateway-security-event-schema.json
-  - type: JSONSchema
-    url: json-schema/trellix-web-gateway-rule-set-schema.json
-  - type: JSONStructure
-    url: json-structure/trellix-web-gateway-security-event-structure.json
-  - type: SpectralRules
-    url: rules/trellix-web-gateway-spectral-rules.yml
-  - type: Vocabulary
-    url: vocabulary/trellix-web-gateway-vocabulary.yml
+- type: Website
+  url: https://trellix.com
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/trellix-web-gateway/overview
+- type: AgenticAccess
+  url: agentic-access/trellix-web-gateway-agentic-access.yml
+- type: DomainSecurity
+  url: security/trellix-web-gateway-domain-security.yml
+- type: Authentication
+  url: authentication/trellix-web-gateway-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/trellixsecurity
+- type: GettingStarted
+  url: https://docs.trellix.com/bundle/web-gateway-getting-started
+- type: DeveloperPortal
+  url: https://developer.trellix.com/
+- type: ChangeLog
+  url: https://docs.trellix.com/bundle/web-gateway-release-notes
+- type: StatusPage
+  url: https://status.trellix.com/
+- type: TermsOfService
+  url: https://www.trellix.com/legal/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.trellix.com/privacy/
+- type: Portal
+  url: https://www.trellix.com/login/
+- type: SDKs
+  url: https://github.com/trellix-enterprise/mwg-sdk
+- type: JSONLD
+  url: json-ld/trellix-web-gateway-context.jsonld
+- type: JSONSchema
+  url: json-schema/trellix-web-gateway-security-event-schema.json
+- type: JSONSchema
+  url: json-schema/trellix-web-gateway-rule-set-schema.json
+- type: JSONStructure
+  url: json-structure/trellix-web-gateway-security-event-structure.json
+- type: SpectralRules
+  url: rules/trellix-web-gateway-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/trellix-web-gateway-vocabulary.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

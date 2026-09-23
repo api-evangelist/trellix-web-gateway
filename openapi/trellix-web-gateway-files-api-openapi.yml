@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Trellix Web Gateway Policy Anti-Malware Files API
-  description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
+  title: Trellix Web Gateway REST Files API
+  description: RESTful API for managing and configuring Trellix Web Gateway (formerly McAfee Web Gateway) appliances. The Konfigurator REST interface provides programmatic access to system administration, configuration management, file handling, authentication, and appliance lifecycle operations.
   version: '1.0'
   contact:
     name: Trellix Support
@@ -9,8 +9,8 @@ info:
     email: support@trellix.com
   termsOfService: https://www.trellix.com/legal/terms-of-use/
 servers:
-- url: https://{mwg-server}:{port}/Konfigurator/REST/policy
-  description: Trellix Web Gateway Policy Endpoint
+- url: https://{mwg-server}:{port}/Konfigurator/REST
+  description: Trellix Web Gateway Appliance
   variables:
     mwg-server:
       default: mwg.example.com
@@ -134,7 +134,7 @@ components:
       type: apiKey
       in: cookie
       name: JSESSIONID
-      description: Session cookie obtained via the Konfigurator REST /login endpoint.
+      description: Session cookie obtained via the /login endpoint. Passed automatically in subsequent requests.
 externalDocs:
-  description: Trellix Web Gateway Policy API Documentation
-  url: https://docs.trellix.com/bundle/web-gateway-policy-api
+  description: Trellix Web Gateway REST API Guide
+  url: https://docs.trellix.com/bundle/web-gateway-rest-api-guide

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Trellix Web Gateway Policy Anti-Malware Rule Sets API
+  title: Trellix Web Gateway Policy Rule Sets API
   description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
   version: '1.0'
   contact:
@@ -21,7 +21,7 @@ servers:
 security:
 - cookieAuth: []
 tags:
-- name: Rule Sets
+- name: Rulesets
   description: Manage policy rule sets
 paths:
   /rulesets:
@@ -30,7 +30,7 @@ paths:
       summary: List all rule sets
       description: Retrieve the list of all configured rule sets, including their status, order, and basic configuration.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - name: type
         in: query
@@ -65,7 +65,7 @@ paths:
       summary: Create a new rule set
       description: Create a new rule set with the specified configuration. The rule set must be committed before it becomes active.
       tags:
-      - Rule Sets
+      - Rulesets
       requestBody:
         required: true
         content:
@@ -89,7 +89,7 @@ paths:
       summary: Get a rule set
       description: Retrieve the full configuration of a specific rule set, including all contained rules and their conditions.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/ruleSetId'
       responses:
@@ -108,7 +108,7 @@ paths:
       summary: Update a rule set
       description: Update the configuration of an existing rule set. Changes must be committed to take effect.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/ruleSetId'
       requestBody:
@@ -135,7 +135,7 @@ paths:
       summary: Delete a rule set
       description: Delete a rule set and all its contained rules. Changes must be committed to take effect.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/ruleSetId'
       responses:
@@ -151,7 +151,7 @@ paths:
       summary: Enable a rule set
       description: Enable a disabled rule set. Changes must be committed to take effect.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/ruleSetId'
       responses:
@@ -167,7 +167,7 @@ paths:
       summary: Disable a rule set
       description: Disable an active rule set without deleting it. Changes must be committed to take effect.
       tags:
-      - Rule Sets
+      - Rulesets
       parameters:
       - $ref: '#/components/parameters/ruleSetId'
       responses:
@@ -179,6 +179,42 @@ paths:
           description: Rule set not found
 components:
   schemas:
+    RuleSetUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule set name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule set
+        order:
+          type: integer
+          description: Updated processing order
+    RuleAction:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - allow
+          - block
+          - redirect
+          - authenticate
+          - log
+          - continue
+          - stop_rule_set
+          - stop_cycle
+          description: Action to take when the rule matches
+        blockTemplate:
+          type: string
+          description: Block page template to display
+        redirectUrl:
+          type: string
+          description: URL to redirect to
     RuleSetCreate:
       type: object
       required:
@@ -202,27 +238,28 @@ components:
           type: boolean
           default: true
           description: Whether the rule set is enabled
-    RuleAction:
+    Rule:
       type: object
       properties:
-        type:
+        id:
           type: string
-          enum:
-          - allow
-          - block
-          - redirect
-          - authenticate
-          - log
-          - continue
-          - stop_rule_set
-          - stop_cycle
-          description: Action to take when the rule matches
-        blockTemplate:
+          description: Unique rule identifier
+        name:
           type: string
-          description: Block page template to display
-        redirectUrl:
+          description: Rule name
+        description:
           type: string
-          description: URL to redirect to
+          description: Rule description
+        enabled:
+          type: boolean
+          description: Whether the rule is active
+        order:
+          type: integer
+          description: Processing order within the rule set
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
     RuleCondition:
       type: object
       properties:
@@ -248,43 +285,6 @@ components:
         listRef:
           type: string
           description: Reference to a custom list for in_list operations
-    Rule:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique rule identifier
-        name:
-          type: string
-          description: Rule name
-        description:
-          type: string
-          description: Rule description
-        enabled:
-          type: boolean
-          description: Whether the rule is active
-        order:
-          type: integer
-          description: Processing order within the rule set
-        condition:
-          $ref: '#/components/schemas/RuleCondition'
-        action:
-          $ref: '#/components/schemas/RuleAction'
-    RuleSetUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated rule set name
-        description:
-          type: string
-          description: Updated description
-        enabled:
-          type: boolean
-          description: Enable or disable the rule set
-        order:
-          type: integer
-          description: Updated processing order
     RuleSet:
       type: object
       properties:

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Trellix Web Gateway Policy Anti-Malware Rules API
+  title: Trellix Web Gateway Policy Rules API
   description: API for creating, updating, and managing security policies, rule sets, and configurations for web filtering and threat prevention on Trellix Web Gateway (formerly McAfee Web Gateway). Provides programmatic access to policy rules, URL filter settings, anti-malware settings, and SSL scanning configurations.
   version: '1.0'
   contact:
@@ -164,48 +164,21 @@ components:
         redirectUrl:
           type: string
           description: URL to redirect to
-    RuleCondition:
+    RuleUpdate:
       type: object
-      properties:
-        property:
-          type: string
-          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
-        operator:
-          type: string
-          enum:
-          - equals
-          - not_equals
-          - contains
-          - not_contains
-          - matches
-          - in_list
-          - not_in_list
-          - greater_than
-          - less_than
-          description: Comparison operator
-        value:
-          type: string
-          description: Value to compare against
-        listRef:
-          type: string
-          description: Reference to a custom list for in_list operations
-    RuleCreate:
-      type: object
-      required:
-      - name
-      - condition
-      - action
       properties:
         name:
           type: string
-          description: Rule name
+          description: Updated rule name
         description:
           type: string
-          description: Rule description
+          description: Updated description
         enabled:
           type: boolean
-          default: true
-          description: Whether the rule is enabled
+          description: Enable or disable the rule
+        order:
+          type: integer
+          description: Updated processing order
         condition:
           $ref: '#/components/schemas/RuleCondition'
         action:
@@ -232,25 +205,52 @@ components:
           $ref: '#/components/schemas/RuleCondition'
         action:
           $ref: '#/components/schemas/RuleAction'
-    RuleUpdate:
+    RuleCreate:
       type: object
+      required:
+      - name
+      - condition
+      - action
       properties:
         name:
           type: string
-          description: Updated rule name
+          description: Rule name
         description:
           type: string
-          description: Updated description
+          description: Rule description
         enabled:
           type: boolean
-          description: Enable or disable the rule
-        order:
-          type: integer
-          description: Updated processing order
+          default: true
+          description: Whether the rule is enabled
         condition:
           $ref: '#/components/schemas/RuleCondition'
         action:
           $ref: '#/components/schemas/RuleAction'
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+          - equals
+          - not_equals
+          - contains
+          - not_contains
+          - matches
+          - in_list
+          - not_in_list
+          - greater_than
+          - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
   parameters:
     ruleSetId:
       name: ruleSetId

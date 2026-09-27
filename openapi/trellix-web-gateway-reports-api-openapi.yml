@@ -150,50 +150,6 @@ components:
       schema:
         type: string
   schemas:
-    Report:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique report identifier
-        name:
-          type: string
-          description: Report name
-        type:
-          type: string
-          enum:
-          - traffic_summary
-          - security_summary
-          - user_activity
-          - url_categories
-          - threat_analysis
-          - bandwidth_usage
-          - policy_hits
-          description: Report type
-        status:
-          type: string
-          enum:
-          - pending
-          - generating
-          - completed
-          - failed
-          description: Report generation status
-        createdAt:
-          type: string
-          format: date-time
-          description: When the report was requested
-        completedAt:
-          type: string
-          format: date-time
-          description: When the report generation completed
-        startTime:
-          type: string
-          format: date-time
-          description: Report data start time
-        endTime:
-          type: string
-          format: date-time
-          description: Report data end time
     ReportRequest:
       type: object
       required:
@@ -242,6 +198,50 @@ components:
               items:
                 type: string
               description: Filter by URL categories
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique report identifier
+        name:
+          type: string
+          description: Report name
+        type:
+          type: string
+          enum:
+          - traffic_summary
+          - security_summary
+          - user_activity
+          - url_categories
+          - threat_analysis
+          - bandwidth_usage
+          - policy_hits
+          description: Report type
+        status:
+          type: string
+          enum:
+          - pending
+          - generating
+          - completed
+          - failed
+          description: Report generation status
+        createdAt:
+          type: string
+          format: date-time
+          description: When the report was requested
+        completedAt:
+          type: string
+          format: date-time
+          description: When the report generation completed
+        startTime:
+          type: string
+          format: date-time
+          description: Report data start time
+        endTime:
+          type: string
+          format: date-time
+          description: Report data end time
   securitySchemes:
     cookieAuth:
       type: apiKey

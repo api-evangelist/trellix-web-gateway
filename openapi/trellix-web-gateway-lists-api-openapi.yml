@@ -188,18 +188,18 @@ components:
             $ref: '#/components/schemas/ListEntry'
           description: Complete replacement entries for the list
   parameters:
-    entryId:
-      name: entryId
-      in: path
-      required: true
-      description: Unique identifier of the list entry
-      schema:
-        type: string
     listId:
       name: listId
       in: path
       required: true
       description: Unique identifier of the custom list
+      schema:
+        type: string
+    entryId:
+      name: entryId
+      in: path
+      required: true
+      description: Unique identifier of the list entry
       schema:
         type: string
   securitySchemes:

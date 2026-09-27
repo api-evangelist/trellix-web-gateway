@@ -102,10 +102,10 @@ paths:
           description: Event not found
 components:
   parameters:
-    endTime:
-      name: endTime
+    startTime:
+      name: startTime
       in: query
-      description: End time for the query range (ISO 8601)
+      description: Start time for the query range (ISO 8601)
       schema:
         type: string
         format: date-time
@@ -131,10 +131,10 @@ components:
       description: Unique identifier of the security event
       schema:
         type: string
-    startTime:
-      name: startTime
+    endTime:
+      name: endTime
       in: query
-      description: Start time for the query range (ISO 8601)
+      description: End time for the query range (ISO 8601)
       schema:
         type: string
         format: date-time

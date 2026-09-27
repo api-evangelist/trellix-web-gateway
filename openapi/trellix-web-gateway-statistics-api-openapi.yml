@@ -135,68 +135,23 @@ paths:
         '401':
           description: Unauthorized
 components:
-  parameters:
-    endTime:
-      name: endTime
-      in: query
-      description: End time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 100
-        maximum: 1000
-    startTime:
-      name: startTime
-      in: query
-      description: Start time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
   schemas:
-    TrafficStatistics:
+    TopCategoryEntry:
       type: object
       properties:
-        totalRequests:
+        category:
+          type: string
+          description: URL category name
+        requestCount:
           type: integer
-          description: Total number of web requests
-        allowedRequests:
-          type: integer
-          description: Number of allowed requests
-        blockedRequests:
+          description: Number of requests in this category
+        blockedCount:
           type: integer
           description: Number of blocked requests
-        totalBytesIn:
-          type: integer
-          description: Total inbound bytes
-        totalBytesOut:
-          type: integer
-          description: Total outbound bytes
-        uniqueUsers:
-          type: integer
-          description: Number of unique users
-        uniqueDestinations:
-          type: integer
-          description: Number of unique destinations accessed
-        timeSeries:
-          type: array
-          items:
-            type: object
-            properties:
-              timestamp:
-                type: string
-                format: date-time
-              requests:
-                type: integer
-              bytesIn:
-                type: integer
-              bytesOut:
-                type: integer
+        percentage:
+          type: number
+          format: float
+          description: Percentage of total traffic
     TopUrlEntry:
       type: object
       properties:
@@ -241,22 +196,67 @@ components:
                 type: integer
               phishing:
                 type: integer
-    TopCategoryEntry:
+    TrafficStatistics:
       type: object
       properties:
-        category:
-          type: string
-          description: URL category name
-        requestCount:
+        totalRequests:
           type: integer
-          description: Number of requests in this category
-        blockedCount:
+          description: Total number of web requests
+        allowedRequests:
+          type: integer
+          description: Number of allowed requests
+        blockedRequests:
           type: integer
           description: Number of blocked requests
-        percentage:
-          type: number
-          format: float
-          description: Percentage of total traffic
+        totalBytesIn:
+          type: integer
+          description: Total inbound bytes
+        totalBytesOut:
+          type: integer
+          description: Total outbound bytes
+        uniqueUsers:
+          type: integer
+          description: Number of unique users
+        uniqueDestinations:
+          type: integer
+          description: Number of unique destinations accessed
+        timeSeries:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              requests:
+                type: integer
+              bytesIn:
+                type: integer
+              bytesOut:
+                type: integer
+  parameters:
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
+    endTime:
+      name: endTime
+      in: query
+      description: End time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -143,6 +143,27 @@ paths:
           description: Rule or rule set not found
 components:
   schemas:
+    RuleCreate:
+      type: object
+      required:
+      - name
+      - condition
+      - action
+      properties:
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          default: true
+          description: Whether the rule is enabled
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
     RuleUpdate:
       type: object
       properties:
@@ -208,27 +229,6 @@ components:
         redirectUrl:
           type: string
           description: URL to redirect to
-    RuleCreate:
-      type: object
-      required:
-      - name
-      - condition
-      - action
-      properties:
-        name:
-          type: string
-          description: Rule name
-        description:
-          type: string
-          description: Rule description
-        enabled:
-          type: boolean
-          default: true
-          description: Whether the rule is enabled
-        condition:
-          $ref: '#/components/schemas/RuleCondition'
-        action:
-          $ref: '#/components/schemas/RuleAction'
     Rule:
       type: object
       properties:
@@ -252,18 +252,18 @@ components:
         action:
           $ref: '#/components/schemas/RuleAction'
   parameters:
-    ruleSetId:
-      name: ruleSetId
-      in: path
-      required: true
-      description: Unique identifier of the rule set
-      schema:
-        type: string
     ruleId:
       name: ruleId
       in: path
       required: true
       description: Unique identifier of the rule
+      schema:
+        type: string
+    ruleSetId:
+      name: ruleSetId
+      in: path
+      required: true
+      description: Unique identifier of the rule set
       schema:
         type: string
   securitySchemes:

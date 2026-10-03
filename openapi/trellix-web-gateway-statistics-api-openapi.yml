@@ -135,23 +135,30 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
+    endTime:
+      name: endTime
+      in: query
+      description: End time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
   schemas:
-    TopCategoryEntry:
-      type: object
-      properties:
-        category:
-          type: string
-          description: URL category name
-        requestCount:
-          type: integer
-          description: Number of requests in this category
-        blockedCount:
-          type: integer
-          description: Number of blocked requests
-        percentage:
-          type: number
-          format: float
-          description: Percentage of total traffic
     TopUrlEntry:
       type: object
       properties:
@@ -234,29 +241,22 @@ components:
                 type: integer
               bytesOut:
                 type: integer
-  parameters:
-    startTime:
-      name: startTime
-      in: query
-      description: Start time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 100
-        maximum: 1000
-    endTime:
-      name: endTime
-      in: query
-      description: End time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
+    TopCategoryEntry:
+      type: object
+      properties:
+        category:
+          type: string
+          description: URL category name
+        requestCount:
+          type: integer
+          description: Number of requests in this category
+        blockedCount:
+          type: integer
+          description: Number of blocked requests
+        percentage:
+          type: number
+          format: float
+          description: Percentage of total traffic
   securitySchemes:
     cookieAuth:
       type: apiKey

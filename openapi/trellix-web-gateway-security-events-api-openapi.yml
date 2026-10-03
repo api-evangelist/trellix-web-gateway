@@ -102,20 +102,6 @@ paths:
           description: Event not found
 components:
   parameters:
-    startTime:
-      name: startTime
-      in: query
-      description: Start time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
     limit:
       name: limit
       in: query
@@ -124,13 +110,6 @@ components:
         type: integer
         default: 100
         maximum: 1000
-    eventId:
-      name: eventId
-      in: path
-      required: true
-      description: Unique identifier of the security event
-      schema:
-        type: string
     endTime:
       name: endTime
       in: query
@@ -138,6 +117,27 @@ components:
       schema:
         type: string
         format: date-time
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    eventId:
+      name: eventId
+      in: path
+      required: true
+      description: Unique identifier of the security event
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
     SecurityEvent:
       type: object

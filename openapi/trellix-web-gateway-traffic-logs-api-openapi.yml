@@ -99,27 +99,6 @@ paths:
           description: Log entry not found
 components:
   parameters:
-    startTime:
-      name: startTime
-      in: query
-      description: Start time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
-    offset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-    logId:
-      name: logId
-      in: path
-      required: true
-      description: Unique identifier of the log entry
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -135,6 +114,27 @@ components:
       schema:
         type: string
         format: date-time
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    logId:
+      name: logId
+      in: path
+      required: true
+      description: Unique identifier of the log entry
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
   schemas:
     TrafficLogEntry:
       type: object

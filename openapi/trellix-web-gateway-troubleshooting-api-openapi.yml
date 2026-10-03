@@ -97,6 +97,22 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    FileInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: File name
+        size:
+          type: integer
+          description: File size in bytes
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+        type:
+          type: string
+          description: File type or MIME type
     LogEntry:
       type: object
       properties:
@@ -119,22 +135,6 @@ components:
         message:
           type: string
           description: Log message content
-    FileInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          description: File name
-        size:
-          type: integer
-          description: File size in bytes
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modification timestamp
-        type:
-          type: string
-          description: File type or MIME type
   securitySchemes:
     cookieAuth:
       type: apiKey

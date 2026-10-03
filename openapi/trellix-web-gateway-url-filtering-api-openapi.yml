@@ -105,31 +105,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    UrlLookupResult:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Looked up URL
-        categories:
-          type: array
-          items:
-            type: string
-          description: Assigned URL categories
-        reputation:
-          type: string
-          enum:
-          - trusted
-          - neutral
-          - suspicious
-          - high_risk
-          - malicious
-          description: URL reputation score
-        riskLevel:
-          type: integer
-          minimum: 0
-          maximum: 127
-          description: Numeric risk level (0-127)
     UrlFilterSettings:
       type: object
       properties:
@@ -167,6 +142,31 @@ components:
         parentCategory:
           type: string
           description: Parent category name for subcategories
+    UrlLookupResult:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Looked up URL
+        categories:
+          type: array
+          items:
+            type: string
+          description: Assigned URL categories
+        reputation:
+          type: string
+          enum:
+          - trusted
+          - neutral
+          - suspicious
+          - high_risk
+          - malicious
+          description: URL reputation score
+        riskLevel:
+          type: integer
+          minimum: 0
+          maximum: 127
+          description: Numeric risk level (0-127)
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -179,6 +179,46 @@ paths:
           description: Rule set not found
 components:
   schemas:
+    RuleSetUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule set name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule set
+        order:
+          type: integer
+          description: Updated processing order
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+          - equals
+          - not_equals
+          - contains
+          - not_contains
+          - matches
+          - in_list
+          - not_in_list
+          - greater_than
+          - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
     RuleSet:
       type: object
       properties:
@@ -212,31 +252,6 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
           description: Rules contained in this rule set
-    RuleCondition:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
-        operator:
-          type: string
-          enum:
-          - equals
-          - not_equals
-          - contains
-          - not_contains
-          - matches
-          - in_list
-          - not_in_list
-          - greater_than
-          - less_than
-          description: Comparison operator
-        value:
-          type: string
-          description: Value to compare against
-        listRef:
-          type: string
-          description: Reference to a custom list for in_list operations
     RuleAction:
       type: object
       properties:
@@ -281,21 +296,6 @@ components:
           type: boolean
           default: true
           description: Whether the rule set is enabled
-    RuleSetUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated rule set name
-        description:
-          type: string
-          description: Updated description
-        enabled:
-          type: boolean
-          description: Enable or disable the rule set
-        order:
-          type: integer
-          description: Updated processing order
     Rule:
       type: object
       properties:

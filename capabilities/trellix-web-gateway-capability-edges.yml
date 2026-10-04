@@ -1,0 +1,95 @@
+slug: trellix-web-gateway
+provider: Trellix Web Gateway
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Security Events
+  spec_file: trellix-web-gateway-security-events-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: GET /events/security  getSecurityEvents  Retrieve security events; schema SecurityEvent
+  reason: Retrieval of security events/threat detections from the gateway feeds SOC/SIEM detection and
+    response, matching Threat Detection & Response Management.
+- tag: Anti-Malware
+  spec_file: trellix-web-gateway-anti-malware-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.75
+  evidence: GET /antimalware/engines listAntiMalwareEngines  List anti-malware engines; AntiMalwareSettings
+  reason: Operations configure and list malware-detection engines on a web security gateway — a threat
+    detection control, squarely Cybersecurity Management. Sub-capability threat detection is the best
+    fit, though it is control configuration rather than SOC response, hence moderate confidence.
+- tag: Data Loss Prevention
+  spec_file: trellix-web-gateway-data-loss-prevention-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /dlp/settings  getDlpSettings  Get DLP settings; GET /dlp/classifiers  listDlpClassifiers  List
+    DLP classifiers
+  reason: Configuring data-loss-prevention settings and content classifiers is a security control of the
+    enterprise, mapping to Cybersecurity Management; no single sub-capability cleanly covers DLP control
+    configuration.
+- tag: Rules
+  spec_file: trellix-web-gateway-rules-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: POST /rulesets/{ruleSetId}/rules  createRule  Create a new rule; schemas RuleCondition, RuleAction
+  reason: CRUD over web filtering / threat prevention policy rules on a secure web gateway — security
+    control policy administration under Cybersecurity Management; sub-capability ambiguous between governance
+    and architecture.
+- tag: Rulesets
+  spec_file: trellix-web-gateway-rulesets-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: POST /rulesets  createRuleSet  Create a new rule set; POST /rulesets/{ruleSetId}/enable  enableRuleSet
+  reason: Managing and enabling/disabling security policy rule sets for web filtering and threat prevention
+    is security control policy administration; L1 Cybersecurity Management only, as no sub-capability
+    is clearly named.
+- tag: SSL Scanning
+  spec_file: trellix-web-gateway-ssl-scanning-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /ssl/settings  getSslSettings  Get SSL scanning settings; POST /ssl/certificates  uploadSslCertificate
+  reason: SSL inspection configuration and certificate management is a cybersecurity control surface;
+    L1 only since certificate/inspection handling spans security architecture and operations.
+- tag: Statistics
+  spec_file: trellix-web-gateway-statistics-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: 'GET /statistics/threats getThreatStatistics Get threat statistics; schemas: ThreatStatistics,
+    TrafficStatistics'
+  reason: Security reporting/analytics on web threat and traffic data from a secure web gateway; closest
+    fit is Cybersecurity Management, threat detection & response reporting. Some ambiguity vs general
+    analytics, hence moderate confidence.
+- tag: URL Filtering
+  spec_file: trellix-web-gateway-url-filtering-api-openapi.yml
+  capability_id: BC-620.10
+  capability_id_l1: BC-620
+  capability_name: Security Strategy & Governance Management
+  confidence: 0.7
+  evidence: GET /urlfilter/settings / PUT /urlfilter/settings updateUrlFilterSettings; lookupUrl Look
+    up URL categorization
+  reason: Configuration of web filtering security policy settings and URL categories — security policy/control
+    governance within Cybersecurity Management; sub-capability choice somewhat uncertain.

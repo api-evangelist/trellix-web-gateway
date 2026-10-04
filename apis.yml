@@ -461,6 +461,9 @@ apis:
   - type: Examples
     url: https://github.com/trellix-enterprise/mwg-api-examples
 common:
+- type: CapabilityMap
+  url: capabilities/trellix-web-gateway-capability-edges.yml
+  name: Trellix Web Gateway Business Capability Map
 - type: Website
   url: https://trellix.com
 - type: PostmanWorkspace

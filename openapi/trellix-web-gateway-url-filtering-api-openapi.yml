@@ -127,21 +127,6 @@ components:
         blockUncategorized:
           type: boolean
           description: Whether to block uncategorized URLs
-    UrlCategory:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Category identifier
-        name:
-          type: string
-          description: Category name
-        description:
-          type: string
-          description: Category description
-        parentCategory:
-          type: string
-          description: Parent category name for subcategories
     UrlLookupResult:
       type: object
       properties:
@@ -167,6 +152,21 @@ components:
           minimum: 0
           maximum: 127
           description: Numeric risk level (0-127)
+    UrlCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Category identifier
+        name:
+          type: string
+          description: Category name
+        description:
+          type: string
+          description: Category description
+        parentCategory:
+          type: string
+          description: Parent category name for subcategories
   securitySchemes:
     cookieAuth:
       type: apiKey

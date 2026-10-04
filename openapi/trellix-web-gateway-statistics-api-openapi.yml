@@ -135,42 +135,7 @@ paths:
         '401':
           description: Unauthorized
 components:
-  parameters:
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 100
-        maximum: 1000
-    endTime:
-      name: endTime
-      in: query
-      description: End time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
-    startTime:
-      name: startTime
-      in: query
-      description: Start time for the query range (ISO 8601)
-      schema:
-        type: string
-        format: date-time
   schemas:
-    TopUrlEntry:
-      type: object
-      properties:
-        url:
-          type: string
-          description: URL
-        requestCount:
-          type: integer
-          description: Number of requests to this URL
-        totalBytes:
-          type: integer
-          description: Total bytes transferred
     ThreatStatistics:
       type: object
       properties:
@@ -203,6 +168,18 @@ components:
                 type: integer
               phishing:
                 type: integer
+    TopUrlEntry:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL
+        requestCount:
+          type: integer
+          description: Number of requests to this URL
+        totalBytes:
+          type: integer
+          description: Total bytes transferred
     TrafficStatistics:
       type: object
       properties:
@@ -257,6 +234,29 @@ components:
           type: number
           format: float
           description: Percentage of total traffic
+  parameters:
+    startTime:
+      name: startTime
+      in: query
+      description: Start time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    endTime:
+      name: endTime
+      in: query
+      description: End time for the query range (ISO 8601)
+      schema:
+        type: string
+        format: date-time
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
   securitySchemes:
     cookieAuth:
       type: apiKey

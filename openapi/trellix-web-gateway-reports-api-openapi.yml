@@ -141,6 +141,14 @@ paths:
         '404':
           description: Report not found
 components:
+  parameters:
+    reportId:
+      name: reportId
+      in: path
+      required: true
+      description: Unique identifier of the report
+      schema:
+        type: string
   schemas:
     ReportRequest:
       type: object
@@ -234,14 +242,6 @@ components:
           type: string
           format: date-time
           description: Report data end time
-  parameters:
-    reportId:
-      name: reportId
-      in: path
-      required: true
-      description: Unique identifier of the report
-      schema:
-        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

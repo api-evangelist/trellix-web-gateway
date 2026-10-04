@@ -54,6 +54,22 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    TopCategoryEntry:
+      type: object
+      properties:
+        category:
+          type: string
+          description: URL category name
+        requestCount:
+          type: integer
+          description: Number of requests in this category
+        blockedCount:
+          type: integer
+          description: Number of blocked requests
+        percentage:
+          type: number
+          format: float
+          description: Percentage of total traffic
     DashboardOverview:
       type: object
       properties:
@@ -97,22 +113,6 @@ components:
                 type: integer
               blocked:
                 type: integer
-    TopCategoryEntry:
-      type: object
-      properties:
-        category:
-          type: string
-          description: URL category name
-        requestCount:
-          type: integer
-          description: Number of requests in this category
-        blockedCount:
-          type: integer
-          description: Number of blocked requests
-        percentage:
-          type: number
-          format: float
-          description: Percentage of total traffic
   securitySchemes:
     cookieAuth:
       type: apiKey

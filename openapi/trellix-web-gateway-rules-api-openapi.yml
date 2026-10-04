@@ -142,6 +142,21 @@ paths:
         '404':
           description: Rule or rule set not found
 components:
+  parameters:
+    ruleId:
+      name: ruleId
+      in: path
+      required: true
+      description: Unique identifier of the rule
+      schema:
+        type: string
+    ruleSetId:
+      name: ruleSetId
+      in: path
+      required: true
+      description: Unique identifier of the rule set
+      schema:
+        type: string
   schemas:
     RuleCreate:
       type: object
@@ -160,6 +175,49 @@ components:
           type: boolean
           default: true
           description: Whether the rule is enabled
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
+    RuleAction:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - allow
+          - block
+          - redirect
+          - authenticate
+          - log
+          - continue
+          - stop_rule_set
+          - stop_cycle
+          description: Action to take when the rule matches
+        blockTemplate:
+          type: string
+          description: Block page template to display
+        redirectUrl:
+          type: string
+          description: URL to redirect to
+    Rule:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique rule identifier
+        name:
+          type: string
+          description: Rule name
+        description:
+          type: string
+          description: Rule description
+        enabled:
+          type: boolean
+          description: Whether the rule is active
+        order:
+          type: integer
+          description: Processing order within the rule set
         condition:
           $ref: '#/components/schemas/RuleCondition'
         action:
@@ -208,64 +266,6 @@ components:
         listRef:
           type: string
           description: Reference to a custom list for in_list operations
-    RuleAction:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - allow
-          - block
-          - redirect
-          - authenticate
-          - log
-          - continue
-          - stop_rule_set
-          - stop_cycle
-          description: Action to take when the rule matches
-        blockTemplate:
-          type: string
-          description: Block page template to display
-        redirectUrl:
-          type: string
-          description: URL to redirect to
-    Rule:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique rule identifier
-        name:
-          type: string
-          description: Rule name
-        description:
-          type: string
-          description: Rule description
-        enabled:
-          type: boolean
-          description: Whether the rule is active
-        order:
-          type: integer
-          description: Processing order within the rule set
-        condition:
-          $ref: '#/components/schemas/RuleCondition'
-        action:
-          $ref: '#/components/schemas/RuleAction'
-  parameters:
-    ruleId:
-      name: ruleId
-      in: path
-      required: true
-      description: Unique identifier of the rule
-      schema:
-        type: string
-    ruleSetId:
-      name: ruleSetId
-      in: path
-      required: true
-      description: Unique identifier of the rule set
-      schema:
-        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

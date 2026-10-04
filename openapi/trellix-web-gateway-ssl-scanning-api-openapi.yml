@@ -131,6 +131,20 @@ components:
         fingerprint:
           type: string
           description: Certificate SHA-256 fingerprint
+    SslCertificateUpload:
+      type: object
+      required:
+      - certificate
+      properties:
+        certificate:
+          type: string
+          description: PEM-encoded certificate data
+        privateKey:
+          type: string
+          description: PEM-encoded private key (for CA certificates)
+        passphrase:
+          type: string
+          description: Private key passphrase if encrypted
     SslSettings:
       type: object
       properties:
@@ -158,20 +172,6 @@ components:
           - TLSv1.2
           - TLSv1.3
           description: Minimum TLS protocol version to accept
-    SslCertificateUpload:
-      type: object
-      required:
-      - certificate
-      properties:
-        certificate:
-          type: string
-          description: PEM-encoded certificate data
-        privateKey:
-          type: string
-          description: PEM-encoded private key (for CA certificates)
-        passphrase:
-          type: string
-          description: Private key passphrase if encrypted
   securitySchemes:
     cookieAuth:
       type: apiKey

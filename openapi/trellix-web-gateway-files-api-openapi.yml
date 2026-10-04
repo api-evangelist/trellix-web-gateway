@@ -104,6 +104,14 @@ paths:
         '404':
           description: File not found
 components:
+  parameters:
+    fileName:
+      name: fileName
+      in: path
+      required: true
+      description: Name of the file
+      schema:
+        type: string
   schemas:
     FileInfo:
       type: object
@@ -121,14 +129,6 @@ components:
         type:
           type: string
           description: File type or MIME type
-  parameters:
-    fileName:
-      name: fileName
-      in: path
-      required: true
-      description: Name of the file
-      schema:
-        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

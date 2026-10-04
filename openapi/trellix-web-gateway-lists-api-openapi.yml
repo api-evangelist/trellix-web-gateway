@@ -130,22 +130,19 @@ paths:
         '404':
           description: Entry or list not found
 components:
-  parameters:
-    listId:
-      name: listId
-      in: path
-      required: true
-      description: Unique identifier of the custom list
-      schema:
-        type: string
-    entryId:
-      name: entryId
-      in: path
-      required: true
-      description: Unique identifier of the list entry
-      schema:
-        type: string
   schemas:
+    ListEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the entry
+        value:
+          type: string
+          description: Entry value (URL, IP, string, etc.)
+        description:
+          type: string
+          description: Optional description of the entry
     CustomList:
       type: object
       properties:
@@ -190,18 +187,21 @@ components:
           items:
             $ref: '#/components/schemas/ListEntry'
           description: Complete replacement entries for the list
-    ListEntry:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the entry
-        value:
-          type: string
-          description: Entry value (URL, IP, string, etc.)
-        description:
-          type: string
-          description: Optional description of the entry
+  parameters:
+    entryId:
+      name: entryId
+      in: path
+      required: true
+      description: Unique identifier of the list entry
+      schema:
+        type: string
+    listId:
+      name: listId
+      in: path
+      required: true
+      description: Unique identifier of the custom list
+      schema:
+        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

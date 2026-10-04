@@ -82,14 +82,6 @@ paths:
         '404':
           description: Appliance not found
 components:
-  parameters:
-    applianceId:
-      name: applianceId
-      in: path
-      required: true
-      description: Unique identifier of the managed appliance
-      schema:
-        type: string
   schemas:
     SystemInfo:
       type: object
@@ -159,6 +151,14 @@ components:
           type: string
           format: date-time
           description: Last synchronization timestamp
+  parameters:
+    applianceId:
+      name: applianceId
+      in: path
+      required: true
+      description: Unique identifier of the managed appliance
+      schema:
+        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

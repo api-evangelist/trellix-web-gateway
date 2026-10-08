@@ -461,6 +461,12 @@ apis:
   - type: Examples
     url: https://github.com/trellix-enterprise/mwg-api-examples
 common:
+- type: Plans
+  url: plans/trellix-web-gateway-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/trellix-web-gateway-rate-limits.yml
+- type: FinOps
+  url: finops/trellix-web-gateway-finops.yml
 - type: CapabilityMap
   url: capabilities/trellix-web-gateway-capability-edges.yml
   name: Trellix Web Gateway Business Capability Map

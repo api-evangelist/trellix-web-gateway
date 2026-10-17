@@ -102,6 +102,14 @@ paths:
           description: Event not found
 components:
   parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 100
+        maximum: 1000
     eventId:
       name: eventId
       in: path
@@ -130,14 +138,6 @@ components:
       schema:
         type: string
         format: date-time
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 100
-        maximum: 1000
   schemas:
     SecurityEvent:
       type: object

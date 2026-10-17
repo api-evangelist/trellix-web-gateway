@@ -82,41 +82,15 @@ paths:
         '404':
           description: Appliance not found
 components:
+  parameters:
+    applianceId:
+      name: applianceId
+      in: path
+      required: true
+      description: Unique identifier of the managed appliance
+      schema:
+        type: string
   schemas:
-    SystemInfo:
-      type: object
-      properties:
-        version:
-          type: string
-          description: Web Gateway software version
-        hostname:
-          type: string
-          description: Appliance hostname
-        serialNumber:
-          type: string
-          description: Appliance serial number
-        status:
-          type: string
-          enum:
-          - running
-          - maintenance
-          - error
-          description: Current operational status
-        uptime:
-          type: integer
-          description: System uptime in seconds
-        cpuUsage:
-          type: number
-          format: float
-          description: Current CPU usage percentage
-        memoryUsage:
-          type: number
-          format: float
-          description: Current memory usage percentage
-        lastConfigChange:
-          type: string
-          format: date-time
-          description: Timestamp of the last configuration change
     Appliance:
       type: object
       properties:
@@ -151,14 +125,40 @@ components:
           type: string
           format: date-time
           description: Last synchronization timestamp
-  parameters:
-    applianceId:
-      name: applianceId
-      in: path
-      required: true
-      description: Unique identifier of the managed appliance
-      schema:
-        type: string
+    SystemInfo:
+      type: object
+      properties:
+        version:
+          type: string
+          description: Web Gateway software version
+        hostname:
+          type: string
+          description: Appliance hostname
+        serialNumber:
+          type: string
+          description: Appliance serial number
+        status:
+          type: string
+          enum:
+          - running
+          - maintenance
+          - error
+          description: Current operational status
+        uptime:
+          type: integer
+          description: System uptime in seconds
+        cpuUsage:
+          type: number
+          format: float
+          description: Current CPU usage percentage
+        memoryUsage:
+          type: number
+          format: float
+          description: Current memory usage percentage
+        lastConfigChange:
+          type: string
+          format: date-time
+          description: Timestamp of the last configuration change
   securitySchemes:
     cookieAuth:
       type: apiKey

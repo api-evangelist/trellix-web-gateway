@@ -105,46 +105,6 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    SslCertificate:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Certificate identifier
-        subject:
-          type: string
-          description: Certificate subject
-        issuer:
-          type: string
-          description: Certificate issuer
-        validFrom:
-          type: string
-          format: date-time
-          description: Certificate validity start date
-        validTo:
-          type: string
-          format: date-time
-          description: Certificate expiration date
-        serialNumber:
-          type: string
-          description: Certificate serial number
-        fingerprint:
-          type: string
-          description: Certificate SHA-256 fingerprint
-    SslCertificateUpload:
-      type: object
-      required:
-      - certificate
-      properties:
-        certificate:
-          type: string
-          description: PEM-encoded certificate data
-        privateKey:
-          type: string
-          description: PEM-encoded private key (for CA certificates)
-        passphrase:
-          type: string
-          description: Private key passphrase if encrypted
     SslSettings:
       type: object
       properties:
@@ -172,6 +132,46 @@ components:
           - TLSv1.2
           - TLSv1.3
           description: Minimum TLS protocol version to accept
+    SslCertificateUpload:
+      type: object
+      required:
+      - certificate
+      properties:
+        certificate:
+          type: string
+          description: PEM-encoded certificate data
+        privateKey:
+          type: string
+          description: PEM-encoded private key (for CA certificates)
+        passphrase:
+          type: string
+          description: Private key passphrase if encrypted
+    SslCertificate:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Certificate identifier
+        subject:
+          type: string
+          description: Certificate subject
+        issuer:
+          type: string
+          description: Certificate issuer
+        validFrom:
+          type: string
+          format: date-time
+          description: Certificate validity start date
+        validTo:
+          type: string
+          format: date-time
+          description: Certificate expiration date
+        serialNumber:
+          type: string
+          description: Certificate serial number
+        fingerprint:
+          type: string
+          description: Certificate SHA-256 fingerprint
   securitySchemes:
     cookieAuth:
       type: apiKey

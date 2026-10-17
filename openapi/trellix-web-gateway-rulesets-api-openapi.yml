@@ -212,21 +212,6 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
           description: Rules contained in this rule set
-    RuleSetUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated rule set name
-        description:
-          type: string
-          description: Updated description
-        enabled:
-          type: boolean
-          description: Enable or disable the rule set
-        order:
-          type: integer
-          description: Updated processing order
     RuleSetCreate:
       type: object
       required:
@@ -250,6 +235,31 @@ components:
           type: boolean
           default: true
           description: Whether the rule set is enabled
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+          - equals
+          - not_equals
+          - contains
+          - not_contains
+          - matches
+          - in_list
+          - not_in_list
+          - greater_than
+          - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
     RuleAction:
       type: object
       properties:
@@ -293,31 +303,21 @@ components:
           $ref: '#/components/schemas/RuleCondition'
         action:
           $ref: '#/components/schemas/RuleAction'
-    RuleCondition:
+    RuleSetUpdate:
       type: object
       properties:
-        property:
+        name:
           type: string
-          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
-        operator:
+          description: Updated rule set name
+        description:
           type: string
-          enum:
-          - equals
-          - not_equals
-          - contains
-          - not_contains
-          - matches
-          - in_list
-          - not_in_list
-          - greater_than
-          - less_than
-          description: Comparison operator
-        value:
-          type: string
-          description: Value to compare against
-        listRef:
-          type: string
-          description: Reference to a custom list for in_list operations
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule set
+        order:
+          type: integer
+          description: Updated processing order
   parameters:
     ruleSetId:
       name: ruleSetId

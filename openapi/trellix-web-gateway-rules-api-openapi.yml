@@ -142,22 +142,26 @@ paths:
         '404':
           description: Rule or rule set not found
 components:
-  parameters:
-    ruleId:
-      name: ruleId
-      in: path
-      required: true
-      description: Unique identifier of the rule
-      schema:
-        type: string
-    ruleSetId:
-      name: ruleSetId
-      in: path
-      required: true
-      description: Unique identifier of the rule set
-      schema:
-        type: string
   schemas:
+    RuleUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated rule name
+        description:
+          type: string
+          description: Updated description
+        enabled:
+          type: boolean
+          description: Enable or disable the rule
+        order:
+          type: integer
+          description: Updated processing order
+        condition:
+          $ref: '#/components/schemas/RuleCondition'
+        action:
+          $ref: '#/components/schemas/RuleAction'
     RuleCreate:
       type: object
       required:
@@ -179,6 +183,31 @@ components:
           $ref: '#/components/schemas/RuleCondition'
         action:
           $ref: '#/components/schemas/RuleAction'
+    RuleCondition:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
+        operator:
+          type: string
+          enum:
+          - equals
+          - not_equals
+          - contains
+          - not_contains
+          - matches
+          - in_list
+          - not_in_list
+          - greater_than
+          - less_than
+          description: Comparison operator
+        value:
+          type: string
+          description: Value to compare against
+        listRef:
+          type: string
+          description: Reference to a custom list for in_list operations
     RuleAction:
       type: object
       properties:
@@ -222,50 +251,21 @@ components:
           $ref: '#/components/schemas/RuleCondition'
         action:
           $ref: '#/components/schemas/RuleAction'
-    RuleUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated rule name
-        description:
-          type: string
-          description: Updated description
-        enabled:
-          type: boolean
-          description: Enable or disable the rule
-        order:
-          type: integer
-          description: Updated processing order
-        condition:
-          $ref: '#/components/schemas/RuleCondition'
-        action:
-          $ref: '#/components/schemas/RuleAction'
-    RuleCondition:
-      type: object
-      properties:
-        property:
-          type: string
-          description: Property to evaluate (e.g., URL.Host, URL.Categories, Antimalware.Infected, Client.IP)
-        operator:
-          type: string
-          enum:
-          - equals
-          - not_equals
-          - contains
-          - not_contains
-          - matches
-          - in_list
-          - not_in_list
-          - greater_than
-          - less_than
-          description: Comparison operator
-        value:
-          type: string
-          description: Value to compare against
-        listRef:
-          type: string
-          description: Reference to a custom list for in_list operations
+  parameters:
+    ruleId:
+      name: ruleId
+      in: path
+      required: true
+      description: Unique identifier of the rule
+      schema:
+        type: string
+    ruleSetId:
+      name: ruleSetId
+      in: path
+      required: true
+      description: Unique identifier of the rule set
+      schema:
+        type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

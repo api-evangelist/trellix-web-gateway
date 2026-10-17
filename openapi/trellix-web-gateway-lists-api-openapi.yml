@@ -131,18 +131,6 @@ paths:
           description: Entry or list not found
 components:
   schemas:
-    ListEntry:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the entry
-        value:
-          type: string
-          description: Entry value (URL, IP, string, etc.)
-        description:
-          type: string
-          description: Optional description of the entry
     CustomList:
       type: object
       properties:
@@ -187,6 +175,18 @@ components:
           items:
             $ref: '#/components/schemas/ListEntry'
           description: Complete replacement entries for the list
+    ListEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the entry
+        value:
+          type: string
+          description: Entry value (URL, IP, string, etc.)
+        description:
+          type: string
+          description: Optional description of the entry
   parameters:
     entryId:
       name: entryId

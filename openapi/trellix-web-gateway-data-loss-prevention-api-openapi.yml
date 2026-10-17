@@ -82,6 +82,28 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    DlpClassifier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Classifier identifier
+        name:
+          type: string
+          description: Classifier name
+        description:
+          type: string
+          description: What the classifier detects
+        type:
+          type: string
+          enum:
+          - builtin
+          - custom
+          - regex
+          description: Classifier type
+        enabled:
+          type: boolean
+          description: Whether the classifier is active
     DlpSettings:
       type: object
       properties:
@@ -106,28 +128,6 @@ components:
         scanFormData:
           type: boolean
           description: Whether to scan form data submissions
-    DlpClassifier:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Classifier identifier
-        name:
-          type: string
-          description: Classifier name
-        description:
-          type: string
-          description: What the classifier detects
-        type:
-          type: string
-          enum:
-          - builtin
-          - custom
-          - regex
-          description: Classifier type
-        enabled:
-          type: boolean
-          description: Whether the classifier is active
   securitySchemes:
     cookieAuth:
       type: apiKey
